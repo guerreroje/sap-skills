@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -36,7 +36,7 @@ jobs:
         run: npm ci
 
       - name: Run UI5 Linter
-        run: npm run lint -- --quiet --format json 2>&1 | tee lint-results.json
+        run: npm run lint -- --quiet --format json 2> lint-diagnostics.log | tee lint-results.json
         continue-on-error: true
 
       - name: Display Lint Results
@@ -53,7 +53,7 @@ jobs:
 
       - name: Generate HTML Report
         if: always()
-        run: npm run lint -- --format html --details 2>&1 | tee lint-report.html
+        run: npm run lint -- --format html --details 2> lint-diagnostics.log | tee lint-report.html
 
       - name: Upload HTML Report
         if: always()
@@ -69,11 +69,12 @@ jobs:
             echo "❌ Lint results file not found"
             exit 1
           fi
-          ERROR_COUNT=$(jq '[.[].errorCount] | add' lint-results.json || echo "0")
-          if [ $? -ne 0 ]; then
+          if ! jq '[.[].errorCount] | add' lint-results.json > /tmp/error_count 2>/dev/null; then
             echo "❌ Failed to parse lint-results.json"
             exit 1
           fi
+          ERROR_COUNT=$(cat /tmp/error_count)
+          ERROR_COUNT=${ERROR_COUNT:-0}
           if [ "$ERROR_COUNT" -gt 0 ]; then
             echo "❌ Found $ERROR_COUNT linting errors"
             exit 1

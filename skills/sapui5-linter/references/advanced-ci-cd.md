@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -140,7 +140,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -175,7 +175,7 @@ jobs:
     name: UI5 Linter
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -187,7 +187,7 @@ jobs:
     name: ESLint
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -200,7 +200,7 @@ jobs:
     needs: [lint-ui5, lint-js]  # Only run if linting passes
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -214,7 +214,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: echo "Deploy to production"
 ```
 
@@ -235,7 +235,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -275,7 +275,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # Fetch all history for diff
 
@@ -446,7 +446,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -454,11 +454,11 @@ jobs:
       - run: npm ci
 
       - name: Run UI5 Linter (JSON output)
-        run: npm run lint -- --format json 2>&1 | tee lint-results.json
+        run: npm run lint -- --format json 2> lint-diagnostics.log | tee lint-results.json
         continue-on-error: true
 
       - name: Run UI5 Linter (HTML report)
-        run: npm run lint -- --format html 2>&1 | tee lint-report.html
+        run: npm run lint -- --format html 2> lint-diagnostics.log | tee lint-report.html
         continue-on-error: true
 
       - name: Upload JSON results
@@ -483,11 +483,12 @@ jobs:
             echo "❌ Lint results file not found"
             exit 1
           fi
-          ERROR_COUNT=$(jq '[.[].errorCount] | add' lint-results.json || echo "0")
-          if [ $? -ne 0 ]; then
+          if ! jq '[.[].errorCount] | add' lint-results.json > /tmp/error_count 2>/dev/null; then
             echo "❌ Failed to parse lint-results.json"
             exit 1
           fi
+          ERROR_COUNT=$(cat /tmp/error_count)
+          ERROR_COUNT=${ERROR_COUNT:-0}
           if [ "$ERROR_COUNT" -gt 0 ]; then
             echo "❌ Found $ERROR_COUNT linting errors"
             exit 1
@@ -512,7 +513,7 @@ jobs:
     if: github.event_name == 'pull_request'
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: '20'
@@ -729,7 +730,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - id: set-matrix
         run: |
           APPS=$(find apps -name "ui5.yaml" -exec dirname {} \; | jq -R -s -c 'split("\n")[:-1]')
@@ -742,7 +743,7 @@ jobs:
       matrix:
         app: ${{ fromJson(needs.find-apps.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
