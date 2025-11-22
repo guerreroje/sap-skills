@@ -178,7 +178,7 @@ Lower roles like ROLE_HR_USER cannot call this operation."
 | $skip | Optional | Integer | Records to skip for pagination. Example: $skip=200 | Query |
 | $select | Optional | String | Properties to include. Example: $select=FirstName,LastName,Email | Query |
 | $expand | Optional | String | Include related data. Example: $expand=Department,Manager | Query |
-| $count | Optional | Boolean | Include total count. Value: true. Example: /Employees/$count | Query |
+| $count | Optional | Boolean | Include total count. Returns entities with @odata.count. Value: true. Example: ?$count=true. Note: Path /Employees/$count returns only integer count. | Query |
 ```
 
 #### Request Body

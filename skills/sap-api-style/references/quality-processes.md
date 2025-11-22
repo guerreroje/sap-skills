@@ -4,6 +4,11 @@ A comprehensive reference for developers and User Assistance (UA) teams creating
 
 **Based on**: SAP API Style Guide v2021.01
 **Last Updated**: 2025-11-21
+
+**Attribution**: Content derived from [SAP API Style Guide](https://github.com/SAP-docs/api-style-guide) (Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/))
+
+**Changes**: Consolidated from multiple source files, reorganized for progressive disclosure, added examples and templates.
+
 **Audience**: Developers, Technical Writers, Product Managers, UA Developers
 
 ---

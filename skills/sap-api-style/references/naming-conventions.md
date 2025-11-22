@@ -4,6 +4,10 @@
 
 **Last Updated**: 2025-11-21
 
+**Attribution**: Content derived from [SAP API Style Guide](https://github.com/SAP-docs/api-style-guide) (Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/))
+
+**Changes**: Consolidated from multiple source files, reorganized for progressive disclosure, added examples and templates.
+
 **Scope**: REST APIs, OData APIs, Java, JavaScript, .NET, and C/C++ libraries
 
 ---

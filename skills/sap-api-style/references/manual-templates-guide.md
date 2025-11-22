@@ -4,6 +4,10 @@
 
 **Last Verified**: 2025-11-21
 
+**Attribution**: Content derived from [SAP API Style Guide](https://github.com/SAP-docs/api-style-guide) (Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/))
+
+**Changes**: Consolidated from multiple source files, reorganized for progressive disclosure, added examples and templates.
+
 **Purpose**: Comprehensive reference for manually documenting REST and OData APIs with standardized templates and best practices
 
 ---
@@ -1216,7 +1220,7 @@ status, and compensation information.
 - LastName (string): Employee's last name
 - Email (string): Corporate email address
 - HireDate (date): Date employee joined
-- Status (string): Employment status (Active, Inactive, Leave)
+- Status (string): Employment status (ACTIVE, INACTIVE, LEAVE)
 - DepartmentID (string): FK to Department
 - ManagerID (string): FK to Manager
 - Salary (decimal): Annual salary
@@ -1304,7 +1308,7 @@ Accept: application/json
 
 #### Query with filtering and selection:
 ```
-GET /Employees?$filter=Status eq 'Active' and Department eq 'SALES'&$select=EmployeeID,FirstName,LastName,Email HTTP/1.1
+GET /Employees?$filter=Status eq 'ACTIVE' and Department eq 'SALES'&$select=EmployeeID,FirstName,LastName,Email HTTP/1.1
 ```
 
 #### Query with paging:
@@ -1471,7 +1475,7 @@ Accept: application/json
 
 **Filtered GET Request**:
 ```http
-GET /Employees?$filter=Status eq 'Active' and Department eq 'SALES'&$select=EmployeeID,FirstName,LastName HTTP/1.1
+GET /Employees?$filter=Status eq 'ACTIVE' and Department eq 'SALES'&$select=EmployeeID,FirstName,LastName HTTP/1.1
 Host: api.example.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 Accept: application/json

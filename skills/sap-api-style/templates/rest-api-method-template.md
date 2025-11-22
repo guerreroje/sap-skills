@@ -64,7 +64,7 @@ and pagination.
 Key points:
 - Supports filtering by multiple fields using query parameters
 - Returns paginated results (default: 20 per page, max: 100 per page)
-- Results sorted by employee ID unless otherwise specified via $orderby
+- Results sorted by employee ID unless otherwise specified via sortBy (e.g., sortBy=employeeId or sortBy=-employeeId for desc)
 - Related method: GET /employees/{employeeId} for retrieving specific employee data
 - Performance: Large result sets should use pagination to avoid timeout"
 
@@ -157,7 +157,7 @@ Additional method-specific headers:
 | limit | Optional | Integer | Maximum results per page. Range: 1-100. Default: 20. Example: "50" | Query |
 | offset | Optional | Integer | Number of results to skip for pagination. Default: 0. Used with limit for pagination. | Query |
 | department | Optional | String | Filter by department code. Valid: "SALES", "ENGINEERING", "FINANCE", "HR", "OPERATIONS". Example: "SALES" | Query |
-| status | Optional | String | Filter by employee status. Valid: "ACTIVE", "INACTIVE", "ON_LEAVE", "TERMINATED". Default: all statuses. | Query |
+| status | Optional | String | Filter by employee status. Valid: "ACTIVE", "INACTIVE", "LEAVE", "TERMINATED". Default: all statuses. | Query |
 | sortBy | Optional | String | Sort field. Valid: "name", "hireDate", "department", "salary". Default: "name". Use - prefix for descending (e.g., "-hireDate") | Query |
 
 ### Request Body
