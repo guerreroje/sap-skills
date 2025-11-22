@@ -128,29 +128,45 @@ SAP Datasphere supports 40+ connection types for data integration.
 *Remote Tables (Recommended)*:
 - ABAP SQL service exposure for federated CDS view access
 - Or: Data Provisioning Agent with CloudDataIntegrationAdapter + SAP_COM_0531
+- CDS views must be extraction-enabled and released (annotated with `@Analytics.dataExtraction.enabled: true`)
 
 *Data Flows*:
 - Communication arrangement for SAP_COM_0532
+- CDS views must be released for extraction
 
 *Replication Flows*:
+- Cloud Connector configured (acts as secure tunnel to S/4HANA Cloud)
 - ABAP SQL service exposure (recommended)
 - Communication arrangement for SAP_COM_0532
+- CDS views must be extraction-enabled and released
 - Optional: RFC fast serialization (SAP Note 3486245)
+- See SAP Note 3297105 for replication-specific requirements
 
 *Model Import*:
 - Data Provisioning Agent with CloudDataIntegrationAdapter
 - Communication arrangements: SAP_COM_0532, SAP_COM_0531, SAP_COM_0722
 
-**Authentication**:
-- OAuth 2.0 (recommended)
-- Basic authentication
-- X.509 Client Certificate (see SAP Note 2801396 for approved CAs)
+*Authorization Requirements*:
+- Users/services need proper authorizations to expose CDS views
+- Communication user requires roles for OData/CDS metadata extraction
+- Some CDS views may require SAP Notes to unblock discovery (check view-specific notes)
 
-**X.509 Certificate Setup**:
+**Authentication Options**:
+
+| Method | Use Case | Notes |
+|--------|----------|-------|
+| OAuth 2.0 (SAML Bearer Assertion) | Principal propagation/SSO | User identity passed through |
+| OAuth 2.0 (Client Credentials) | Service-to-service | Technical user access |
+| Basic Authentication | Legacy/simple setups | Not recommended for production |
+| X.509 Client Certificate | Principal propagation with Cloud Connector | See SAP Note 2801396 for approved CAs |
+
+**X.509 Certificate Setup for Principal Propagation**:
 1. Generate certificate using OpenSSL or SAP Cloud Identity Services
-2. Upload certificate to communication user
-3. Add user to communication system with "SSL Client Certificate" authentication
-4. Create required communication arrangements
+2. Upload certificate to communication user in S/4HANA Cloud
+3. Configure Cloud Connector for principal propagation (if applicable)
+4. Add user to communication system with "SSL Client Certificate" authentication
+5. Create required communication arrangements
+6. Test connection with actual user to verify propagation
 
 **Connection Properties**:
 ```yaml
@@ -656,6 +672,8 @@ framework_port=5050
 [Datasphere]
 tenant_url=https://xxx.hana.ondemand.com
 ```
+
+> **⚠️ Security Note**: The `dpagentconfig.ini` file contains sensitive configuration and credentials. Ensure proper file permissions (`chmod 600` on Linux) and keep it out of version control. Consider using environment variables for credentials where supported.
 
 ### Adapter Registration
 

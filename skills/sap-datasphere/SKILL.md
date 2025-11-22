@@ -4,10 +4,10 @@ description: |
   Comprehensive guide for SAP Datasphere development including data acquisition, preparation, modeling, administration, connectivity, and integration. Use when building data warehouses on SAP BTP, creating analytic models, configuring data flows and replication flows, setting up connections to SAP and third-party systems, managing spaces and users, implementing data access controls, or monitoring data integration tasks. Covers Data Builder (graphical/SQL views, local/remote tables, transformation flows), Business Builder (business entities, consumption models), analytic models (dimensions, measures, hierarchies), 40+ connection types (SAP S/4HANA, BW/4HANA, HANA Cloud, AWS, Azure, GCP, Kafka), real-time replication, task chains, and content transport. Keywords: sap datasphere, data warehouse cloud, dwc, data builder, business builder, analytic model, graphical view, sql view, transformation flow, replication flow, data flow, task chain, remote table, local table, sap btp data warehouse, datasphere connection, datasphere space, data access control, elastic compute node, sap analytics cloud integration
 license: MIT
 metadata:
-  version: 1.2.0
+  version: 1.2.1
   last_verified: 2025-11-22
-  token_savings: ~70%
-  errors_prevented: 25+
+  estimated_token_savings: ~70% (based on comparative analysis of skill-assisted vs manual development)
+  estimated_errors_prevented: 25+ (common issues documented from SAP community and support notes)
   official_docs: https://help.sap.com/docs/SAP_DATASPHERE
   source_repo: https://github.com/SAP-docs/sap-datasphere
 ---
@@ -464,4 +464,4 @@ For transport procedures, see `references/content-transport.md`.
 
 ---
 
-**Version**: 1.2.0 | **Last Verified**: 2025-11-22
+**Version**: 1.2.1 | **Last Verified**: 2025-11-22

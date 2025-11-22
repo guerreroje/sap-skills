@@ -4,7 +4,7 @@
 **Last Updated**: 2025-11-22
 **Status**: Complete - Enhanced with detailed source verification
 **Source Repository**: https://github.com/SAP-docs/sap-datasphere/tree/main/docs
-**Version**: 1.2.0
+**Version**: 1.2.1
 
 ---
 
@@ -39,7 +39,7 @@ docs/
 │   ├── Root files (~90 files)
 │   ├── Acquiring-and-Preparing-Data-in-the-Data-Builder/ (~91 files)
 │   ├── Modeling-Data-in-the-Data-Builder/ (~59 files)
-│   ├── Buisiness-Builder/ (~36 files)
+│   ├── Business-Builder/ (~36 files)
 │   └── Creating-Finding-Sharing-Objects/ (~10 files)
 │
 ├── Administering/                          (~135 files)

@@ -55,6 +55,8 @@ SAP Datasphere supports multiple methods for moving content between tenants.
 | Consumption Models | Yes | Exports all perspectives and dependent models/entities |
 | Authorization Scenarios | Yes | Exports associated data access control |
 
+> **Note on Manual Selection**: E/R Models and Task Chains require manual selection because they represent complex container objects with multiple potential dependencies. Unlike Analytic Models or Flows that have clear source→target relationships, these objects may reference many unrelated items. Explicit user selection prevents unintended transports of large object graphs.
+
 ### Non-Transportable Items
 
 - Data (table contents)
@@ -284,25 +286,27 @@ datasphere login --service-key key.json
 ### Export Commands
 
 ```bash
-# Export space
-datasphere export --space SALES_ANALYTICS --output export.zip
+# Export space definitions
+datasphere spaces read --space SALES_ANALYTICS --output export.json
 
 # Export specific objects
-datasphere export --objects "VIEW:sales_view,TABLE:customers" --output export.zip
+datasphere spaces read --space SALES_ANALYTICS --definitions VIEW:sales_view,TABLE:customers --output export.json
 
-# Export with dependencies
-datasphere export --space SALES --include-dependencies --output export.zip
+# Export with verbose output
+datasphere spaces read --space SALES_ANALYTICS --output export.json --verbose
 ```
 
 ### Import Commands
 
 ```bash
-# Import package
-datasphere import --file export.zip --target-space PRODUCTION
+# Import/create space from file (target determined by file content)
+datasphere spaces create --file-path export.json
 
-# Import with options
-datasphere import --file export.zip --target-space PROD --overwrite --skip-errors
+# Import with verbose output
+datasphere spaces create --file-path export.json --verbose
 ```
+
+> **Note**: The target space is determined by the content of the JSON file. Use the Transport app UI for more granular control over target space mapping.
 
 ### CI/CD Integration
 
@@ -312,13 +316,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install CLI
         run: npm install -g @sap/datasphere-cli
       - name: Login
         run: datasphere login --service-key ${{ secrets.DS_SERVICE_KEY }}
       - name: Import
-        run: datasphere import --file models/export.zip --target-space PROD
+        run: datasphere spaces create --file-path models/export.json
 ```
 
 ---
