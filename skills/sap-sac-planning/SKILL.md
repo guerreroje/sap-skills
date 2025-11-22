@@ -4,11 +4,11 @@ description: |
   This skill should be used when developing SAP Analytics Cloud (SAC) planning applications, including building planning-enabled stories, analytics designer applications with planning functionality, data actions, multi actions, version management, and planning workflows. Use when creating planning models, implementing data entry forms, configuring spreading/distribution/allocation, setting up data locking, building calendar-based planning processes with approval workflows, writing JavaScript scripts for planning automation, using the getPlanning() API, PlanningModel API, or DataSource API for planning scenarios, troubleshooting planning performance issues, or integrating predictive forecasting into planning workflows.
 license: MIT
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   last_updated: 2025-11-22
-  sac_version: "2025.14+"
-  documentation_source: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
-  api_reference: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html
+  sac_version: "2025.23"
+  documentation_source: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e
+  api_reference: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2025.23/en-US/index.html
   reference_files: 5
   status: production
 ---
@@ -371,6 +371,7 @@ Protect planning data during and after planning cycles.
 | Open | Yes | Yes |
 | Restricted | No (except owner) | Yes |
 | Locked | No | No |
+| Mixed | Varies | Varies (selection contains multiple states) |
 
 ### Configuration
 
@@ -543,15 +544,40 @@ console.log("Lock state: " + lockState);
 ## Official Documentation Links
 
 **Essential Resources**:
-- **SAP Analytics Cloud Help**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
-- **API Reference (Latest)**: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html
-- **Planning Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/cd897576c3344475a208c2f7a52f151e.html
+- **SAP Analytics Cloud Help (2025.23)**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e
+- **API Reference (2025.23)**: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2025.23/en-US/index.html
+- **Analytics Designer Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/0798b81f9130425389dec84e19326b93.html
+- **Planning Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/cd897576c3344475a208c2f7a52f151e.html
 
-**Specific Topics**:
-- **Data Actions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/69a370e6cfd84315973101389baacde0.html
-- **Version Management**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/9d9056a13b764ad3aca8fef2630fcc00.html
-- **Data Locking**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/e07d46e950794d5a928a9b16d1394de6.html
-- **Calendar Planning**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/af4b7e39edd249d3b59fa7d4ab110a7a.html
+**Planning Model & Data**:
+- **Planning Model Data**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/bc9f0eb2da1848dd9d3925ec29337e9f.html
+- **Model Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/0ace2c43b92b41099b1cd964b4ff198a.html
+- **Data Foundation**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/6f6e75a5e60a4d099939196a97a25814.html
+
+**Data Actions & Multi Actions**:
+- **Run Data Actions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/69a370e6cfd84315973101389baacde0.html
+- **Get Started with Data Actions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/2850221adef14958a4554ad2860ff412.html
+- **Create Data Action**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/e28c7a30978b406aa5e24318206f6443.html
+- **Add Parameters**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/4835429d35534add875bae17e93b12e1.html
+
+**Version Management**:
+- **Version Management Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/9d9056a13b764ad3aca8fef2630fcc00.html
+- **Creating Versions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/3b7f87c3d9cb49b7a6fef3f5cb0a6250.html
+- **Public Versions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/b6e3d093988e4c3eba7eb6c1c110e954.html
+- **Private Versions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/1a011f8041a84e109a3b6bf8c1c81bc1.html
+
+**Data Locking**:
+- **Configuring Data Locking**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/e07d46e950794d5a928a9b16d1394de6.html
+- **Data Locking States**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/91fa3cbbd46d457ab04f9ef3c7901655.html
+
+**Calendar & Workflows**:
+- **Calendar Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/af4b7e39edd249d3b59fa7d4ab110a7a.html
+- **Planning Processes**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/f6189755175940f3a4e007c3d6b83ee5.html
+- **Task Types**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/32c739d6f05b4990a08ef3948b18a1aa.html
+
+**Allocations & Spreading**:
+- **Allocation Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/de944ce1189543e5858798036d576094.html
+- **Value Driver Trees**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/b4d2b021719f4d958afd0922ac7de8d1.html
 
 **Learning Resources**:
 - **Planning Learning Journey**: https://learning.sap.com/learning-journeys/leveraging-sap-analytics-cloud-functionality-for-enterprise-planning

@@ -1,8 +1,9 @@
 # SAP SAC Planning Skill - Progress Tracking Document
 
 **Created**: 2025-11-22
-**Status**: In Development
-**Skill Version**: 1.0.0
+**Status**: Production
+**Skill Version**: 1.1.0
+**SAC Version**: 2025.23
 
 ---
 
@@ -168,13 +169,17 @@
 
 ## Documentation Links for Future Updates
 
-### Official SAP Documentation
-- **Analytics Designer API Reference (Latest)**: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html
-- **SAP Analytics Cloud Help**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
-- **Planning Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/cd897576c3344475a208c2f7a52f151e.html
-- **Data Actions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/69a370e6cfd84315973101389baacde0.html
-- **Version Management**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/9d9056a13b764ad3aca8fef2630fcc00.html
-- **Data Locking**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/e07d46e950794d5a928a9b16d1394de6.html
+### Official SAP Documentation (2025.23)
+- **Analytics Designer API Reference (2025.23)**: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2025.23/en-US/index.html
+- **SAP Analytics Cloud Help (2025.23)**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e
+- **Analytics Designer Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/0798b81f9130425389dec84e19326b93.html
+- **Planning Overview**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/cd897576c3344475a208c2f7a52f151e.html
+- **Planning Model Data**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/bc9f0eb2da1848dd9d3925ec29337e9f.html
+- **Data Actions**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/69a370e6cfd84315973101389baacde0.html
+- **Version Management**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/9d9056a13b764ad3aca8fef2630fcc00.html
+- **Data Locking**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/e07d46e950794d5a928a9b16d1394de6.html
+- **Calendar Planning**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/af4b7e39edd249d3b59fa7d4ab110a7a.html
+- **Allocations**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/de944ce1189543e5858798036d576094.html
 
 ### SAP Learning
 - **Planning Learning Journey**: https://learning.sap.com/learning-journeys/leveraging-sap-analytics-cloud-functionality-for-enterprise-planning
@@ -195,6 +200,7 @@
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0.0 | 2025-11-22 | Initial skill creation with comprehensive planning coverage |
+| 1.1.0 | 2025-11-22 | Updated to SAC 2025.23 API; Added Calendar Integration API, BPC Planning Sequence API, DataChangeInsights, SearchToInsight, SmartDiscovery, Export APIs, Mixed DataLocking state; Updated all documentation links to 2025.23 |
 
 ---
 
