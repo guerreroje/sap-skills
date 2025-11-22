@@ -16,61 +16,107 @@ Detailed configuration reference for the SAP Fiori tools Page Editor.
 
 ### Filter Fields
 
-Configure filter bar elements for data discovery:
+Configure filter bar elements for data discovery.
 
-**Properties**:
-- Filter field type (single value, range, multi-value)
-- Value help configuration
-- Default values
-- Visibility settings
+**Types**:
+- **Compact Filters**: Fields with value help
+- **Visual Filters**: Charts with selectable elements (analytics-enabled services)
 
-**Configuration Path**: Page Editor > Filter Bar > Add Filter Field
+**Adding**: Page Map > Configure Page > Add icon next to Filter Bar > Filter Fields
+
+Generates `UI.SelectionFields` annotation.
+
+**Excluded Properties**: `UI.Hidden`, `UI.HiddenFilter`, `NonFilterableProperties`
+
+**Editable Properties (Compact)**: Label, External ID, Text, Text Arrangement, Display Type
+
+**Visual Filter Properties**: Measure/Dimension Labels, Scale Factor, Fractional Digits, Sort Order, Fixed Values
 
 ### Table Configuration
 
-**Supported Table Types**:
-- Responsive Table
-- Grid Table
-- Analytical Table
-- Tree Table (for hierarchical data)
+**Supported Table Types**: Responsive, Grid, Analytical, Tree (hierarchical data)
 
-**Column Types**:
+**Column Types (7)**:
 
 | Column Type | Description |
 |-------------|-------------|
-| Basic Column | Standard data display |
+| Basic Column | Standard value display (String, Decimal) |
 | Chart Column | Inline chart visualization |
-| Contact Column | Contact card integration |
+| Contact Column | Contact information display |
 | Progress Column | Progress indicator |
 | Rating Column | Star rating display |
+| Table Actions | Actionable elements |
+| External Navigation | External navigation links |
 
-**Table Actions**:
-- Inline actions (row-level)
-- Table toolbar actions
-- Navigation actions
-- Custom actions (OData V4)
+**Column Properties**:
+- **Label**: From `Common.Label` or `@title`, customizable
+- **Importance**: Controls small-screen visibility (None = hidden)
+- **Hidden**: Conditional hiding via boolean property
+
+### Table Actions
+
+**Action Types**:
+| Type | Annotation | Description |
+|------|------------|-------------|
+| Internal | `UI.DataFieldForAction` | Operations within app using bound actions |
+| External | `UI.DataFieldForIntentBasedNavigation` | Navigate to other FLP apps |
+
+**Placement**: Toolbar or Inline (column)
+
+**Properties**:
+- Label (from `Common.Label` or `@title`)
+- Importance (column actions only)
+- Criticality (Positive/Negative for inline only)
+- Hidden (conditional)
+- Semantic Object Mapping (external navigation)
+- Requires Context (toolbar external navigation)
 
 ### Multiple Views
 
-Create tabbed views with different table configurations:
+Display additional tables/charts in separate tabs via icon tab bar.
 
-**Configuration**:
-1. Select Table node in Page Editor
-2. Add View via context menu
-3. Configure view-specific filters and columns
-4. Set default view
+**Requirements**:
+- `@Aggregation.ApplySupported` at service level
+- Custom aggregations: `@Aggregation.CustomAggregate`
+- Transformation aggregations: SAPUI5 1.106+
+- Cannot coexist with Analytical Charts
+
+**Adding Views**:
+1. Click Add icon on Views node
+2. Select table or chart view type
+3. Choose Entity from OData Service
+4. For charts: specify type, dimension, measure
+
+Generates `UI.LineItem` or `UI.Chart` with qualifiers, updates `manifest.json`.
+
+**Management**: Drag-and-drop reordering, delete icon (cannot remove last main entity table view)
 
 ### Analytical Chart
 
-Add data visualizations to List Report:
+Add aggregated data visualization to List Report.
 
-**Chart Types**: Bar, Line, Column, Pie, Donut, Scatter, Bubble
+**Prerequisites**:
+- No Multiple Views in List Report
+- Main entity has aggregable/groupable properties
+- Transformation aggregations: SAPUI5 1.106+
 
-**Configuration**:
-- Dimensions (categories)
-- Measures (values)
-- Chart type selection
-- Color configuration
+**Adding**:
+1. Click "Add Chart" in Page Editor header
+2. Select chart type
+3. Choose dimension (groupable property)
+4. Choose measure (aggregable property or create new)
+
+**Configuration Properties**:
+
+| Property | Description |
+|----------|-------------|
+| Chart Type | Visualization style |
+| Title | Display text (supports i18n) |
+| Measures | Aggregated values (min 1 default, cannot add same twice) |
+| Dimensions | Groupable categories (min 1 default) |
+| Presentation Variant | Controls sorting (New, From Table, None) |
+
+**Note**: Sort order applies to both chart and table.
 
 ---
 
@@ -78,44 +124,63 @@ Add data visualizations to List Report:
 
 ### Header Configuration
 
-**Header Facets**:
-- Data Point - Single value display
-- Progress Indicator - Progress visualization
-- Rating Indicator - Star ratings
-- Contact - Contact information card
-- Address - Address display
-- Micro Chart - Compact charts
+Based on `@UI.HeaderInfo` annotation.
+
+**Header Properties**:
+| Property | Description |
+|----------|-------------|
+| Type Name/Plural | String describing main object |
+| Title | Displayed in header area |
+| Description | Additional context |
+| Image | Reference via `ImageUrl` |
+| Initials | Path to string properties |
+| Icon URL | SAP icon format (e.g., `sap-icon://accept`) |
 
 **Header Actions**:
-- Standard actions (Edit, Delete, Copy)
-- Custom actions with handlers
+- **Standard Actions**: Edit, Delete (can be hidden conditionally)
+- **Annotation-Based**: `UI.DataFieldForAction`, `UI.DataFieldForIntentBasedNavigation`, `UI.DataFieldForActionGroups`
+- **Custom Actions**: Based on application extensions
+
+**Header Sections (7 Types)**:
+| Section | Description |
+|---------|-------------|
+| Form Section | Groups multiple fields |
+| Data Point | Single key metrics with semantic coloring |
+| Progress | Progress toward targets |
+| Rating | Star ratings (default 5-star) |
+| Bullet Micro Chart | Values on scales with targets |
+| Area/Column/Line Micro Chart | Trend visualization |
+| Radial/Comparison/Harvey/Stacked Bar | Additional chart types |
+
+Reorder sections via drag-and-drop (updates `UI.HeaderFacets`).
 
 ### Section Types
 
 #### Form Section
 
-Display and edit entity properties in form layout:
+Based on `UI.FieldGroup` annotation.
 
-**Field Types**:
-- Basic Fields - Text, number, date inputs
-- Connected Fields - Related data display
-- Contact Fields - Contact information
-- Smart Fields - Auto-configured based on metadata
+**Adding**:
+1. Open Page Editor for Object/Form Entry Page
+2. Navigate to section node > Add icon
+3. Choose "Add Form Section"
+4. Enter label
 
-**Layout Options**:
-- Column count (1-4)
-- Field grouping
-- Responsive behavior
+**Properties**:
+- Label: Section title
+- Display on Demand: Hide content under "Show More"
+- Hidden: Visibility control
 
 #### Table Section
 
-Embed tables within Object Page:
+**Adding**:
+1. Open Page Editor
+2. Section node > Add icon > "Add Table Section"
+3. Enter label and Value Source Entity
 
-**Configuration**:
-- Entity association selection
-- Column configuration
-- Inline editing support
-- Navigation to detail pages
+Generates `UI.LineItem` annotation with reference facet.
+
+**Properties**: Label, Hidden
 
 #### Identification Section
 
@@ -131,11 +196,58 @@ Group related content logically with collapsible containers.
 
 ### Footer Configuration
 
-Configure page-level actions in footer bar:
+Actions from `UI.DataFieldForAction` records where `Determining = true`.
 
-- Save/Cancel for edit mode
-- Custom actions
-- Determining actions (primary action highlighting)
+**Limitations**:
+- External navigation actions NOT allowed in footer
+- Importance and Requires Context properties don't apply
+
+**Criticality**: Affects action ordering (Positive/Negative reorganizes nodes)
+
+### Basic Fields
+
+**Adding Fields**:
+1. Expand section > click add button
+2. Search/select fields from dropdown
+3. Multiple fields can be added simultaneously
+
+**Excluded Properties**:
+- `Edm.Guid` type properties
+- Draft properties: `IsActiveEntity`, `HasActiveEntity`, `HasDraftEntity`
+- Draft navigation: `SiblingEntity`, `DraftAdministrativeData`
+- Already referenced properties
+- Duplicates within same section
+
+**Moving Fields**:
+- Drag-and-drop (highlights green when valid)
+- Arrow buttons (up/down)
+- Multi-select: Ctrl+Click
+- Cross-section only when same entity `FieldGroup`/`Identification`
+
+**Field Properties**:
+
+| Property | Description |
+|----------|-------------|
+| Label | Display text |
+| Criticality | Semantic coloring |
+| Display as Image | Image rendering |
+| External ID | External identifier |
+| Hidden / Hide by Property | Visibility control |
+| Restrictions | Input control |
+| Semantic Object Name/Mapping | Navigation |
+| Text / Text Arrangement | Display format |
+| Display Type | Rendering type |
+
+**Restrictions (Input Control)**:
+
+| Option | Behavior |
+|--------|----------|
+| None | No annotations, defaults to optional |
+| Optional | Field may remain empty |
+| Mandatory | Value required |
+| ReadOnly | Non-editable display-only |
+
+**Note**: Read-only objects disable Display Type and Restrictions properties.
 
 ---
 
