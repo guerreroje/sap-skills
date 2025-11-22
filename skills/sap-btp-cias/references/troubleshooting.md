@@ -271,12 +271,54 @@ Access by selecting a task in monitoring view.
 
 ## Accessibility Features
 
-CIAS operates on SAP BTP cockpit platform. Accessibility features include:
-- Screen reader support
-- Keyboard navigation
-- SAP BTP cockpit accessibility features
+CIAS operates on the SAP BTP cockpit platform and inherits its accessibility capabilities.
 
-Reference: SAP Help Portal accessibility documentation for SAP BTP cockpit
+### Platform Accessibility
+
+CIAS is built on SAP Fiori/SAPUI5 technology, which provides:
+
+| Feature | Support Level |
+|---------|---------------|
+| **Screen Readers** | Supported (JAWS, NVDA, VoiceOver) |
+| **Keyboard Navigation** | Full keyboard operability |
+| **High Contrast Themes** | Available via SAP BTP cockpit settings |
+| **Focus Indicators** | Visible focus states for interactive elements |
+| **ARIA Labels** | Semantic markup for assistive technologies |
+
+### Keyboard Navigation
+
+Common keyboard shortcuts in CIAS applications:
+
+| Action | Shortcut |
+|--------|----------|
+| Navigate between elements | Tab / Shift+Tab |
+| Activate buttons/links | Enter or Space |
+| Navigate lists | Arrow keys |
+| Close dialogs | Escape |
+| Access menus | F6 (navigate regions) |
+
+### Theme Customization
+
+Users can adjust themes via the user info dropdown:
+1. Click user avatar/name in header
+2. Select **Settings** or **Appearance**
+3. Choose from available themes:
+   - Morning Horizon (Light) - Default
+   - Evening Horizon (Dark)
+   - High Contrast Black
+   - High Contrast White
+
+### Known Limitations
+
+- Complex automation parameter forms may require additional screen reader configuration
+- Some monitoring charts may have limited accessibility descriptions
+- PDF export functionality may produce documents with varying accessibility compliance
+
+### Accessibility Resources
+
+- SAP BTP Cockpit Accessibility: https://help.sap.com/docs/btp/sap-business-technology-platform/accessibility-features
+- SAPUI5 Accessibility: https://sapui5.hana.ondemand.com/sdk/#/topic/03b914b46e624b138a6fb1b7cf2049ae
+- SAP Accessibility Statement: https://www.sap.com/about/company/diversity/accessibility.html
 
 ---
 

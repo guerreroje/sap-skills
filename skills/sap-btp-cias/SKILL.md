@@ -113,7 +113,7 @@ Cloud Integration Automation Service provides guided workflows to integrate SAP 
 - OAuth2 certificate maximum validity: **1 year**
 - Execution scope cannot be changed after confirmation
 - Destination cannot be changed if already used in automation task
-- Supported browsers (Windows): Firefox (ESR + latest), Chrome (latest)
+- Supported browsers: Google Chrome, Microsoft Edge (Chromium), Mozilla Firefox, Apple Safari (macOS)
 
 ## Security Architecture
 

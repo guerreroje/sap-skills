@@ -2,104 +2,121 @@
 
 **Source Repository**: https://github.com/SAP-docs/btp-cloud-integration-automation-service/tree/main/docs
 **Extraction Date**: 2025-11-22
-**Total Files**: 35 markdown files
-**Status**: COMPLETE
+**Phase**: 1 - Initial Extraction
+**Status**: PARTIAL - Core content consolidated into skill files
 
 ---
 
-## Documentation Structure Overview
+## Files Included in This PR (12 files)
 
 ```
-docs/
-├── css/                    # Stylesheets (not extracted - UI only)
-├── images/                 # Image assets (referenced in docs)
-└── *.md                    # 35 markdown files (ALL EXTRACTED)
+skills/sap-btp-cias/
+├── SKILL.md                      # Main skill file
+├── README.md                     # Discovery keywords
+├── EXTRACTION_PROGRESS.md        # This tracking document
+├── references/
+│   ├── setup-guide.md           # Subscription, OAuth2, destinations
+│   ├── security-guide.md        # Security architecture, IdP, roles
+│   ├── integration-scenarios.md # 100+ scenarios with codes
+│   ├── troubleshooting.md       # Error resolution procedures
+│   ├── maintenance-planner.md   # Maintenance Planner integration
+│   ├── task-ui-guide.md         # Task UI controls and behaviors
+│   └── whats-new.md             # Release notes 2021-2025
+└── templates/
+    ├── destination-config.md    # Destination configuration templates
+    └── role-assignment.md       # Role assignment procedures
 ```
 
----
-
-## Extraction Status by Category
-
-### Core Documentation (3 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `index.md` | EXTRACTED | Complete navigation hierarchy and TOC |
-| `what-is-cloud-integration-automation-service-35fbf2a.md` | EXTRACTED | Service overview, advantages, limitations, supported scenarios |
-| `what-s-new-in-cloud-integration-automation-service-ee05dea.md` | EXTRACTED | Release notes 2021-2025, new data centers, features |
-
-### Setup & Prerequisites (4 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `prerequisites-2eae0b6.md` | EXTRACTED | Cloud regions (AWS, Azure, Alibaba), system requirements |
-| `subscription-to-cloud-integration-automation-service-b3a72d9.md` | EXTRACTED | Standard vs OAuth2 plan overview |
-| `subscription-to-standard-plan-c8ed936.md` | EXTRACTED | 7-step subscription process |
-| `service-and-application-plans-ad78835.md` | EXTRACTED | Plan details and use cases |
-
-### Usage & Operations (6 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `using-cloud-integration-automation-service-5ccb2ce.md` | EXTRACTED | Plan for Integration workflow steps |
-| `working-with-tasks-3da3577.md` | EXTRACTED | Task management, claiming, automation |
-| `task-9ec0684.md` | EXTRACTED | Task tabs, instructions, automation controls |
-| `my-inbox-7f7860d.md` | EXTRACTED | Inbox access, roles required |
-| `uploading-a-file-in-a-task-8c24365.md` | EXTRACTED | Certificate file upload process |
-| `using-maintenance-planner-2ad4326.md` | EXTRACTED | 9-step workflow invocation process |
-| `selecting-execution-scope-444db93.md` | EXTRACTED | Mandatory vs optional tasks selection |
-
-### Configuration (4 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `destinations-496a763.md` | EXTRACTED | Destination overview, security requirements |
-| `destination-creation-b2cd7e9.md` | EXTRACTED | 6-step destination creation process |
-| `add-or-change-destination-b9d3c03.md` | EXTRACTED | Editing destinations during execution |
-| `confirm-system-components-1f39555.md` | EXTRACTED | Component validation, conflict handling |
-
-### Security & Access Control (8 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `roles-and-authorizations-917f842.md` | EXTRACTED | 3 roles: Administrator, Expert, Monitoring |
-| `role-assignment-cd6b96b.md` | EXTRACTED | Multi-user assignment, claiming |
-| `assigning-roles-to-the-users-9ad530a.md` | EXTRACTED | Role collections, IdP configuration |
-| `security-9e8f7c2.md` | EXTRACTED | Security overview introduction |
-| `security-architecture-df15122.md` | EXTRACTED | 6 core components, XSRF protection |
-| `security-restrictions-3538ec5.md` | EXTRACTED | 15-workflow limit, data deletion rules |
-| `identity-provider-and-identity-management-1508b49.md` | EXTRACTED | IdP configuration, authentication flow |
-| `create-instance-in-oauth2-service-plan-6187a7e.md` | EXTRACTED | OAuth2 instance creation, mTLS setup |
-
-### Data & Compliance (3 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `data-protection-and-privacy-22abc39.md` | EXTRACTED | 90-day log retention, BC-INS-CIT-RT support |
-| `sensitive-data-02563ca.md` | EXTRACTED | Credential store service usage |
-| `audit-logging-639f869.md` | EXTRACTED | Audit log service integration |
-
-### Support & Reference (6 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `monitoring-and-troubleshooting-18460b7.md` | EXTRACTED | FAQ, support channels |
-| `monitoring-scenario-implementation-f8daffa.md` | EXTRACTED | Execution monitoring, logs, termination |
-| `downloading-the-cloud-integration-automation-service-execution-summary-report-666ddf4.md` | EXTRACTED | PDF export from My Inbox and Monitoring |
-| `accessibility-features-in-cloud-integration-automation-service-5dd238a.md` | EXTRACTED | SAP BTP cockpit accessibility |
-| `glossary-0eee936.md` | EXTRACTED | 7 terms: blocking, consent, personal data, etc. |
-| `summary-71f9a64.md` | EXTRACTED | Execution summary screen, Complete Execution |
-
-### Administrative (2 files) - COMPLETE
-
-| File | Status | Content Summary |
-|------|--------|-----------------|
-| `unsubscribe-f06f7f5.md` | EXTRACTED | Permanent deletion process, data loss warning |
-| `disclaimer-7823b84.md` | EXTRACTED | Initial task, terms acceptance |
+**Total skill files created**: 12
 
 ---
 
-## Key Information Extracted
+## Source Repository Content (35 markdown files)
+
+The source repository contains 35 markdown files. Content from these files has been analyzed and consolidated into the skill files above.
+
+### Source Files Analyzed
+
+#### Core Documentation (3 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `index.md` | SKILL.md (structure reference) |
+| `what-is-cloud-integration-automation-service-35fbf2a.md` | SKILL.md, integration-scenarios.md |
+| `what-s-new-in-cloud-integration-automation-service-ee05dea.md` | whats-new.md |
+
+#### Setup & Prerequisites (4 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `prerequisites-2eae0b6.md` | SKILL.md, setup-guide.md |
+| `subscription-to-cloud-integration-automation-service-b3a72d9.md` | setup-guide.md |
+| `subscription-to-standard-plan-c8ed936.md` | setup-guide.md |
+| `service-and-application-plans-ad78835.md` | SKILL.md, setup-guide.md |
+
+#### Usage & Operations (7 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `using-cloud-integration-automation-service-5ccb2ce.md` | SKILL.md, integration-scenarios.md |
+| `working-with-tasks-3da3577.md` | task-ui-guide.md |
+| `task-9ec0684.md` | SKILL.md, task-ui-guide.md |
+| `my-inbox-7f7860d.md` | task-ui-guide.md |
+| `uploading-a-file-in-a-task-8c24365.md` | task-ui-guide.md |
+| `using-maintenance-planner-2ad4326.md` | maintenance-planner.md |
+| `selecting-execution-scope-444db93.md` | task-ui-guide.md |
+
+#### Configuration (4 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `destinations-496a763.md` | setup-guide.md, destination-config.md |
+| `destination-creation-b2cd7e9.md` | SKILL.md, destination-config.md |
+| `add-or-change-destination-b9d3c03.md` | troubleshooting.md |
+| `confirm-system-components-1f39555.md` | task-ui-guide.md |
+
+#### Security & Access Control (8 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `roles-and-authorizations-917f842.md` | SKILL.md, security-guide.md |
+| `role-assignment-cd6b96b.md` | role-assignment.md |
+| `assigning-roles-to-the-users-9ad530a.md` | setup-guide.md, role-assignment.md |
+| `security-9e8f7c2.md` | security-guide.md |
+| `security-architecture-df15122.md` | SKILL.md, security-guide.md |
+| `security-restrictions-3538ec5.md` | SKILL.md, security-guide.md |
+| `identity-provider-and-identity-management-1508b49.md` | security-guide.md |
+| `create-instance-in-oauth2-service-plan-6187a7e.md` | SKILL.md, setup-guide.md |
+
+#### Data & Compliance (3 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `data-protection-and-privacy-22abc39.md` | security-guide.md |
+| `sensitive-data-02563ca.md` | security-guide.md |
+| `audit-logging-639f869.md` | security-guide.md |
+
+#### Support & Reference (6 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `monitoring-and-troubleshooting-18460b7.md` | troubleshooting.md |
+| `monitoring-scenario-implementation-f8daffa.md` | SKILL.md, task-ui-guide.md |
+| `downloading-the-cloud-integration-automation-service-execution-summary-report-666ddf4.md` | task-ui-guide.md |
+| `accessibility-features-in-cloud-integration-automation-service-5dd238a.md` | troubleshooting.md |
+| `glossary-0eee936.md` | SKILL.md, security-guide.md |
+| `summary-71f9a64.md` | task-ui-guide.md |
+
+#### Administrative (2 files)
+
+| Source File | Consolidated Into |
+|-------------|-------------------|
+| `unsubscribe-f06f7f5.md` | setup-guide.md |
+| `disclaimer-7823b84.md` | task-ui-guide.md |
+
+---
+
+## Key Information Consolidated
 
 ### Supported Cloud Regions
 
@@ -132,7 +149,7 @@ docs/
 - No self-service deletion of user data (support ticket to BC-INS-CIT-RT required)
 - Log retention: 90 days
 - OAuth2 certificate maximum validity: 1 year
-- Supported browsers: Mozilla Firefox (ESR + latest), Google Chrome (latest) on Windows
+- Supported browsers: Google Chrome, Microsoft Edge (Chromium), Mozilla Firefox, Apple Safari (macOS)
 
 ### Security Architecture Components
 
