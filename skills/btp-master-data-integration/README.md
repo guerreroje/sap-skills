@@ -78,6 +78,7 @@ btp-master-data-integration/
 ├── PROGRESS_TRACKING.md              # Documentation extraction tracking
 └── references/
     ├── glossary-and-pricing.md       # Complete glossary, pricing, maintenance windows
+    ├── setup-guide-complete.md       # Prerequisites, tenant management, version history
     ├── integration-models.md         # Complete ODM types and versions
     ├── integration-guides.md         # System-specific integration guides
     ├── soap-api-reference.md         # SOAP web services with field mappings

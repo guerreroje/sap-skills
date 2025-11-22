@@ -155,8 +155,9 @@
 | File | Purpose | Lines |
 |------|---------|-------|
 | SKILL.md | Main skill instructions | ~280 |
-| README.md | Discovery keywords | ~130 |
+| README.md | Discovery keywords | ~150 |
 | references/glossary-and-pricing.md | Complete glossary, pricing, maintenance windows | ~200 |
+| references/setup-guide-complete.md | Prerequisites, tenant management, client config, version history | ~350 |
 | references/integration-models.md | ODM types and versions | ~130 |
 | references/integration-guides.md | System-specific guides | ~280 |
 | references/soap-api-reference.md | SOAP API with complete field mappings | ~500 |

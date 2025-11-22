@@ -227,6 +227,7 @@ Check SAP Trust Center: https://www.sap.com/about/cloud-trust-center/
 
 For detailed information:
 - `references/glossary-and-pricing.md` - Complete glossary, pricing tiers, qualifying apps, maintenance windows
+- `references/setup-guide-complete.md` - Prerequisites, tenant management, client config, version history
 - `references/integration-models.md` - Complete ODM types and versions
 - `references/integration-guides.md` - System-specific setup guides
 - `references/soap-api-reference.md` - SOAP web services with complete field mappings
