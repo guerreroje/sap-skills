@@ -228,6 +228,7 @@ For detailed information, see:
 - `references/replication-flows.md` - Replication flows, cloud storage, Kafka
 - `references/data-workflow.md` - Data workflow operators, orchestration
 - `references/security-cdc.md` - Security, data protection, CDC methods
+- `references/additional-features.md` - Monitoring, cloud storage services, scenario templates, data types, Git terminal
 
 ## Templates
 
