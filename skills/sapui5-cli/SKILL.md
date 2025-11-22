@@ -120,7 +120,6 @@ ui5 serve [options]                     # Start development server
   --open <path>                         # Open browser to path
   --h2                                  # Enable HTTP/2
   --accept-remote-connections           # Allow non-localhost access
-  --sap-csp-policies                    # Enable CSP headers
 
 ui5 tree [options]                      # Display dependency tree
   --flat                                # Show flat list
@@ -140,7 +139,7 @@ ui5 build [child-command] [options]     # Build project
   --dest <path>                         # Output directory (default: ./dist)
   --clean-dest                          # Clean destination before build
   --create-build-manifest               # Store build metadata
-  --experimental-css-variables          # Generate CSS variable artifacts
+  --experimental-css-variables          # Generate CSS variable artifacts [experimental]
 ```
 
 ### Configuration
@@ -356,7 +355,6 @@ This skill provides working templates for common configurations:
 
 - **`templates/ui5.yaml.application`**: Complete application configuration
 - **`templates/ui5.yaml.library`**: Complete library configuration
-- **`templates/ui5.yaml.workspace`**: Workspace configuration
 - **`templates/ui5-workspace.yaml`**: Monorepo workspace setup
 - **`templates/custom-task-template.js`**: Custom build task boilerplate
 - **`templates/custom-middleware-template.js`**: Custom server middleware boilerplate

@@ -9,9 +9,7 @@ This reference provides comprehensive details about the UI5 build process, tasks
 1. [Overview](#overview)
 2. [Build Types](#build-types)
 3. [Standard Build Tasks](#standard-build-tasks)
-4. [Min
-
-ification Process](#minification-process)
+4. [Minification Process](#minification-process)
 5. [Source Maps](#source-maps)
 6. [Bundle Generation](#bundle-generation)
 7. [Legacy Bundle Tooling (LBT)](#legacy-bundle-tooling-lbt)

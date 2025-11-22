@@ -270,7 +270,7 @@ ui5 serve --h2                      # Enable HTTP/2 (auto-enables HTTPS)
 **Custom Ports**:
 ```bash
 ui5 serve --port 3000               # HTTP on port 3000
-ui5 serve --h2 --https-port 4000    # HTTPS on port 4000
+ui5 serve --h2 --port 4000          # HTTPS/HTTP2 on port 4000
 ```
 
 **Configuration (ui5.yaml)**:
@@ -568,7 +568,19 @@ ui5 serve --h2
 
 ### Using Custom Certificates
 
-Currently not supported via CLI. Use custom middleware if needed.
+Custom HTTPS certificates are supported via CLI flags:
+
+```bash
+ui5 serve --h2 --key /path/to/server.key --cert /path/to/server.crt
+```
+
+**Default Certificates**: Auto-generated and stored in `~/.ui5/server/` (server.key, server.crt)
+
+**Custom Certificate Options**:
+- `--key <path>`: Path to private key file
+- `--cert <path>`: Path to certificate file
+
+**Advanced Scenarios**: For dynamic SNI, client certificates, or other complex requirements, use a reverse proxy or custom middleware.
 
 ---
 
@@ -593,9 +605,10 @@ server:
 
 ```bash
 ui5 serve \
-  --port 3000 \                  # HTTP port
-  --https-port 4000 \            # HTTPS port
-  --h2 \                         # Enable HTTP/2
+  --port 3000 \                  # Port (HTTP or HTTPS with --h2)
+  --h2 \                         # Enable HTTP/2 and HTTPS
+  --key /path/to/key \           # Custom SSL key (optional)
+  --cert /path/to/cert \         # Custom SSL certificate (optional)
   --accept-remote-connections \  # Allow non-localhost
   --sap-csp-policies \           # Enable CSP policies
   --serve-csp-reports \          # Collect CSP reports

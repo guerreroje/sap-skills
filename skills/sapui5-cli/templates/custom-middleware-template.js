@@ -49,7 +49,7 @@ export default function({log, middlewareUtil, options, resources}) {
     const {configuration = {}} = options;
 
     // Validate configuration
-    if (!configuration.enabled) {
+    if (configuration.enabled === false) {
         log.info("Middleware disabled by configuration");
         return (req, res, next) => next();
     }
@@ -204,19 +204,27 @@ import multer from "multer";
 export function createUploadExample({log, options}) {
     const upload = multer({dest: "uploads/"});
 
-    return upload.single("file"), async function(req, res, next) {
-        if (!req.file) {
-            next();
-            return;
-        }
+    return async function(req, res, next) {
+        // Invoke multer middleware
+        upload.single("file")(req, res, (err) => {
+            if (err) {
+                log.error(`Upload error: ${err.message}`);
+                return next(err);
+            }
 
-        log.info(`File uploaded: ${req.file.originalname}`);
+            if (!req.file) {
+                next();
+                return;
+            }
 
-        // Process uploaded file
-        res.json({
-            message: "File uploaded successfully",
-            filename: req.file.originalname,
-            size: req.file.size
+            log.info(`File uploaded: ${req.file.originalname}`);
+
+            // Process uploaded file
+            res.json({
+                message: "File uploaded successfully",
+                filename: req.file.originalname,
+                size: req.file.size
+            });
         });
     };
 }
