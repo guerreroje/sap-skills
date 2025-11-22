@@ -184,18 +184,6 @@ The skill automatically activates when you ask about SAP Fiori tools topics. Exa
 
 ## Skill Structure
 
-```
-sap-fiori-tools/
-├── SKILL.md                           # Main skill instructions
-├── README.md                          # This file (keywords)
-├── PROGRESS_TRACKING.md               # Documentation extraction progress
-└── references/
-    ├── page-editor.md                 # Page Editor details
-    ├── annotations.md                 # Annotation development
-    ├── deployment.md                  # Deployment configuration
-    ├── adaptation-projects.md         # Extension development
-    └── preview.md                     # Preview and testing
-```
 
 ## Documentation Sources
 
