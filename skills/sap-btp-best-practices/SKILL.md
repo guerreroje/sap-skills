@@ -4,7 +4,7 @@ description: |
   Comprehensive SAP Business Technology Platform (BTP) best practices for enterprise cloud architecture, account management, security, deployment, and operations. Use when planning SAP BTP implementations, setting up account hierarchies (global accounts, directories, subaccounts), configuring Cloud Foundry or Kyma environments, implementing authentication with SAP Cloud Identity Services, designing CI/CD pipelines with SAP Continuous Integration and Delivery, establishing governance models, building Platform Engineering teams, implementing failover strategies, or managing the complete application lifecycle on SAP BTP.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   last_verified: "2025-11-21"
   source: "https://github.com/SAP-docs/btp-best-practices-guide"
 ---
@@ -39,9 +39,19 @@ Global Account (contract with SAP)
 
 **Key Principles**:
 - Global accounts represent contracts with SAP, typically one per commercial model
-- Directories group subaccounts for management, billing, or compliance purposes
+- Directories group subaccounts for management, billing, or compliance purposes (up to 7 levels deep)
 - Subaccounts are deployed in specific regions and enable runtime environments
 - Use labels for virtual grouping and reporting (Dev/Test/Prod, cost centers)
+
+### Administrative Responsibilities
+
+| Level | Key Responsibilities |
+|-------|---------------------|
+| **Global Account** | Appoint administrators; manage entitlements and quotas for distribution |
+| **Directory** | Manage member access; oversee entitlements (if enabled) |
+| **Subaccount** | Assign business roles; manage member access |
+
+**Recommendation**: Appoint substitute administrators at each level to ensure continuity.
 
 ### Environments
 
@@ -483,12 +493,13 @@ SAP recommends migrating from Neo to multi-cloud foundation for closer integrati
 ## References
 
 For detailed guidance, see the reference files in the `references/` directory:
-- `account-models.md` - Detailed account structure patterns
-- `security-and-authentication.md` - Complete security guidance
+- `account-models.md` - Detailed account structure patterns and naming conventions
+- `security-and-authentication.md` - Complete security guidance and destination methods
 - `deployment-and-delivery.md` - CI/CD and transport management details
 - `failover-and-resilience.md` - Multi-region and failover implementation
 - `operations-and-monitoring.md` - Go-live and monitoring procedures
 - `governance-and-teams.md` - Team structure and processes
+- `templates-and-examples.md` - **Complete code templates**: Kubernetes RBAC manifests, MTA descriptors, Helm charts, CI/CD configs, multi-region GitHub links
 
 ---
 

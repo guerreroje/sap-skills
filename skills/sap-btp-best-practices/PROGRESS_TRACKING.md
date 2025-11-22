@@ -179,6 +179,7 @@ Located in `references/` directory:
 - `failover-and-resilience.md` - Multi-region and failover strategies
 - `operations-and-monitoring.md` - Go-live and monitoring details
 - `governance-and-teams.md` - Team structure and processes
+- `templates-and-examples.md` - Complete code templates (Kubernetes manifests, MTA, Helm, CI/CD)
 
 ---
 

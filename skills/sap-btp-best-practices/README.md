@@ -8,7 +8,7 @@ This skill provides production-ready guidance for SAP BTP implementations based 
 
 **Source Documentation**: https://github.com/SAP-docs/btp-best-practices-guide
 
-**Version**: 1.0.0
+**Version**: 1.1.0
 **Last Verified**: 2025-11-21
 
 ---
@@ -233,6 +233,7 @@ Located in `references/` directory:
 - `failover-and-resilience.md` - Multi-region and failover implementation
 - `operations-and-monitoring.md` - Go-live and monitoring procedures
 - `governance-and-teams.md` - Team structure and processes
+- `templates-and-examples.md` - **Complete code templates**: Kubernetes RBAC manifests, MTA descriptors, Helm charts, CI/CD pipeline configs, multi-region GitHub links
 
 ### Tracking
 - `PROGRESS_TRACKING.md` - Documents coverage of source material
