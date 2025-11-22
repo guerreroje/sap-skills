@@ -565,6 +565,7 @@ See `references/troubleshooting.md` for complete troubleshooting guide.
 | `references/mail-protocols.md` | SMTP, IMAP, POP3 configuration |
 | `references/identity-propagation-scenarios.md` | ABAP, NetWeaver Java, custom IDP |
 | `references/operational-guides.md` | Network zones, solution management |
+| `references/connectivity-alternatives-and-config.md` | Reverse proxy, user roles, RFC config |
 | `references/troubleshooting.md` | Common issues and solutions |
 | `templates/destination-http-oauth.json` | HTTP destination with OAuth template |
 | `templates/destination-onpremise.json` | On-premise destination template |
@@ -589,4 +590,4 @@ See `references/troubleshooting.md` for complete troubleshooting guide.
 
 **Last Updated**: 2025-11-22
 **Next Review**: 2026-02-22
-**Source**: https://github.com/SAP-docs/btp-connectivity (383 files, 343+ analyzed)
+**Source**: https://github.com/SAP-docs/btp-connectivity (383 files, 352+ analyzed)

@@ -191,6 +191,7 @@ sap-btp-connectivity/
 │   ├── mail-protocols.md                 # SMTP, IMAP, POP3 configuration
 │   ├── identity-propagation-scenarios.md # ABAP, NetWeaver Java, IDP
 │   ├── operational-guides.md             # Network zones, solution mgmt
+│   ├── connectivity-alternatives-and-config.md # Reverse proxy, RFC config
 │   └── troubleshooting.md                # Common issues
 └── templates/
     ├── destination-http-oauth.json       # HTTP destination templates
