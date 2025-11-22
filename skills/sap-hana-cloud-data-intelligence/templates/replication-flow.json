@@ -1,5 +1,4 @@
 {
-  "$schema": "https://sap.github.io/data-intelligence/schemas/replication-flow.json",
   "name": "abap_to_hana_replication",
   "description": "Replication flow from ABAP system to HANA Cloud",
   "version": "1.0.0",

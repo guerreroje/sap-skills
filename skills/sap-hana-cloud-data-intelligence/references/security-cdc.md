@@ -91,14 +91,21 @@ Generalized: user@domain.com
 
 ## Audit Logging
 
-### Responsibility
+### Responsibility Model
 
-**Important:** SAP Data Intelligence does not independently generate audit logs for:
-- Sensitive data inputs
-- Transformations
-- Outputs
+**SAP Data Intelligence Platform Logs (DI-native):**
+- Platform-level access events (user login/logout)
+- User actions (pipeline creation, modification, execution)
+- System configuration changes
+- API access attempts
 
-**You must configure** source and target systems to generate audit logs.
+**Customer-Configured Logs (upstream/downstream systems):**
+SAP Data Intelligence does not generate audit logs for:
+- Sensitive data inputs from source systems
+- Data transformations applied to PII/sensitive data
+- Data outputs written to target systems
+
+**You must configure** source and target systems to generate audit logs for data-level operations. This is required because DI processes data in transit but does not independently track individual data record access.
 
 ### Recommended Logging Events
 
@@ -138,12 +145,16 @@ See SAP Data Intelligence Administration Guide for:
 
 CDC enables tracking changes in source systems for incremental data loading.
 
+### Terminology
+
+**Cloud Data Integration (CDI)**: An internal component of SAP Data Intelligence that provides connectivity and data movement capabilities. CDI performs polling-based change detection by periodically querying source systems for modified records.
+
 ### CDC Approaches
 
 | Approach | Technology | Description |
 |----------|------------|-------------|
 | Trigger-based | Database triggers | Insert/Update/Delete tracking |
-| Polling-based | CDI technology | Periodic change detection |
+| Polling-based | Cloud Data Integration (CDI) | Periodic change detection via scheduled queries |
 | Log-based | Transaction logs | Real-time change capture |
 
 ### Supported Databases (Trigger-based)
@@ -212,7 +223,7 @@ CDC performance depends on:
 
 1. **Data Classification**: Categorize data by sensitivity
 2. **Anonymization**: Apply for non-production environments
-3. **Access Logging**: Track who accesses sensitive data
+3. **Access Logging**: Configure source/target systems to track who accesses sensitive data (see [Audit Logging - Responsibility Model](#responsibility-model) for details on DI-native vs. customer-configured logs)
 4. **Retention**: Implement data retention policies
 
 ### CDC Implementation

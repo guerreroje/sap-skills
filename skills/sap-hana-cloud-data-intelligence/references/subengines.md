@@ -199,20 +199,25 @@ JavaScript-based operator development.
 ### Creating Node.js Operator
 
 ```javascript
-// Operator script
+// Operator script using @sap/vflow-sub-node-sdk
+const { Operator } = require("@sap/vflow-sub-node-sdk");
 
-$.setPortCallback("input", function(ctx, msg) {
+// Get operator instance
+const operator = Operator.getInstance();
+
+// Set up input port handler
+operator.getInPort("input").onMessage((ctx) => {
     // Process message
-    var data = msg.body;
-    var result = processData(data);
+    const data = ctx.body;
+    const result = processData(data);
 
-    // Send output
-    $.output(result);
+    // Send to output port
+    operator.getOutPort("output").send(result);
 });
 
 function processData(data) {
     // Transform data
-    return data.map(function(item) {
+    return data.map((item) => {
         return {
             id: item.id,
             value: item.value * 2
@@ -225,28 +230,39 @@ function processData(data) {
 
 **Message Handling:**
 ```javascript
+const { Operator } = require("@sap/vflow-sub-node-sdk");
+const operator = Operator.getInstance();
+
 // Set port callback
-$.setPortCallback("port_name", function(ctx, msg) {
+operator.getInPort("port_name").onMessage((ctx) => {
+    // Access message body via ctx.body
+    const data = ctx.body;
     // Process message
 });
 
-// Send to output
-$.output(data);
+// Send to output port
+operator.getOutPort("output").send(data);
 
-// Send to specific port
-$.sendTo("port_name", data);
+// Send to specific named port
+operator.getOutPort("port_name").send(data);
 ```
 
 **Configuration:**
 ```javascript
+const operator = Operator.getInstance();
+
 // Access config
-var paramValue = $.config.paramName;
+const paramValue = operator.config.paramName;
 ```
 
 **Logging:**
 ```javascript
-$.log("info", "Processing message");
-$.log("error", "Error: " + err.message);
+const operator = Operator.getInstance();
+
+// Use operator logger
+operator.logger.info("Information message");
+operator.logger.debug("Debug message");
+operator.logger.error("Error message");
 ```
 
 ### Node.js Data Types

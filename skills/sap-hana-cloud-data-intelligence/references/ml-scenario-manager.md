@@ -265,7 +265,7 @@ model_data = artifacts.get("model.pkl")
 | `read()` | Load entire remote file at once |
 | `write()` | Write strings, bytes, or files to data lake |
 
-**Important:** Only files between 5 MB and 5 GB can be appended. Use `get_writer()` for smaller files.
+**Important:** Files between 5 MB and 5 GB (inclusive) may be appended using the append functionality. For files smaller than 5 MB, use `get_writer()` for incremental writing instead.
 
 ```python
 from sapdi.artifact import Artifact
@@ -349,7 +349,10 @@ def on_input(msg):
     accuracy = model.score(X_test, y_test)
 
     # Track metrics
-    with tracking.start_run() as run:
+    with tracking.start_run(
+        run_collection_name="classification_experiments",
+        run_name="rf_training_001"
+    ) as run:
         run.log_param("model_type", "RandomForest")
         run.log_metric("accuracy", accuracy)
         run.log_artifact("model.pkl", pickle.dumps(model))
@@ -440,14 +443,21 @@ Deploy trained models for inference.
 
 ```python
 import pickle
+from sapdi.artifact import Artifact
 
 # Load model once
 model = None
 
 def load_model():
     global model
-    from sapdi import tracking
-    model = pickle.loads(tracking.get_artifact("model.pkl"))
+    # Get artifact metadata first
+    artifacts = Artifact.list()
+    model_artifact = next((a for a in artifacts if a.name == "model"), None)
+
+    if model_artifact:
+        # Download artifact and load model
+        with Artifact.open_file(model_artifact.id, "model.pkl").get_reader() as f:
+            model = pickle.load(f)
 
 def on_input(msg):
     if model is None:
