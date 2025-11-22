@@ -88,7 +88,10 @@ def Message processData(Message message) {
     } catch (Exception e) {
         log.error("Processing failed: ${e.message}", e)
         message.setProperty("ErrorMessage", e.message)
-        message.setProperty("ErrorStackTrace", e.stackTrace.toString())
+        // Use StringWriter for readable stack trace
+        def sw = new StringWriter()
+        e.printStackTrace(new PrintWriter(sw))
+        message.setProperty("ErrorStackTrace", sw.toString())
         throw e  // Re-throw to trigger exception handling
     }
 
@@ -110,11 +113,11 @@ def Message transformJson(Message message) {
     def body = message.getBody(String.class)
     def input = new groovy.json.JsonSlurper().parseText(body)
 
-    // Transform
+    // Transform (use explicit UTC timezone for ISO 8601 format)
     def output = [
         id: input.customerId,
         name: input.customerName,
-        timestamp: new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        timestamp: new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"))
     ]
 
     message.setBody(groovy.json.JsonOutput.toJson(output))

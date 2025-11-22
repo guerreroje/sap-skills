@@ -116,7 +116,7 @@
 - [ ] basic-concepts-of-integration-design-ca0f6f7.md
 
 **Reference File**: `references/cloud-integration.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 3. Adapters (Cloud Integration)
 - [ ] amqp-adapter-5cc1a71.md
@@ -147,7 +147,7 @@
 - [ ] microsoft-dynamics-crm-receiver-adapter-ee724c8.md
 
 **Reference File**: `references/adapters.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 4. Integration Flow Steps & Patterns
 - [ ] define-content-modifier-8f04a70.md
@@ -176,8 +176,8 @@
 - [ ] message-filter-bd52346.md
 - [ ] composed-message-processor-353a119.md
 
-**Reference File**: `references/integration-flow-steps.md`
-**Status**: Pending
+**Reference File**: `references/cloud-integration.md` (Flow Steps section)
+**Status**: Complete
 
 ### 5. Message Mapping & Transformation
 - [ ] message-mapping-459ccdf.md
@@ -194,8 +194,8 @@
 - [ ] conversion-rules-for-json-to-xml-conversion-232a9cf.md
 - [ ] conversion-rules-for-xml-to-json-conversion-66d099d.md
 
-**Reference File**: `references/message-mapping.md`
-**Status**: Pending
+**Reference File**: `references/cloud-integration.md` (Message Mapping section)
+**Status**: Complete
 
 ### 6. Scripting (Groovy/JavaScript)
 - [ ] developing-script-and-script-collection-e60f706.md
@@ -212,7 +212,7 @@
 - [ ] script-use-cases-148851b.md (and following files)
 
 **Reference File**: `references/scripting.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 7. Security (Cloud Integration)
 - [ ] apply-message-level-security-9036c0c.md
@@ -229,7 +229,7 @@
 - [ ] All renewal-of-* files in Operations
 
 **Reference File**: `references/security.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 8. API Management Capability
 - [ ] api-management-1b17d18.md (ISuite)
@@ -244,7 +244,7 @@
 - [ ] sap-api-management-in-the-cloud-foundry-environment-7d8514b.md
 
 **Reference File**: `references/api-management.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 9. API Proxy Development
 - [ ] build-api-proxies-74c042b.md
@@ -326,7 +326,7 @@
 - [ ] Kubernetes platform-specific guides (EKS, AKS, GKE, OpenShift, RKE2)
 
 **Reference File**: `references/edge-integration-cell.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 13. Integration Advisor
 - [ ] integration-advisor-3309fe0.md
@@ -336,8 +336,8 @@
 - [ ] troubleshooting-for-integration-advisor-2de873e.md
 - [ ] All files in `/docs/ci/IntegrationAdvisor/`
 
-**Reference File**: `references/integration-advisor.md`
-**Status**: Pending
+**Reference File**: `references/integration-advisor-tpm.md`
+**Status**: Complete
 
 ### 14. Event Mesh
 - [ ] event-mesh-3129673.md
@@ -358,7 +358,7 @@
 - [ ] webhook-subscriptions-58e3729.md
 
 **Reference File**: `references/event-mesh.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 15. Trading Partner Management
 - [ ] trading-partner-management-28fe3dc.md
@@ -366,8 +366,8 @@
 - [ ] glossary-for-sap-trading-partner-management-81860a4.md
 - [ ] troubleshooting-for-trading-partner-management-c5eaae5.md
 
-**Reference File**: `references/trading-partner-management.md`
-**Status**: Pending
+**Reference File**: `references/integration-advisor-tpm.md` (TPM section)
+**Status**: Complete
 
 ### 16. Integration Assessment
 - [ ] integration-assessment-310067e.md
@@ -384,8 +384,8 @@
 - [ ] integration-styles-and-integration-use-case-patterns-770909d.md
 - [ ] technology-mapping-a50d8d6.md
 
-**Reference File**: `references/integration-assessment.md`
-**Status**: Pending
+**Reference File**: `references/migration-assessment.md` (ISA-M section)
+**Status**: Complete
 
 ### 17. Migration Assessment & Tooling
 - [ ] what-is-migration-assessment-164b835.md
@@ -404,8 +404,8 @@
 - [ ] pipeline-approach-efc40f8.md
 - [ ] standard-approach-1b75b4a.md
 
-**Reference File**: `references/migration.md`
-**Status**: Pending
+**Reference File**: `references/migration-assessment.md`
+**Status**: Complete
 
 ### 18. Data Space Integration
 - [ ] data-space-integration-8bb6972.md
@@ -421,7 +421,7 @@
 - [ ] accessibility-features-in-data-space-integration-dc5c2ee.md
 
 **Reference File**: `references/data-space-integration.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 19. Graph
 - [ ] graph-e03300f.md
@@ -434,8 +434,8 @@
 - [ ] configure-the-visibility-of-graph-navigator-f5bd17d.md
 - [ ] troubleshooting-for-graph-2cfb06c.md
 
-**Reference File**: `references/graph.md`
-**Status**: Pending
+**Reference File**: `references/graph-odata.md`
+**Status**: Complete
 
 ### 20. OData Provisioning
 - [ ] odata-provisioning-d257fc3.md
@@ -443,8 +443,8 @@
 - [ ] runtime-access-and-role-assignment-for-odata-provisioning-b46816c.md
 - [ ] troubleshooting-for-odata-provisioning-cdcbaa2.md
 
-**Reference File**: `references/odata-provisioning.md`
-**Status**: Pending
+**Reference File**: `references/graph-odata.md` (OData section)
+**Status**: Complete
 
 ### 21. Operations & Monitoring
 - [ ] operating-and-monitoring-cloud-integration-c401afc.md
@@ -469,7 +469,7 @@
 - [ ] monitor-the-health-of-certificates-using-sap-cloud-alm-7bd9d9f.md
 
 **Reference File**: `references/operations-monitoring.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 22. Content Transport
 - [ ] content-transport-cb7d2f1.md
@@ -484,7 +484,7 @@
 - [ ] transport-api-management-artifacts-via-sap-cloud-transport-management-service-2e4bc72.md
 
 **Reference File**: `references/content-transport.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 23. Setup & Configuration
 - [ ] initial-setup-17ab4a2.md
@@ -521,7 +521,7 @@
 - [ ] All fix-* files
 
 **Reference File**: `references/troubleshooting.md`
-**Status**: Pending
+**Status**: Complete
 
 ### 25. Best Practices & Guidelines
 - [ ] best-practices-b16cf85.md
@@ -580,34 +580,22 @@
 
 ## Reference Files Created
 
-| File | Topics Covered | Line Count | Status |
-|------|----------------|------------|--------|
-| `integration-suite-overview.md` | Core concepts, capabilities, architecture | TBD | Pending |
-| `cloud-integration.md` | CI capability, iFlows, development | TBD | Pending |
-| `adapters.md` | All adapter configurations | TBD | Pending |
-| `integration-flow-steps.md` | All flow steps and patterns | TBD | Pending |
-| `message-mapping.md` | Mapping, transformation, converters | TBD | Pending |
-| `scripting.md` | Groovy/JavaScript scripting | TBD | Pending |
-| `security.md` | Security configurations, keys, certificates | TBD | Pending |
-| `api-management.md` | APIM capability overview | TBD | Pending |
-| `api-proxy.md` | API proxy development | TBD | Pending |
-| `api-policies.md` | All policy types and configurations | TBD | Pending |
-| `developer-hub.md` | Developer portal management | TBD | Pending |
-| `edge-integration-cell.md` | Hybrid/edge deployments | TBD | Pending |
-| `integration-advisor.md` | B2B integration | TBD | Pending |
-| `event-mesh.md` | Event-driven architecture | TBD | Pending |
-| `trading-partner-management.md` | TPM capability | TBD | Pending |
-| `integration-assessment.md` | ISA-M methodology | TBD | Pending |
-| `migration.md` | PO migration | TBD | Pending |
-| `data-space-integration.md` | Data space capabilities | TBD | Pending |
-| `graph.md` | Business data graph | TBD | Pending |
-| `odata-provisioning.md` | OData service provisioning | TBD | Pending |
-| `operations-monitoring.md` | Operations, monitoring, alerts | TBD | Pending |
-| `content-transport.md` | Transport mechanisms | TBD | Pending |
-| `setup-configuration.md` | Initial setup, roles, access | TBD | Pending |
-| `troubleshooting.md` | Error resolution | TBD | Pending |
-| `best-practices.md` | Design guidelines | TBD | Pending |
-| `apis.md` | Programmatic access | TBD | Pending |
+| File | Topics Covered | Status |
+|------|----------------|--------|
+| `cloud-integration.md` | CI capability, iFlows, flow steps, mapping, development | Complete |
+| `adapters.md` | All 80+ adapter configurations | Complete |
+| `scripting.md` | Groovy/JavaScript scripting patterns and API | Complete |
+| `security.md` | Security configurations, keys, certificates, auth | Complete |
+| `api-management.md` | APIM capability, policies, Developer Hub | Complete |
+| `edge-integration-cell.md` | Hybrid/edge Kubernetes deployments | Complete |
+| `event-mesh.md` | Event-driven architecture, topics, queues | Complete |
+| `integration-advisor-tpm.md` | B2B integration, MIGs, MAGs, TPM | Complete |
+| `graph-odata.md` | Business data graph, OData provisioning | Complete |
+| `migration-assessment.md` | PO migration, ISA-M methodology | Complete |
+| `data-space-integration.md` | Data space capabilities, Catena-X, EDC | Complete |
+| `operations-monitoring.md` | Operations, monitoring, alerts | Complete |
+| `content-transport.md` | Transport mechanisms (TMS, CTS+, MTAR) | Complete |
+| `troubleshooting.md` | Error resolution, diagnostics | Complete |
 
 ---
 
@@ -615,10 +603,8 @@
 
 | Template | Purpose | Status |
 |----------|---------|--------|
-| `integration-flow.xml` | Basic iFlow structure | Pending |
-| `groovy-script.groovy` | Common script patterns | Pending |
-| `api-proxy-config.json` | API proxy configuration | Pending |
-| `policy-template.xml` | Policy definition | Pending |
+| `groovy-script-template.groovy` | Common Groovy script patterns and API usage | Complete |
+| `api-policy-template.xml` | All 34 API policy types with XML examples | Complete |
 
 ---
 
@@ -649,6 +635,54 @@
 2. **Cross-references**: Many files reference other files in the documentation
 3. **Progressive disclosure**: Core concepts in SKILL.md, details in reference files
 4. **Update frequency**: Check GitHub commits for documentation updates
+
+---
+
+## Maintenance Guidelines
+
+### Versioning Strategy
+
+| Version Component | When to Increment | Example |
+|-------------------|-------------------|---------|
+| **Major** (X.0.0) | Breaking changes, major feature additions | New capability coverage |
+| **Minor** (1.X.0) | New reference files, significant updates | Added event-mesh.md |
+| **Patch** (1.0.X) | Bug fixes, typo corrections, minor updates | Fixed code examples |
+
+### Recommended Update Cadence
+
+| Frequency | Task |
+|-----------|------|
+| **Monthly** | Check SAP documentation for critical updates |
+| **Quarterly** | Full review of all reference files against source docs |
+| **Per SAP Release** | Update for new features, deprecations, breaking changes |
+| **As Needed** | Address reported issues, community feedback |
+
+### Maintainer Responsibilities
+
+1. **Documentation Sync**
+   - Monitor https://github.com/SAP-docs/btp-integration-suite for commits
+   - Review SAP release notes for Integration Suite updates
+   - Update "Last Updated" dates when making changes
+
+2. **Quality Assurance**
+   - Verify code examples compile/run correctly
+   - Test templates in actual Integration Suite environment
+   - Validate links to external documentation
+
+3. **Community Support**
+   - Respond to GitHub issues within 1 week
+   - Accept and review community PRs
+   - Document known issues and workarounds
+
+### Ownership
+
+| Area | Responsibility |
+|------|----------------|
+| **Overall Skill** | SAP Skills Maintainers |
+| **Cloud Integration** | Core team |
+| **API Management** | Core team |
+| **Event Mesh** | Core team |
+| **Edge Integration Cell** | Core team |
 
 ---
 

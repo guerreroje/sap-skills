@@ -259,8 +259,11 @@ def Message processData(Message message) {
     // Get property
     def logId = message.getProperty("SAP_MessageProcessingLogID")
 
-    // Set body
-    message.setBody(newBody)
+    // Process and transform body
+    def transformedBody = body.toUpperCase()
+
+    // Set body (use the transformed result)
+    message.setBody(transformedBody)
 
     // Set header
     message.setHeader("CustomHeader", "value")

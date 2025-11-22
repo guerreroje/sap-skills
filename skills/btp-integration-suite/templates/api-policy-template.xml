@@ -16,8 +16,8 @@
 <!--
 <VerifyAPIKey name="Verify-API-Key" enabled="true" continueOnError="false">
     <APIKey ref="request.header.x-api-key"/>
-    <! - - Alternative: query parameter - - >
-    <! - - <APIKey ref="request.queryparam.apikey"/> - - >
+    [Alternative: use query parameter instead]
+    [<APIKey ref="request.queryparam.apikey"/>]
 </VerifyAPIKey>
 -->
 
@@ -74,8 +74,8 @@
 <!--
 <SpikeArrest name="Spike-Control" enabled="true">
     <Rate>30pm</Rate>
-    <! - - Alternative: per second - - >
-    <! - - <Rate>10ps</Rate> - - >
+    [Alternative: per second]
+    [<Rate>10ps</Rate>]
     <Identifier ref="request.header.x-api-key"/>
 </SpikeArrest>
 -->
@@ -156,7 +156,7 @@
 <!--
 <ExtractVariables name="Extract-Data" enabled="true">
     <Source>request</Source>
-    <! - - From JSON payload - - >
+    <!-- From JSON payload -->
     <JSONPayload>
         <Variable name="userId" type="string">
             <JSONPath>$.user.id</JSONPath>
@@ -165,7 +165,7 @@
             <JSONPath>$.orders.length()</JSONPath>
         </Variable>
     </JSONPayload>
-    <! - - From XML payload - - >
+    <!-- From XML payload -->
     <XMLPayload stopPayloadProcessing="false">
         <Namespaces>
             <Namespace prefix="ns">http://example.com/ns</Namespace>
@@ -174,7 +174,7 @@
             <XPath>/ns:Order/ns:OrderId</XPath>
         </Variable>
     </XMLPayload>
-    <! - - From headers/query params - - >
+    <!-- From headers/query params -->
     <Header name="Content-Type">
         <Pattern ignoreCase="true">application/{format}</Pattern>
     </Header>
