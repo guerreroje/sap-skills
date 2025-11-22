@@ -58,11 +58,11 @@ Expose and activate these APIs:
 | Business Situation Type - Read | Access situation type definitions |
 
 **Steps**:
-1. Log into SAP S/4HANA system
-2. Use transaction for API activation
-3. Activate Business Situation - Read API
-4. Activate Business Situation Type - Read API
-5. Configure OData services
+1. Log into SAP S/4HANA GUI
+2. Enter transaction `/IWFND/MAINT_SERVICE`
+3. Choose **Add Service** to publish the Business Situation - Read OData service
+4. Select the appropriate system alias and activate the service
+5. Repeat for Business Situation Type - Read OData service
 
 **Additional Requirement**: Install and configure SAP Cloud Connector to enable BTP access to on-premise system.
 

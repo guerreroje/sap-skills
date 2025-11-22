@@ -42,12 +42,26 @@ The source documentation uses SAP Help Portal document IDs (loio* format). These
 | Error Handling | loio6ab65e2a7b8c9d0eb4f54a05e3c9e5cf† | Known errors |
 | Logging | loioc7544a3d181441348511ed3e1740c8b6 | Audit logging |
 
-### Direct Link Format
+### Direct Link Formats
 
-To access documents directly using loio IDs:
+**Preferred (Direct Access)**:
+Use the viewer format for direct document access:
+```
+https://help.sap.com/viewer/{loio_id}/en-US
+```
+
+Example:
+```
+https://help.sap.com/viewer/loio4832a67a390d42ca9f876a1ded9ea84d/en-US
+```
+
+**Alternative (Search-based)**:
+For discovery when exact document ID is uncertain, use search:
 ```
 https://help.sap.com/docs/intelligent-situation-automation?locale=en-US&q=loio{ID}
 ```
+
+Note: The viewer format provides direct access; the search format may return multiple results.
 
 ---
 
@@ -55,7 +69,7 @@ https://help.sap.com/docs/intelligent-situation-automation?locale=en-US&q=loio{I
 
 ### Core BTP Documentation
 - **SAP BTP Overview**: https://help.sap.com/docs/BTP
-- **BTP Cloud Foundry Environment**: https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/
+- **BTP Cloud Foundry Environment**: https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/9c7092c7b7ae4d49bc8ae35fdd0e0b18.html
 
 ### Subscription & Account Management
 | Topic | Link |
@@ -159,22 +173,13 @@ When SAP documentation changes:
 3. Test links before committing
 4. Update "Last Verified" date
 
-### Link Format
-SAP Help Portal links follow patterns:
+### Link Patterns
+SAP Help Portal links follow these patterns:
 - Product docs: `https://help.sap.com/docs/{PRODUCT}`
-- Viewer format: `https://help.sap.com/viewer/{doc_id}/{locale}`
+- Viewer format: `https://help.sap.com/viewer/{loio_id}/{locale}` (preferred for direct access)
 - New format: `https://help.sap.com/docs/{product}/{doc_id}.html`
 
-### Document ID Usage
-To construct direct links using document IDs:
-```
-https://help.sap.com/viewer/{loio_id}/en-US
-```
-
-Example:
-```
-https://help.sap.com/viewer/loio4832a67a390d42ca9f876a1ded9ea84d/en-US
-```
+See "Direct Link Formats" section above for usage examples.
 
 ---
 
