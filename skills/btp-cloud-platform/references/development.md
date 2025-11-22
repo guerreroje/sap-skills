@@ -284,15 +284,42 @@ module.exports = cds.service.impl(async function() {
 ### Running Locally
 
 ```bash
-# Start with watch
+# Start with watch (SQLite in-memory)
 cds watch
 
-# With specific profile
+# With hybrid profile (remote services, local app)
 cds watch --profile hybrid
 
 # Deploy to database
 cds deploy --to hana
 ```
+
+**Profile Options**:
+| Profile | Description | Use Case |
+|---------|-------------|----------|
+| `default` | SQLite in-memory, mock auth | Initial development, quick testing |
+| `hybrid` | Connect to remote BTP services while running locally | Test with real HANA, XSUAA, destinations |
+| `production` | Full BTP services | Deployed application |
+
+**Hybrid Profile Setup** (`.cdsrc.json`):
+```json
+{
+  "[hybrid]": {
+    "requires": {
+      "db": {
+        "kind": "hana",
+        "credentials": { "from": "env:VCAP_SERVICES" }
+      },
+      "auth": {
+        "kind": "xsuaa",
+        "credentials": { "from": "env:VCAP_SERVICES" }
+      }
+    }
+  }
+}
+```
+
+Run `cds bind` to fetch service credentials, then `cds watch --profile hybrid`.
 
 ---
 

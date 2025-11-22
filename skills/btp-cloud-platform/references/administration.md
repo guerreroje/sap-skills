@@ -119,16 +119,19 @@ btp assign accounts/entitlement \
 
 ### Common Services to Assign
 
-| Service | Plan | Description |
-|---------|------|-------------|
-| `cloudfoundry` | `standard` | CF runtime |
-| `kymaruntime` | `aws` / `azure` / `gcp` | Kyma runtime |
-| `abap` | `standard` | ABAP environment |
-| `hana-cloud` | `hana` | HANA Cloud database |
-| `xsuaa` | `application` | Authorization service |
-| `destination` | `lite` | Destination service |
-| `connectivity` | `lite` | Connectivity service |
-| `application-logs` | `lite` | Application logging |
+| Service | Plan | Description | Availability |
+|---------|------|-------------|--------------|
+| `cloudfoundry` | `standard` | CF runtime | All CF regions |
+| `kymaruntime` | `aws` / `azure` / `gcp` | Kyma runtime | Selected regions only |
+| `abap` | `standard` | ABAP environment | Selected regions only |
+| `hana-cloud` | `hana` | HANA Cloud database | All regions |
+| `xsuaa` | `application` | Authorization service | All regions |
+| `destination` | `lite` | Destination service | All regions |
+| `connectivity` | `lite` | Connectivity service | All regions |
+| `application-logs` | `lite` | Application logging | All regions |
+
+> **Note**: Services marked "Selected regions only" require checking regional availability in BTP Cockpit
+> or SAP Discovery Center before assignment. Kyma/ABAP availability varies by IaaS provider and region.
 
 ---
 

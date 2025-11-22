@@ -123,10 +123,28 @@ Subaccount → Trust Configuration → New Trust Configuration
 
 ### SAML Trust Configuration
 
-1. Export SAML metadata from IdP
-2. Import in subaccount trust configuration
-3. Configure attribute mapping
-4. Test authentication flow
+**Setup Steps**:
+1. Export SAML metadata XML from your IdP
+2. In BTP Cockpit: Subaccount → Trust Configuration → New Trust Configuration
+3. Upload IdP metadata (contains signing certificate, endpoints)
+4. Configure attribute mapping (email, groups, custom attributes)
+5. Download BTP SAML metadata for IdP registration
+6. Test authentication flow
+
+**Metadata Exchange**:
+```
+IdP Metadata → BTP              BTP Metadata → IdP
+- Entity ID                     - Entity ID
+- SSO URL                       - Assertion Consumer URL
+- Signing Certificate           - Signing Certificate
+- NameID format                 - Supported bindings
+```
+
+**Certificate Handling**:
+- IdP certificates expire—monitor and update before expiry
+- BTP auto-generates service provider certificate
+- For certificate renewal: upload new IdP metadata with updated certificate
+- Grace period allows both old and new certificates during transition
 
 ---
 

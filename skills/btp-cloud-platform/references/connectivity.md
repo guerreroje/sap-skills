@@ -236,9 +236,30 @@ Define which resources are accessible:
 
 ### High Availability
 
-- Install on multiple hosts
-- Configure shadow connector
-- Automatic failover
+**Architecture**:
+- **Master connector**: Active, handles all traffic
+- **Shadow connector**: Standby, monitors master health
+- Automatic failover if master becomes unavailable
+
+**Setup**:
+1. Install Cloud Connector on two separate hosts
+2. Configure first as master (connects to BTP)
+3. Configure second as shadow (points to master)
+4. Shadow automatically takes over if master fails
+
+**Configuration**:
+```
+Master: cc-master.internal.company.com:8443
+Shadow: cc-shadow.internal.company.com:8443
+    → Points to master for health checks
+    → Same subaccount/location ID configuration
+```
+
+**Best Practices**:
+- Deploy master and shadow on different physical hosts
+- Use different network segments if possible
+- Monitor both instances via Cloud Connector admin UI
+- Test failover periodically
 
 ### Monitoring
 
