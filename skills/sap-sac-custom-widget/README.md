@@ -33,6 +33,14 @@ This skill should be used when:
 - Migrating widgets between SAC tenants
 - Setting up widget hosting infrastructure
 
+## Requirements
+
+- SAP Analytics Cloud tenant with:
+  - Optimized Story Experience, OR
+  - Analytics Designer
+- JavaScript/Web Components knowledge
+- Hosting solution (SAC-hosted, GitHub Pages, or web server)
+
 ## Features
 
 - Complete JSON metadata schema reference
@@ -42,25 +50,21 @@ This skill should be used when:
 - Multiple hosting options (SAC-hosted, GitHub, external)
 - Security best practices (integrity hash, CORS)
 - Common error solutions and debugging techniques
-- Ready-to-use templates
-
-## Requirements
-
-- SAP Analytics Cloud tenant with:
-  - Optimized Story Experience, OR
-  - Analytics Designer
-- JavaScript/Web Components knowledge
-- Hosting solution (SAC-hosted, GitHub Pages, or web server)
+- 6 ready-to-use widget templates
+- ECharts integration guide
+- Widget Add-On feature (QRC Q4 2023+)
+- Performance optimization guidelines
+- Custom types and script API types
 
 ## Version Information
 
 | Property | Value |
 |----------|-------|
-| Skill Version | 1.0.0 |
+| Skill Version | 1.1.0 |
 | SAC Version | 2025.19 |
 | Last Verified | 2025-11-22 |
-| Token Savings | ~70% |
-| Errors Prevented | 15+ |
+| Token Savings | ~75% |
+| Errors Prevented | 25+ |
 
 ## Official Documentation
 

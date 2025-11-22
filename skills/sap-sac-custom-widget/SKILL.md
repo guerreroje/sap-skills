@@ -1,17 +1,17 @@
 ---
 name: sap-sac-custom-widget
 description: |
-  SAP Analytics Cloud (SAC) Custom Widget development skill. Use when building custom visualizations, interactive components, or extending SAC with Web Components. Covers JSON metadata configuration, JavaScript Web Components, lifecycle functions (onCustomWidgetBeforeUpdate, onCustomWidgetAfterUpdate, onCustomWidgetResize, onCustomWidgetDestroy), data binding with feeds, styling panels, builder panels, property/event/method definitions, third-party library integration (ECharts, D3.js), hosting options (SAC-hosted, GitHub, AWS, Azure), security (integrity hash, CORS), and debugging techniques. Provides templates for basic widgets, data-bound charts, and styling panels. Supports Optimized Story Experience and Analytics Designer. Prevents common errors: missing lifecycle functions, incorrect JSON schema, integrity warnings, CORS failures, property type mismatches, and data binding issues.
+  SAP Analytics Cloud (SAC) Custom Widget development skill. Use when building custom visualizations, interactive components, extending SAC with Web Components, or creating Widget Add-Ons to customize built-in widgets. Covers JSON metadata configuration, JavaScript Web Components, lifecycle functions (onCustomWidgetBeforeUpdate, onCustomWidgetAfterUpdate, onCustomWidgetResize, onCustomWidgetDestroy), data binding with feeds, styling panels, builder panels, property/event/method definitions, custom types (enumerations, data structures), script API data types (Selection, MemberInfo, ResultMemberInfo), third-party library integration (ECharts, D3.js, Chart.js), hosting options (SAC-hosted, GitHub, AWS, Azure), security (integrity hash, CORS), performance optimization, and debugging techniques. Includes Widget Add-On feature (QRC Q4 2023+) for extending built-in widgets without creating from scratch. Provides templates for basic widgets, data-bound charts, styling panels, and KPI cards. Supports Optimized Story Experience and Analytics Designer. Prevents common errors: missing lifecycle functions, incorrect JSON schema, integrity warnings, CORS failures, property type mismatches, data binding issues, and performance anti-patterns.
 
-  Keywords: sap analytics cloud, sac custom widget, custom widget development, web component sac, json metadata widget, widget lifecycle functions, onCustomWidgetBeforeUpdate, onCustomWidgetAfterUpdate, onCustomWidgetResize, onCustomWidgetDestroy, sac data binding, widget data binding, dataBindings feeds, getDataBinding, getResultSet, styling panel widget, builder panel widget, widget properties events methods, propertiesChanged event, dispatchEvent custom widget, sac echarts integration, sac d3js integration, third party library sac, widget hosting sac, sac hosted widget, integrity hash widget, sha256 integrity, widget security cors, sac widget debugging, custom visualization sac, sac analytics designer widget, optimized story experience widget, sac widget api, widget add-on, sac script api widget
+  Keywords: sap analytics cloud, sac custom widget, custom widget development, web component sac, json metadata widget, widget lifecycle functions, onCustomWidgetBeforeUpdate, onCustomWidgetAfterUpdate, onCustomWidgetResize, onCustomWidgetDestroy, sac data binding, widget data binding, dataBindings feeds, getDataBinding, getResultSet, styling panel widget, builder panel widget, widget properties events methods, propertiesChanged event, dispatchEvent custom widget, sac echarts integration, sac d3js integration, third party library sac, widget hosting sac, sac hosted widget, integrity hash widget, sha256 integrity, widget security cors, sac widget debugging, custom visualization sac, sac analytics designer widget, optimized story experience widget, sac widget api, widget add-on, sac script api widget, custom types enumeration, MemberInfo ResultMemberInfo Selection, widget installation admin, sac performance optimization, shadow dom web component, sac tooltip customization, plot area addon
 
 license: MIT
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   last_verified: 2025-11-22
   sac_version: "2025.19"
-  token_savings: ~70%
-  errors_prevented: 15+
+  token_savings: ~75%
+  errors_prevented: 25+
   official_docs:
     - https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/0ac8c6754ff84605a4372468d002f2bf/75311f67527c41638ceb89af9cd8af3e.html
     - https://help.sap.com/doc/c813a28922b54e50bd2a307b099787dc/release/en-US/CustomWidgetDevGuide_en.pdf
@@ -463,13 +463,36 @@ onCustomWidgetAfterUpdate(changedProperties) {
 
 ---
 
+## Widget Add-Ons (QRC Q4 2023+)
+
+Widget Add-Ons extend built-in SAC widgets without building from scratch.
+
+**Use Cases**:
+- Customize chart tooltips
+- Add visual elements to plot areas
+- Override built-in styling
+
+**Supported Charts**: Bar/Column, Stacked Bar/Column, Line, Stacked Area, Numeric Point
+
+**Key Differences from Custom Widgets**:
+- Only `main` and `builder` components (no `styling`)
+- Must specify extension target (`tooltip`, `plotArea`, `numericPoint`)
+- SAC provides chart context data via methods
+
+See **`references/widget-addon-guide.md`** for complete implementation guide.
+
+---
+
 ## Bundled Resources
 
 For detailed templates and examples, see:
 
 1. **`references/json-schema-reference.md`** - Complete JSON schema documentation
-2. **`references/widget-templates.md`** - Ready-to-use widget templates
+2. **`references/widget-templates.md`** - Ready-to-use widget templates (6 templates)
 3. **`references/echarts-integration.md`** - ECharts library integration guide
+4. **`references/widget-addon-guide.md`** - Widget Add-On development (QRC Q4 2023+)
+5. **`references/best-practices-guide.md`** - Performance, security, and development guidelines
+6. **`references/advanced-topics.md`** - Custom types, script API types, installation
 
 ---
 
@@ -494,6 +517,13 @@ For detailed templates and examples, see:
 
 ## Version History
 
+**v1.1.0** (2025-11-22)
+- Added Widget Add-On feature documentation (QRC Q4 2023+)
+- Added best practices guide (performance, security, development)
+- Added advanced topics (custom types, script API types, installation)
+- Enhanced description with additional keywords
+- Increased error prevention coverage to 25+
+
 **v1.0.0** (2025-11-22)
 - Initial release
 - Complete JSON metadata reference
@@ -506,4 +536,4 @@ For detailed templates and examples, see:
 
 ---
 
-**Last Verified**: 2025-11-22 | **SAC Version**: 2025.19 | **Skill Version**: 1.0.0
+**Last Verified**: 2025-11-22 | **SAC Version**: 2025.19 | **Skill Version**: 1.1.0
