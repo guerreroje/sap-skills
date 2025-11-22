@@ -365,7 +365,7 @@ Implement proper token validation in action endpoints:
 ```javascript
 const xsenv = require('@sap/xsenv');
 const passport = require('passport');
-const JWTStrategy = require('@sap/xss-middleware').JWTStrategy;
+const { JWTStrategy } = require('@sap/xssec');
 
 // Configure passport with XSUAA
 const services = xsenv.getServices({ uaa: { tag: 'xsuaa' } });
@@ -382,6 +382,11 @@ app.post('/api/process',
     // Process request
   }
 );
+```
+
+**Required packages:**
+```bash
+npm install @sap/xsenv @sap/xssec passport
 ```
 
 ### Cloud Foundry Tasks
