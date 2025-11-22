@@ -10,15 +10,205 @@
       "description": "Comprehensive 14-phase audit process for skill quality assurance. Use when investigating suspected issues, major package updates detected, skill last verified >3 months ago, or before marketplace submission.",
       "version": "1.3.0",
       "category": "tooling",
-      "keywords": [
-        "skill review",
-        "skill audit",
-        "documentation review",
-        "version check",
-        "quality assurance",
-        "standards compliance",
-        "sap skill review"
-      ],
+      "keywords": ["skill review", "skill audit", "documentation review", "version check", "quality assurance", "standards compliance"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-ai-core",
+      "source": "skills/sap-ai-core",
+      "description": "Guides development with SAP AI Core and AI Launchpad for enterprise AI/ML workloads. Covers generative AI models, orchestration workflows, RAG, ML pipelines, and content filtering.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["sap ai core", "ai launchpad", "generative ai", "llm", "rag", "ml training", "orchestration", "embeddings"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-api-style",
+      "source": "skills/sap-api-style",
+      "description": "Comprehensive guidance for documenting SAP APIs following official SAP API Style Guide standards. Covers REST, OData, OpenAPI, Javadoc, JSDoc, and API Business Hub compliance.",
+      "version": "1.0.0",
+      "category": "tooling",
+      "keywords": ["api documentation", "openapi", "swagger", "odata", "javadoc", "jsdoc", "api style guide", "sap api hub"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-best-practices",
+      "source": "skills/sap-btp-best-practices",
+      "description": "Comprehensive BTP best practices for enterprise cloud architecture, account management, security, deployment, and operations. Covers account hierarchies, Cloud Foundry, Kyma, governance, and CI/CD.",
+      "version": "1.1.2",
+      "category": "btp",
+      "keywords": ["btp best practices", "account hierarchy", "cloud foundry", "kyma", "governance", "ci/cd", "platform engineering"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-build-work-zone-advanced",
+      "source": "skills/sap-btp-build-work-zone-advanced",
+      "description": "Develops and administers SAP Build Work Zone digital workplace solutions. Covers workspaces, UI Integration Cards, content packages, Microsoft 365/Teams integration, and chatbots.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["build work zone", "workspaces", "ui integration cards", "microsoft 365", "teams", "sharepoint", "chatbots"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-business-application-studio",
+      "source": "skills/sap-btp-business-application-studio",
+      "description": "Cloud-based IDE on SAP BTP for SAP Fiori, CAP, and HANA development. Covers dev spaces, connectivity, MTA deployment, Git operations, and runtime management.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["business application studio", "bas", "cloud ide", "dev space", "cap", "fiori", "mta", "git"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-cias",
+      "source": "skills/sap-btp-cias",
+      "description": "Cloud Integration Automation Service for guided integration workflows. Covers CIAS subscriptions, destinations, roles, scenario planning, and My Inbox tasks.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["cias", "cloud integration automation", "integration scenarios", "workflow", "my inbox", "guided integration"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-cloud-platform",
+      "source": "skills/sap-btp-cloud-platform",
+      "description": "Comprehensive SAP BTP reference for cloud development, deployment, and operations. Covers Cloud Foundry, Kyma, ABAP environments, identity providers, and multi-target applications.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["btp", "cloud foundry", "kyma", "abap environment", "mta", "cloud connector", "xsuaa", "destinations"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-cloud-transport-management",
+      "source": "skills/sap-btp-cloud-transport-management",
+      "description": "Transport management for software deliverables across BTP environments. Covers transport landscapes, nodes, routes, import queues, and CI/CD integration.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["cloud transport management", "ctm", "transport landscape", "mta deployment", "import queue", "change management"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-developer-guide",
+      "source": "skills/sap-btp-developer-guide",
+      "description": "Develops business applications on BTP using CAP or ABAP Cloud. Covers Cloud Foundry, Kyma, SAP HANA Cloud integration, Fiori UIs, and multitenant SaaS applications.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["btp development", "cap", "abap cloud", "cloud foundry", "kyma", "hana cloud", "fiori", "multitenant"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-integration-suite",
+      "source": "skills/sap-btp-integration-suite",
+      "description": "Enterprise integration with SAP Integration Suite. Covers Cloud Integration iFlows, API Management, Event Mesh, Trading Partner Management, and integration adapters.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["integration suite", "cloud integration", "iflow", "api management", "event mesh", "b2b", "edi", "adapters"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-intelligent-situation-automation",
+      "source": "skills/sap-btp-intelligent-situation-automation",
+      "description": "Situation-based automation between S/4HANA and BTP. Covers Event Mesh integration, destination configuration, system onboarding, and automatic situation resolution.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["intelligent situation automation", "isa", "s4hana", "event mesh", "situation handling", "automation"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-job-scheduling",
+      "source": "skills/sap-btp-job-scheduling",
+      "description": "Job Scheduling Service for one-time and recurring jobs on BTP. Covers REST API, cron schedules, OAuth 2.0, Cloud Foundry tasks, and Kyma integration.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["job scheduling", "cron", "recurring jobs", "cf tasks", "oauth2", "scheduler", "asynchronous jobs"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-master-data-integration",
+      "source": "skills/sap-btp-master-data-integration",
+      "description": "Central master data hub on BTP for synchronizing master data. Covers MDI tenants, distribution models, SOAP APIs, One Domain Model integration, and extensibility.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["master data integration", "mdi", "one domain model", "business partners", "soap api", "data replication"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-btp-service-manager",
+      "source": "skills/sap-btp-service-manager",
+      "description": "Service Manager for managing service instances and bindings across BTP environments. Covers SMCTL CLI, BTP CLI, REST APIs, Kubernetes operator, and OAuth2.",
+      "version": "1.0.0",
+      "category": "btp",
+      "keywords": ["service manager", "smctl", "service instances", "service bindings", "kubernetes", "cf services", "osbapi"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-datasphere",
+      "source": "skills/sap-datasphere",
+      "description": "Cloud-native data warehouse on BTP. Covers Data Builder, Business Builder, analytic models, data flows, 40+ connections, real-time replication, and SAC integration.",
+      "version": "1.2.1",
+      "category": "data-analytics",
+      "keywords": ["datasphere", "data warehouse", "dwc", "data builder", "analytic model", "graphical view", "sql view", "sac"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-fiori-tools",
+      "source": "skills/sap-fiori-tools",
+      "description": "Develops SAP Fiori applications using SAP Fiori tools extensions for VS Code and BAS. Covers Fiori Elements, Page Editor, and Freestyle SAPUI5 generation.",
+      "version": "1.0.0",
+      "category": "ui-development",
+      "keywords": ["fiori tools", "fiori elements", "page editor", "list report", "object page", "sapui5", "vs code"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-hana-cloud-data-intelligence",
+      "source": "skills/sap-hana-cloud-data-intelligence",
+      "description": "Data processing pipelines and ML scenarios in SAP Data Intelligence Cloud. Covers graph operators, ABAP/S4HANA integration, replication flows, and JupyterLab.",
+      "version": "1.0.0",
+      "category": "data-analytics",
+      "keywords": ["data intelligence", "pipelines", "operators", "ml scenarios", "jupyterlab", "replication flows", "abap"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-sac-custom-widget",
+      "source": "skills/sap-sac-custom-widget",
+      "description": "Custom Widget development for SAC. Covers Web Components, JSON metadata, lifecycle functions, data binding, styling panels, third-party libraries, and Widget Add-Ons.",
+      "version": "1.1.0",
+      "category": "data-analytics",
+      "keywords": ["sac custom widget", "web component", "custom visualization", "data binding", "echarts", "d3js", "widget add-on"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-sac-planning",
+      "source": "skills/sap-sac-planning",
+      "description": "Planning application development with SAC. Covers planning models, data actions, version management, data locking, calendar workflows, and getPlanning() API.",
+      "version": "1.1.0",
+      "category": "data-analytics",
+      "keywords": ["sac planning", "planning model", "data actions", "version management", "calendar", "workflows", "forecasting"],
+      "license": "MIT"
+    },
+    {
+      "name": "sap-sac-scripting",
+      "source": "skills/sap-sac-scripting",
+      "description": "Scripting for SAC Analytics Designer and stories. Covers DataSource API, Chart/Table manipulation, Planning operations, Calendar integration, and 39 code templates.",
+      "version": "1.1.0",
+      "category": "data-analytics",
+      "keywords": ["sac scripting", "analytics designer", "datasource api", "planning api", "calendar api", "script api"],
+      "license": "MIT"
+    },
+    {
+      "name": "sapui5",
+      "source": "skills/sapui5",
+      "description": "Develops SAP UI5 applications including Freestyle apps, Fiori Elements, custom controls, data binding, OData integration, routing, testing, and performance optimization.",
+      "version": "1.0.0",
+      "category": "ui-development",
+      "keywords": ["sapui5", "ui5", "fiori elements", "mvc", "odata", "xml views", "controllers", "qunit", "opa5"],
+      "license": "MIT"
+    },
+    {
+      "name": "sapui5-linter",
+      "source": "skills/sapui5-linter",
+      "description": "UI5 Linter for static code analysis of SAPUI5/OpenUI5 projects. Detects deprecated APIs, global usage, CSP violations, with autofix capabilities for UI5 2.x migration.",
+      "version": "1.0.0",
+      "category": "tooling",
+      "keywords": ["ui5 linter", "static analysis", "deprecated api", "csp violations", "autofix", "ui5 2.x migration"],
       "license": "MIT"
     }
   ]
