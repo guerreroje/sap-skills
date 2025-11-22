@@ -211,6 +211,15 @@ Cloud Transport Management Service (CTMS) provides automated transport:
 
 ## Planning Integration
 
+### ⚠️ Important Limitations
+
+Before implementing planning widgets, review these constraints:
+
+1. **Builder Panel + Data Binding Conflict**: Cannot combine custom Builder Panel with data binding in the same widget
+2. **Hierarchies Not Supported**: Data binding works with flat data only; select "flat" representation in SAC
+
+See details in [Data Binding Limitations](#data-binding-limitations) below.
+
 ### Custom Widgets for Planning
 
 Custom widgets can support SAP Analytics Cloud Planning scenarios:

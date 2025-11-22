@@ -310,6 +310,8 @@ Each widget can have up to three web components:
 }
 ```
 
+**Note**: For detailed information on `Color` and `Selection` types, including their JavaScript usage patterns and structure, see [Script API Data Types](advanced-topics.md#script-api-data-types) in Advanced Topics.
+
 ### Property Configuration
 
 | Field | Type | Required | Description |

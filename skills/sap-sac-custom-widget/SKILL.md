@@ -151,6 +151,8 @@ A custom widget requires two files:
 })();
 ```
 
+**⚠️ Production Note**: The `ignoreIntegrity: true` setting above is **development only**. For production deployments, generate a SHA256 integrity hash (see [Security: Integrity Hash](#security-integrity-hash) section) and set `ignoreIntegrity: false` to ensure widget security and avoid admin warnings.
+
 ---
 
 ## JSON Metadata Reference

@@ -262,7 +262,15 @@ Widget Add-Ons allow customization of SAC's built-in widgets:
         return;
       }
 
-      const { width, height, yScale, targetValue } = this._chartContext;
+      const { width, height, yScale } = this._chartContext;
+
+      // Defensive check: Validate yScale is a function before using
+      if (!yScale || typeof yScale !== "function") {
+        console.warn("[PlotAreaAddon] Chart context missing valid yScale function");
+        this._shadowRoot.innerHTML = "";
+        return;
+      }
+
       const y = yScale(this._props.targetValue);
 
       this._shadowRoot.innerHTML = `

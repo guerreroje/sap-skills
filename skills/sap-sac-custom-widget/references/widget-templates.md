@@ -1129,7 +1129,192 @@ Widget with design-time configuration via builder panel.
 }
 ```
 
-The builder panel (builder-widget-config.js) follows the same pattern as the styling panel but typically contains more configuration options for data visualization settings.
+### builder-widget-config.js
+
+Builder panel for data visualization configuration. Provides design-time controls
+for chart type, legend visibility, orientation, and data feed selection.
+
+```javascript
+(function() {
+  // Builder Panel Web Component for Widget Configuration
+  const template = document.createElement("template");
+  template.innerHTML = `
+    <style>
+      :host {
+        display: block;
+        font-family: "72", Arial, sans-serif;
+        font-size: 12px;
+      }
+      .panel {
+        padding: 12px;
+      }
+      .section {
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .section-title {
+        font-weight: 600;
+        color: #32363a;
+        margin-bottom: 8px;
+      }
+      .field {
+        margin-bottom: 12px;
+      }
+      label {
+        display: block;
+        margin-bottom: 4px;
+        color: #32363a;
+        font-weight: 500;
+      }
+      select, input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #89919a;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background: #fff;
+      }
+      .checkbox-field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .checkbox-field label {
+        margin-bottom: 0;
+      }
+      .help-text {
+        font-size: 11px;
+        color: #6a6d70;
+        margin-top: 4px;
+      }
+    </style>
+    <div class="panel">
+      <!-- Chart Configuration Section -->
+      <div class="section">
+        <div class="section-title">Chart Configuration</div>
+        <div class="field">
+          <label for="chartTypeSelect">Chart Type</label>
+          <select id="chartTypeSelect">
+            <option value="bar">Bar Chart</option>
+            <option value="column">Column Chart</option>
+            <option value="line">Line Chart</option>
+            <option value="area">Area Chart</option>
+            <option value="pie">Pie Chart</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="orientationSelect">Orientation</label>
+          <select id="orientationSelect">
+            <option value="vertical">Vertical</option>
+            <option value="horizontal">Horizontal</option>
+          </select>
+          <div class="help-text">Applies to bar/column charts</div>
+        </div>
+        <div class="field checkbox-field">
+          <input type="checkbox" id="showLegendCheckbox" />
+          <label for="showLegendCheckbox">Show Legend</label>
+        </div>
+      </div>
+
+      <!-- Data Binding Info Section -->
+      <div class="section">
+        <div class="section-title">Data Configuration</div>
+        <div class="field">
+          <label>Category Feed</label>
+          <input type="text" id="categoryFeed" readonly placeholder="Bind in Builder Panel" />
+          <div class="help-text">Configure via Data Binding panel</div>
+        </div>
+        <div class="field">
+          <label>Value Feed</label>
+          <input type="text" id="valueFeed" readonly placeholder="Bind in Builder Panel" />
+          <div class="help-text">Configure via Data Binding panel</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  class BuilderWidgetConfig extends HTMLElement {
+    constructor() {
+      super();
+      this._shadowRoot = this.attachShadow({ mode: "open" });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
+      this._props = {
+        chartType: "bar",
+        showLegend: true,
+        orientation: "vertical"
+      };
+
+      // Event listeners for configuration changes
+      this._shadowRoot.getElementById("chartTypeSelect").addEventListener("change", (e) => {
+        this._firePropertiesChanged({ chartType: e.target.value });
+      });
+
+      this._shadowRoot.getElementById("orientationSelect").addEventListener("change", (e) => {
+        this._firePropertiesChanged({ orientation: e.target.value });
+      });
+
+      this._shadowRoot.getElementById("showLegendCheckbox").addEventListener("change", (e) => {
+        this._firePropertiesChanged({ showLegend: e.target.checked });
+      });
+    }
+
+    // Dispatch property changes to SAC framework
+    _firePropertiesChanged(properties) {
+      this.dispatchEvent(new CustomEvent("propertiesChanged", {
+        detail: { properties }
+      }));
+    }
+
+    // Lifecycle: Called before properties are updated
+    onCustomWidgetBeforeUpdate(changedProperties) {
+      this._props = { ...this._props, ...changedProperties };
+    }
+
+    // Lifecycle: Called after properties are updated - sync UI
+    onCustomWidgetAfterUpdate(changedProperties) {
+      if (changedProperties.chartType !== undefined) {
+        this._shadowRoot.getElementById("chartTypeSelect").value = changedProperties.chartType;
+      }
+      if (changedProperties.orientation !== undefined) {
+        this._shadowRoot.getElementById("orientationSelect").value = changedProperties.orientation;
+      }
+      if (changedProperties.showLegend !== undefined) {
+        this._shadowRoot.getElementById("showLegendCheckbox").checked = changedProperties.showLegend;
+      }
+    }
+
+    // Data binding info (read-only display)
+    // NOTE: Actual data feed configuration is handled by SAC's native Builder Panel.
+    // This section displays current binding status for reference.
+    setDataBindingInfo(bindingInfo) {
+      if (bindingInfo?.chartData) {
+        const feeds = bindingInfo.chartData.feeds || {};
+        if (feeds.category) {
+          this._shadowRoot.getElementById("categoryFeed").value = feeds.category.label || "Bound";
+        }
+        if (feeds.value) {
+          this._shadowRoot.getElementById("valueFeed").value = feeds.value.label || "Bound";
+        }
+      }
+    }
+
+    // Property getters/setters
+    get chartType() { return this._props.chartType; }
+    set chartType(v) { this._props.chartType = v; }
+    get showLegend() { return this._props.showLegend; }
+    set showLegend(v) { this._props.showLegend = v; }
+    get orientation() { return this._props.orientation; }
+    set orientation(v) { this._props.orientation = v; }
+  }
+
+  customElements.define("builder-widget-config", BuilderWidgetConfig);
+})();
+```
+
+**Note**: The builder panel provides design-time configuration UI. Data feed selection
+(category/value) is typically configured through SAC's native data binding interface
+rather than custom controls, as SAC handles the model/dimension selection.
 
 ---
 
