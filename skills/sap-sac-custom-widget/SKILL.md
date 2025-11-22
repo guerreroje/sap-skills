@@ -493,6 +493,7 @@ For detailed templates and examples, see:
 4. **`references/widget-addon-guide.md`** - Widget Add-On development (QRC Q4 2023+)
 5. **`references/best-practices-guide.md`** - Performance, security, and development guidelines
 6. **`references/advanced-topics.md`** - Custom types, script API types, installation
+7. **`references/integration-and-migration.md`** - Script integration, content transport, story compatibility, planning
 
 ---
 

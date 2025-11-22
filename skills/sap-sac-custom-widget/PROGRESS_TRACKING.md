@@ -198,6 +198,7 @@
    - widget-addon-guide.md - Widget Add-On feature (QRC Q4 2023+)
    - best-practices-guide.md - Performance, security, development guidelines
    - advanced-topics.md - Custom types, script API types, installation
+   - integration-and-migration.md - Script integration, content transport, story compatibility, planning
 
 **Information Gaps Addressed**:
 - Widget Add-On feature (new in QRC Q4 2023)
@@ -207,9 +208,13 @@
 - Security best practices
 - Widget installation process
 - Third-party library integration patterns
+- Script integration and global script objects
+- Content transport and CTMS migration
+- Story compatibility (Classic vs Optimized)
+- Planning integration and data write-back
 
-**Total Reference Files**: 6
-**Total Lines of Documentation**: ~5,500+
+**Total Reference Files**: 7
+**Total Lines of Documentation**: ~6,000+
 
 ---
 
