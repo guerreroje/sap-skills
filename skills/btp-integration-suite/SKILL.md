@@ -284,17 +284,26 @@ Integration Suite → Monitor → Integrations and APIs
 
 ### Reference Documentation
 Detailed guides available in `references/` directory:
-- `cloud-integration.md` - Comprehensive CI development guide
-- `adapters.md` - All adapter configurations and patterns
-- `integration-flow-steps.md` - Complete step reference
-- `scripting.md` - Groovy/JavaScript patterns and APIs
-- `api-management.md` - APIM development guide
-- `api-policies.md` - All 34 policies with examples
-- `edge-integration-cell.md` - Hybrid deployment guide
-- `event-mesh.md` - Event-driven patterns
-- `security.md` - Security configurations and key management
-- `troubleshooting.md` - Error resolution guide
-- `best-practices.md` - Design guidelines
+
+**Core Development**:
+- `cloud-integration.md` - iFlow development, steps, patterns, best practices
+- `adapters.md` - All 80+ adapter configurations (HTTP, SFTP, OData, RFC, etc.)
+- `scripting.md` - Groovy/JavaScript patterns, APIs, and templates
+- `api-management.md` - API proxy development, 34 policies, Developer Hub
+- `security.md` - Authentication, keystores, certificates, credentials
+
+**Capabilities**:
+- `edge-integration-cell.md` - Hybrid Kubernetes deployment guide
+- `event-mesh.md` - Topics, queues, brokers, webhooks, EDA patterns
+- `integration-advisor-tpm.md` - B2B integration, MIGs, MAGs, partner management
+- `graph-odata.md` - Business Data Graph, OData provisioning
+- `data-space-integration.md` - Catena-X, EDC, sovereign data exchange
+- `migration-assessment.md` - PO migration, ISA-M, technology mapping
+
+**Operations**:
+- `operations-monitoring.md` - Message monitoring, stores, connectivity tests
+- `content-transport.md` - TMS, CTS+, MTAR, manual export/import
+- `troubleshooting.md` - Error resolution, diagnostics, HTTP error catalog
 
 ### Templates
 Ready-to-use templates in `templates/` directory:

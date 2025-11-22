@@ -13,14 +13,27 @@
 - `README.md` - Auto-trigger keywords and documentation links
 - `PROGRESS_TRACKING.md` - This file
 
-### Reference Files (in `references/`)
-- `cloud-integration.md` - Cloud Integration development guide (Complete)
-- `api-management.md` - API Management with policies reference (Complete)
-- `adapters.md` - All adapter types and configurations (Complete)
-- `edge-integration-cell.md` - Hybrid deployment guide (Complete)
+### Reference Files (in `references/`) - 14 Files
+
+**Core Development** (5 files):
+- `cloud-integration.md` - iFlow development, steps, patterns (Complete)
+- `adapters.md` - All 80+ adapter configurations (Complete)
 - `scripting.md` - Groovy/JavaScript patterns and API (Complete)
-- `security.md` - Security configurations and certificates (Complete)
-- `troubleshooting.md` - Error resolution and monitoring (Complete)
+- `api-management.md` - API proxy, 34 policies, Developer Hub (Complete)
+- `security.md` - Authentication, keystores, certificates (Complete)
+
+**Capabilities** (6 files):
+- `edge-integration-cell.md` - Hybrid Kubernetes deployment (Complete)
+- `event-mesh.md` - Topics, queues, brokers, EDA patterns (Complete)
+- `integration-advisor-tpm.md` - B2B, MIGs, MAGs, TPM (Complete)
+- `graph-odata.md` - Business Data Graph, OData provisioning (Complete)
+- `data-space-integration.md` - Catena-X, EDC, data sovereignty (Complete)
+- `migration-assessment.md` - PO migration, ISA-M methodology (Complete)
+
+**Operations** (3 files):
+- `operations-monitoring.md` - Monitoring, stores, connectivity (Complete)
+- `content-transport.md` - TMS, CTS+, MTAR, export/import (Complete)
+- `troubleshooting.md` - Error resolution, diagnostics (Complete)
 
 ### Templates (in `templates/`)
 - `groovy-script-template.groovy` - Common script patterns
