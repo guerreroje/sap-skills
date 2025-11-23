@@ -568,7 +568,8 @@ For templates, see `templates/`:
 ## Source Documentation
 
 **Update this skill by checking**:
-- https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html
+- https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html (ABAP Cloud)
+- https://help.sap.com/docs/SAP_NETWEAVER_AS_ABAP_752/f2e545608079437ab165c105649b89db/7c078765ec6d4e6b88b71bdaf8a2bd9f.html (NetWeaver 7.52 User Guide)
 - https://github.com/SAP-samples/abap-cheat-sheets
 - https://community.sap.com/t5/tag/CDS%20Views/tg-p
 

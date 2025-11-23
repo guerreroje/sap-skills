@@ -178,6 +178,7 @@ sap-abap-cds/
 
 ### SAP Official
 - **ABAP CDS Keyword Documentation**: https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html
+- **SAP NetWeaver 7.52 CDS User Guide**: https://help.sap.com/docs/SAP_NETWEAVER_AS_ABAP_752/f2e545608079437ab165c105649b89db/7c078765ec6d4e6b88b71bdaf8a2bd9f.html
 - **ABAP CDS Annotations (Cloud)**: https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds_annotations.html
 - **ABAP CDS Annotations (7.50)**: https://help.sap.com/doc/abapdocu_750_index_htm/7.50/en-US/abencds_annotations_sap.htm
 - **SAP Learning - CDS Functions**: https://learning.sap.com/learning-journeys/acquire-core-abap-skills/calling-built-in-functions-in-cds-views
