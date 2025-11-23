@@ -150,28 +150,35 @@ sap-abap/
 ├── SKILL.md                        # Main skill file with quick reference
 ├── README.md                       # This file (keywords for discoverability)
 ├── PROGRESS_TRACKING.md            # Content extraction progress
-└── references/                     # Detailed reference files (21 files)
-    ├── internal-tables.md          # Complete table operations
-    ├── table-grouping.md           # GROUP BY loops
-    ├── abap-sql.md                 # ABAP SQL comprehensive guide
-    ├── sql-hierarchies.md          # CTE hierarchies, navigators
-    ├── where-conditions.md         # WHERE clause patterns
-    ├── object-orientation.md       # OO programming patterns
-    ├── design-patterns.md          # Factory, Singleton, Strategy
-    ├── constructor-expressions.md  # Constructor operators
-    ├── dynamic-programming.md      # RTTI, RTTC, field symbols
-    ├── string-processing.md        # String functions and regex
-    ├── numeric-operations.md       # Math functions, big integers
-    ├── bits-bytes.md               # Binary operations, CASTING
-    ├── rap-eml.md                  # RAP and EML reference
-    ├── cds-views.md                # CDS view entities
-    ├── unit-testing.md             # ABAP Unit framework
-    ├── exceptions.md               # Exception handling
-    ├── cloud-development.md        # ABAP Cloud specifics
-    ├── released-classes.md         # Released API catalog
-    ├── authorization.md            # Authorization checks, DCL
+└── references/                     # Detailed reference files (28 files)
     ├── abap-dictionary.md          # DDIC objects, types
-    └── generative-ai.md            # AI SDK integration
+    ├── abap-sql.md                 # ABAP SQL comprehensive guide
+    ├── amdp.md                     # ABAP Managed Database Procedures
+    ├── authorization.md            # Authorization checks, DCL
+    ├── bits-bytes.md               # Binary operations, CASTING
+    ├── builtin-functions.md        # String, numeric, table functions
+    ├── cds-views.md                # CDS view entities
+    ├── cloud-development.md        # ABAP Cloud specifics
+    ├── constructor-expressions.md  # Constructor operators
+    ├── date-time.md                # Date, time, timestamps, XCO
+    ├── design-patterns.md          # Factory, Singleton, Strategy
+    ├── dynamic-programming.md      # RTTI, RTTC, field symbols
+    ├── exceptions.md               # Exception handling
+    ├── generative-ai.md            # AI SDK integration
+    ├── internal-tables.md          # Complete table operations
+    ├── numeric-operations.md       # Math functions, big integers
+    ├── object-orientation.md       # OO programming patterns
+    ├── performance.md              # Database, internal table optimization
+    ├── program-flow.md             # IF, CASE, LOOP, DO, WHILE
+    ├── rap-eml.md                  # RAP and EML reference
+    ├── released-classes.md         # Released API catalog
+    ├── sap-luw.md                  # Logical Unit of Work, transactions
+    ├── sql-hierarchies.md          # CTE hierarchies, navigators
+    ├── string-processing.md        # String functions and regex
+    ├── table-grouping.md           # GROUP BY loops
+    ├── unit-testing.md             # ABAP Unit framework
+    ├── where-conditions.md         # WHERE clause patterns
+    └── xml-json.md                 # XML/JSON processing
 ```
 
 ## Usage
@@ -195,8 +202,8 @@ Content based on official SAP ABAP Cheat Sheets:
 
 ## Version
 
-- **Skill Version**: 2.0.0
-- **Last Updated**: 2025-11-22
+- **Skill Version**: 2.1.0
+- **Last Updated**: 2025-11-23
 - **ABAP Release**: Latest (7.5x / Cloud)
-- **Reference Files**: 21
+- **Reference Files**: 28
 - **Source Coverage**: 91% (31 of 34 source files)
