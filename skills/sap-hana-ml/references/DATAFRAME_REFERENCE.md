@@ -243,14 +243,31 @@ df.describe()
 
 ### Join Operations
 
+Join conditions use **SQL-style syntax** with fully qualified column references:
+
 ```python
-# Inner join
-df1.join(df2, condition='df1.ID = df2.ID')
+# Inner join - condition uses SQL-like syntax with DataFrame names
+df1.join(df2, condition='df1.ID = df2.ID')  # ✓ Correct: explicit table refs
 
 # Left join
 df1.join(df2, condition='df1.ID = df2.ID', how='left')
 
-# Join types: 'inner', 'left', 'right', 'full'
+# Right join
+df1.join(df2, condition='df1.ID = df2.ID', how='right')
+
+# Full outer join
+df1.join(df2, condition='df1.ID = df2.ID', how='full')
+
+# Join types: 'inner' (default), 'left', 'right', 'full'
+```
+
+**Important**: Always use fully qualified column names (`df1.COLUMN`, `df2.COLUMN`) in join conditions to avoid ambiguity:
+```python
+# ✓ Correct - explicit DataFrame references
+df1.join(df2, condition='df1.ID = df2.CUSTOMER_ID', how='left')
+
+# ✗ Avoid - ambiguous column references may cause errors
+# df1.join(df2, condition='ID = CUSTOMER_ID', how='left')
 ```
 
 ### Set Operations

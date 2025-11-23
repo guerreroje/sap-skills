@@ -600,14 +600,18 @@ forecast_line_plot(
 ```python
 import matplotlib.pyplot as plt
 
-# Create figure
+# Create figure - returns (Figure, Axes) tuple
 fig, ax = plt.subplots(figsize=(12, 8))
-viz = EDAVisualizer(ax=ax)
-viz.distribution_plot(data=df, column='VALUE')
 
-# Save to file
+# EDAVisualizer methods modify ax in-place and return ax for chaining
+viz = EDAVisualizer(ax=ax)
+ax = viz.distribution_plot(data=df, column='VALUE')  # Returns matplotlib Axes
+
+# Save to file - returns None, writes file to disk
 plt.savefig('distribution.png', dpi=300, bbox_inches='tight')
-plt.close()
+
+# Close figure to free memory - important in loops/scripts
+plt.close()  # Returns None, releases figure resources
 ```
 
 ### Multiple Plots
@@ -616,9 +620,10 @@ plt.close()
 import matplotlib.pyplot as plt
 from hana_ml.visualizers.eda import EDAVisualizer
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+# Create 2x2 subplot grid
+fig, axes = plt.subplots(2, 2, figsize=(14, 10))  # Returns (Figure, ndarray of Axes)
 
-# Distribution
+# Distribution - each plot method returns its Axes object
 viz1 = EDAVisualizer(ax=axes[0, 0])
 viz1.distribution_plot(data=df, column='AGE')
 
@@ -634,8 +639,14 @@ viz3.scatter_plot(data=df, x='AGE', y='SALARY')
 viz4 = EDAVisualizer(ax=axes[1, 1])
 viz4.correlation_plot(data=df, columns=['F1', 'F2', 'F3'])
 
+# Adjust spacing between subplots - returns None, modifies figure state
 plt.tight_layout()
+
+# Save dashboard - returns None, writes file to disk
 plt.savefig('eda_dashboard.png', dpi=300)
+
+# Good practice: close figure to free memory (optional but recommended)
+plt.close()
 ```
 
 ### Notebook Integration
@@ -657,12 +668,37 @@ display(iframe)
 
 ## Dependencies
 
-The visualizers module requires:
-- matplotlib
-- plotly (for interactive plots)
-- graphviz (for tree visualization)
-- wordcloud (for word cloud generation)
+The visualizers module requires direct and transitive dependencies:
+
+**Direct dependencies:**
+- matplotlib (static plots)
+- plotly (interactive plots)
+- graphviz (tree visualization)
+- wordcloud (word cloud generation)
+
+**Transitive dependencies** (required by above):
+- numpy (required by matplotlib, plotting functions)
+- pillow (required by wordcloud for image handling)
+- pandas (DataFrame integration with visualizers)
 
 ```bash
-pip install matplotlib plotly graphviz wordcloud
+# Install all visualization dependencies (explicit)
+pip install matplotlib plotly graphviz wordcloud pillow numpy pandas
+
+# Or install hana-ml which handles dependencies automatically
+pip install hana-ml
+
+# Note: hana-ml includes visualization dependencies by default
+# Transitive dependencies are resolved automatically by pip
+```
+
+**Note**: The `graphviz` Python package requires the Graphviz system binary to be installed separately:
+```bash
+# Ubuntu/Debian
+apt-get install graphviz
+
+# macOS
+brew install graphviz
+
+# Windows: Download from https://graphviz.org/download/
 ```
