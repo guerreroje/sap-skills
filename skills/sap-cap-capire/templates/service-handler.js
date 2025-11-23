@@ -45,8 +45,8 @@ module.exports = class CatalogService extends cds.ApplicationService {
     // Add computed fields after read
     this.after('READ', Books, this.enrichBooks);
 
-    // Emit event after order created
-    this.after('CREATE', 'Orders', this.emitOrderCreated);
+    // NOTE: emitOrderCreated handler should be registered in OrderService
+    // or AdminService where Orders entity is exposed, not in CatalogService
 
     return super.init();
   }
@@ -87,16 +87,16 @@ module.exports = class CatalogService extends cds.ApplicationService {
     // Check stock availability
     const bookData = await SELECT.one.from(Books).where({ ID: book });
     if (!bookData) {
-      return req.reject(404, `Book ${book} not found`);
+      req.reject(404, `Book ${book} not found`);  // req.reject throws, no return needed
     }
 
     // Guard against undefined stock
     const currentStock = bookData.stock ?? 0;
     if (currentStock < quantity) {
-      return req.reject(409, `Insufficient stock. Available: ${currentStock}`);
+      req.reject(409, `Insufficient stock. Available: ${currentStock}`);
     }
 
-    // Create order
+    // Create order - use transaction for atomicity
     const orderNo = `ORD-${Date.now()}`;
     const order = {
       orderNo,
@@ -110,13 +110,12 @@ module.exports = class CatalogService extends cds.ApplicationService {
       }]
     };
 
-    // Update stock
-    await UPDATE(Books, book).set({
-      stock: { '-=': quantity }
+    // Wrap in transaction: INSERT order first, then UPDATE stock
+    // If INSERT fails, stock change is rolled back
+    await cds.tx(req).run(async (tx) => {
+      await tx.run(INSERT.into(Orders).entries(order));
+      await tx.run(UPDATE(Books, book).set({ stock: { '-=': quantity } }));
     });
-
-    // Insert order
-    await INSERT.into(Orders).entries(order);
 
     return {
       success: true,
@@ -151,6 +150,8 @@ module.exports = class CatalogService extends cds.ApplicationService {
 
   /**
    * Enrich books after read
+   * Note: isAvailable is a stored computed field in the schema,
+   * so we only add runtime-computed fields here
    */
   enrichBooks(books, req) {
     for (const book of books) {
@@ -159,10 +160,11 @@ module.exports = class CatalogService extends cds.ApplicationService {
         book.discount = '10%';
       }
 
-      // Add availability flag
-      book.available = book.stock > 0;
+      // Note: isAvailable is already computed and stored in the database
+      // No need to set it here - it's populated from the schema definition:
+      // isAvailable : Boolean = (stock > 0) stored
 
-      // Add human-readable stock status
+      // Add human-readable stock status (runtime computed)
       if (book.stock === 0) {
         book.stockStatus = 'Out of Stock';
       } else if (book.stock < 10) {
@@ -187,13 +189,19 @@ module.exports = class CatalogService extends cds.ApplicationService {
   }
 
   /**
-   * Custom READ handler (optional - use when you need full control)
+   * Custom READ handler example (optional - use when you need full control)
+   * NOTE: This handler is commented out in init() by default.
+   * If enabled, it runs INSTEAD of the default handler, so AFTER handlers
+   * like enrichBooks won't run automatically - you must call them explicitly.
    */
   async onReadBooks(req) {
     // Get data from database
     const books = await cds.db.run(req.query);
 
-    // Apply custom filtering using the 'available' field set by enrichBooks
-    return books.filter(book => book.available !== false);
+    // If filtering based on enriched fields, call enrichBooks first
+    this.enrichBooks(books, req);
+
+    // Filter using the stored computed field isAvailable from schema
+    return books.filter(book => book.isAvailable !== false);
   }
 }

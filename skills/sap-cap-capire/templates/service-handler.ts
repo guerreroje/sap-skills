@@ -69,25 +69,19 @@ export default class CatalogService extends cds.ApplicationService {
     // Check stock availability
     const bookData = await SELECT.one.from(Books).where({ ID: book });
     if (!bookData) {
-      // Use req.reject for error responses - terminates request with HTTP error
-      return req.reject(404, `Book ${book} not found`);
+      // req.reject throws an error, no return needed
+      req.reject(404, `Book ${book} not found`);
     }
 
     // Guard against undefined stock
     const currentStock = bookData.stock ?? 0;
     if (currentStock < quantity) {
-      // Use req.reject for business rule violations (409 Conflict)
-      return req.reject(409, `Insufficient stock. Available: ${currentStock}`);
+      req.reject(409, `Insufficient stock. Available: ${currentStock}`);
     }
 
-    // Update stock
-    await UPDATE(Books, book).set({
-      stock: { '-=': quantity }
-    });
-
-    // Create order
+    // Create order - use transaction for atomicity
     const orderNo = `ORD-${Date.now()}`;
-    await INSERT.into(Orders).entries({
+    const order = {
       orderNo,
       status: 'confirmed',
       total: bookData.price * quantity,
@@ -96,6 +90,13 @@ export default class CatalogService extends cds.ApplicationService {
         quantity,
         price: bookData.price
       }]
+    };
+
+    // Wrap in transaction: INSERT order first, then UPDATE stock
+    // If INSERT fails, stock change is rolled back
+    await cds.tx(req).run(async (tx: any) => {
+      await tx.run(INSERT.into(Orders).entries(order));
+      await tx.run(UPDATE(Books, book).set({ stock: { '-=': quantity } }));
     });
 
     return {
@@ -136,18 +137,25 @@ export default class CatalogService extends cds.ApplicationService {
 
   /**
    * Enrich books after read
+   * Note: isAvailable is a stored computed field in the schema,
+   * so we only add runtime-computed fields here
    */
   private enrichBooks(books: Array<{
     stock?: number;
     discount?: string;
-    available?: boolean;
+    isAvailable?: boolean;  // From schema stored computed field
     stockStatus?: string;
   }>): void {
     for (const book of books) {
       if (book.stock && book.stock > 100) {
         book.discount = '10%';
       }
-      book.available = (book.stock ?? 0) > 0;
+
+      // Note: isAvailable is already computed and stored in the database
+      // No need to set it here - it's populated from the schema definition:
+      // isAvailable : Boolean = (stock > 0) stored
+
+      // Add human-readable stock status (runtime computed)
       if (!book.stock || book.stock === 0) {
         book.stockStatus = 'Out of Stock';
       } else if (book.stock < 10) {
