@@ -18,10 +18,10 @@ service CatalogService {
   @readonly
   entity Books as projection on my.Books {
     *,
-    author.name as authorName : String,
-    genre.code as genre_code : String,
-    genre.name as genreName : String,
-    currency.code as currency_code : String
+    author.name as authorName,
+    genre.code as genre_code,
+    genre.name as genreName,
+    currency.code as currency_code
   } excluding { createdBy, modifiedBy, author, genre, currency };
 
   /**

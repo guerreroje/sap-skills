@@ -20,8 +20,8 @@ annotate CatalogService.Books with @UI.HeaderInfo: {
   TypeName       : 'Book',
   TypeNamePlural : 'Books',
   Title          : { Value: title },
-  Description    : { Value: authorName },
-  ImageUrl       : coverImage
+  Description    : { Value: authorName }
+  // Note: Add coverImage field to Books entity if image support is needed
 };
 
 /**
