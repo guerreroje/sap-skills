@@ -133,7 +133,7 @@ This skill extracts and organizes content from **90 documentation files** across
 
 ## Maintenance
 
-**Last Updated**: 2025-11-22
+**Last Updated**: 2025-11-27
 **Source Repository**: https://github.com/SAP-docs/sap-btp-master-data-integration
 **Review Schedule**: Quarterly
 

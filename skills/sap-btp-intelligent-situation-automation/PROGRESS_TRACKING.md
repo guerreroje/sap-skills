@@ -1,9 +1,11 @@
 # SAP BTP Intelligent Situation Automation - Content Extraction Progress
 
-**Repository**: https://github.com/SAP-docs/sap-btp-intelligent-situation-automation/tree/main/docs
+**Repository**: https://github.com/SAP-docs/btp-intelligent-situation-automation/tree/main/docs
 **Purpose**: Track extraction and coverage of SAP BTP Intelligent Situation Automation documentation
-**Last Updated**: 2025-11-22
+**Last Updated**: 2025-11-27
 **Extraction Status**: Complete
+**Service Status**: ⚠️ DEPRECATED (September 24, 2025)
+**End of Service**: March 2026 (estimated)
 
 ---
 
@@ -198,14 +200,17 @@ The skill follows Anthropic best practices with three-level loading:
 4. Test updated configurations
 5. Document changes in README.md
 
+### Service Deprecation Notice
+**Deprecation Date**: September 24, 2025
+**Source**: SAP Community Blog by Vidya Shetty (Product and Topic Expert)
+**Link**: https://community.sap.com/t5/technology-blog-posts-by-sap/deprecation-of-intelligent-situation-automation-service/ba-p/14214342
+
+### Migration Path
+SAP is working towards a GenAI-based capability in the **Situation Handling Extended framework**. Updates will be provided when available for consumption.
+
 ### Next Scheduled Review
-**Date**: 2026-02-22
-**Tasks**:
-- Verify API endpoint changes
-- Check for new communication scenarios
-- Update external resource links
-- Verify role template changes
-- Update "Last Verified" dates
+**Status**: NO FURTHER UPDATES - Service deprecated
+**Final Review**: Completed 2025-11-27
 
 ---
 
@@ -224,7 +229,7 @@ The skill follows Anthropic best practices with three-level loading:
 
 ---
 
-**Document Version**: 1.0.0
-**Last Updated**: 2025-11-22
-**Status**: Extraction Complete
+**Document Version**: 1.1.0
+**Last Updated**: 2025-11-27
+**Status**: Archive (Service Deprecated)
 **Maintainer**: SAP Skills Team | https://github.com/secondsky/sap-skills

@@ -6,6 +6,20 @@ Using Maintenance Planner with Cloud Integration Automation Service.
 
 ---
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites](#prerequisites)
+3. [Access Maintenance Planner](#access-maintenance-planner)
+4. [Integration Scenarios](#integration-scenarios)
+   - System Information Download
+   - Stack XML Upload
+   - Project Creation
+5. [Workflow Integration](#workflow-integration)
+6. [Best Practices](#best-practices)
+
+---
+
 ## Overview
 
 Maintenance Planner provides an alternative method for invoking Cloud Integration Automation Service workflows. It allows planning of cloud integration scenarios with system selection based on S-User customer associations.

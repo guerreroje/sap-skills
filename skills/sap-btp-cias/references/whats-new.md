@@ -6,6 +6,30 @@ Complete release notes for Cloud Integration Automation Service from 2021-2025.
 
 ---
 
+## Table of Contents
+
+1. [2025](#2025)
+   - China (CN20) Data Center
+   - Other Updates
+2. [2024](#2024)
+   - Montreal (CA10) Data Center
+   - Real-Time Integration Support
+   - Theme Update
+   - Mobile Responsiveness
+3. [2023](#2023)
+   - Tokyo (JP10) Data Center
+   - Progress Tracking
+   - New Integration Scenarios
+4. [2022](#2022)
+   - Frankfurt (EU11) & Shanghai (CN40)
+   - API Enhancements
+5. [2021](#2021)
+   - Cloud Foundry Support
+   - Initial Launch
+   - Neo Environment Deprecation
+
+---
+
 ## 2025
 
 ### New Data Center - China (CN20)

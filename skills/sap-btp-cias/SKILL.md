@@ -5,8 +5,8 @@ description: |
   Use when: setting up CIAS subscriptions, configuring destinations, assigning roles (CIASIntegrationAdministrator, CIASIntegrationExpert, CIASIntegrationMonitor), planning integration scenarios, working with My Inbox tasks, monitoring scenario execution, troubleshooting CIAS errors, creating OAuth2 instances, configuring identity providers for CIAS, understanding CIAS security architecture, or integrating SAP products (S/4HANA, SuccessFactors, BTP services, SAP Build, IBP).
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
-  last_verified: "2025-11-22"
+  version: "1.0.1"
+  last_verified: "2025-11-27"
   sap_product: "Cloud Integration Automation Service"
   source_docs: "https://github.com/SAP-docs/btp-cloud-integration-automation-service"
 ---
@@ -254,17 +254,20 @@ After automation failure:
 - **Only Failed Automations** - Retry failed steps only
 - **All Automations** - Retry entire sequence
 
-## Related Reference Files
+## Bundled Resources
 
-For detailed information, load these reference files as needed:
+### Reference Files
+1. `references/setup-guide.md` - Complete subscription, OAuth2, and destination configuration procedures
+2. `references/security-guide.md` - Security architecture, identity provider configuration, and role management
+3. `references/integration-scenarios.md` - Full list of 100+ supported integration scenarios with codes (1M1, 22K, 4A1, etc.)
+4. `references/troubleshooting.md` - Detailed error resolution procedures and common issues
+5. `references/maintenance-planner.md` - Maintenance Planner integration guide and workflow invocation
+6. `references/task-ui-guide.md` - Complete task UI controls, tabs, behaviors, and automation steps
+7. `references/whats-new.md` - Complete release notes from 2021-2025 with feature updates
 
-- `references/setup-guide.md` - Complete subscription and OAuth2 configuration
-- `references/security-guide.md` - Security architecture, IdP, roles in detail
-- `references/integration-scenarios.md` - Full list of 100+ supported scenarios with codes
-- `references/troubleshooting.md` - Detailed troubleshooting procedures
-- `references/maintenance-planner.md` - Using Maintenance Planner for workflow invocation
-- `references/task-ui-guide.md` - Complete task UI controls and tab details
-- `references/whats-new.md` - Complete release notes 2021-2025
+### Template Files
+1. `templates/destination-config.md` - Destination configuration templates by target system type
+2. `templates/role-assignment.md` - Role assignment procedures and checklists for different scenarios
 
 ## Documentation Sources
 

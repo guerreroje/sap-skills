@@ -4,11 +4,24 @@ description: |
   Configures and integrates SAP Master Data Integration (MDI) service on SAP Business Technology Platform. Use when setting up MDI tenants, connecting applications (S/4HANA, SuccessFactors, Ariba, Fieldglass, etc.), configuring distribution models, SOAP APIs for business partners, extensibility, or troubleshooting master data replication. Covers One Domain Model integration, Business Data Orchestration, client authentication (OAuth2, mTLS), and security configurations.
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
-  last_verified: "2025-11-25"
+  version: "1.1.0"
+  last_verified: "2025-11-27"
 ---
 
 # SAP BTP Master Data Integration
+
+**Table of Contents**
+- [Quick Reference](#quick-reference)
+- [Core Concepts](#core-concepts)
+- [Decision Trees](#decision-trees)
+- [Setup Workflow](#setup-workflow)
+- [System Limitations](#system-limitations)
+- [Client Configuration](#client-configuration)
+- [SOAP Endpoints](#soap-endpoints)
+- [Common Integration Scenarios](#common-integration-scenarios)
+- [Security Best Practices](#security-best-practices)
+- [Troubleshooting](#troubleshooting)
+- [Bundled Resources](#bundled-resources)
 
 SAP Master Data Integration (MDI) is a central master data hub on SAP BTP that enables applications to synchronize local master data databases with a centralized repository.
 
@@ -226,18 +239,22 @@ Check SAP Trust Center: https://www.sap.com/about/cloud-trust-center/
 ### Support Component
 `BC-CP-CF-ONEMDS`
 
-## Reference Files
+## Bundled Resources
 
-For detailed information:
-- `references/glossary-and-pricing.md` - Complete glossary, pricing tiers, qualifying apps, maintenance windows
-- `references/setup-guide-complete.md` - Prerequisites, tenant management, client config, version history
-- `references/integration-models.md` - Complete ODM types and versions
-- `references/integration-guides.md` - System-specific setup guides
-- `references/soap-api-reference.md` - SOAP web services with complete field mappings
-- `references/features-complete.md` - All features, REST/SOAP events, Local ID APIs, Data Privacy
-- `references/security-and-privacy.md` - Security, data protection, filtering
-- `references/extensibility.md` - Custom extensions and WSDL generation
-- `references/monitoring.md` - Business Data Orchestration monitoring
+### Core Documentation
+1. `references/setup-guide-complete.md` (12.2K lines) - Complete setup guide with prerequisites, tenant management, client configuration, and version history
+2. `references/glossary-and-pricing.md` (7.3K lines) - Comprehensive glossary, pricing tiers, qualifying applications, and maintenance windows
+3. `references/features-complete.md` (11.6K lines) - All MDI features including REST/SOAP events, Local ID APIs, and data privacy
+
+### Integration Resources
+4. `references/integration-models.md` (3.4K lines) - Complete ODM types and versions for all supported master data
+5. `references/integration-guides.md` (6.8K lines) - System-specific setup guides for S/4HANA, SuccessFactors, Ariba, and more
+6. `references/soap-api-reference.md` (17.7K lines) - Complete SOAP web services reference with field mappings
+
+### Advanced Topics
+7. `references/security-and-privacy.md` (7.7K lines) - Security guidelines, data protection, and filtering configurations
+8. `references/extensibility.md` (4.5K lines) - Custom extensions, field definitions, and WSDL generation
+9. `references/monitoring.md` (7.3K lines) - Business Data Orchestration monitoring and troubleshooting
 
 ## Documentation Sources
 

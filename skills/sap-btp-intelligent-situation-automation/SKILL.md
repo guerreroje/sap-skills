@@ -13,68 +13,74 @@ description: |
   Cloud Connector, cf-eu10, CA-SIT-ATM, business situations, situation types, situation actions
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
-  last_verified: "2025-11-25"
+  version: "1.1.0"
+  last_verified: "2025-11-27"
+  status: "DEPRECATED"
+  deprecation_date: "2025-09-24"
+  end_of_service: "2026-03-24 (estimated)"
 ---
 
 # SAP BTP Intelligent Situation Automation
 
-## Overview
+## ⚠️ DEPRECATION NOTICE
 
-SAP Intelligent Situation Automation is a BTP service that enables automatic handling of business situations from SAP S/4HANA and SAP S/4HANA Cloud systems. It leverages SAP Event Mesh for real-time event communication and allows organizations to define automated actions for resolving situations.
+**Service Status**: DEPRECATED as of September 24, 2025
 
-**Documentation Source**: https://github.com/SAP-docs/sap-btp-intelligent-situation-automation
+SAP BTP Intelligent Situation Automation service has been deprecated and will reach end-of-service 6 months from the deprecation announcement (approximately March 2026) or when the last contract commitment is fulfilled.
 
-**Last Verified**: 2025-11-22
+**Immediate Action Required**: 
+- Unsubscribe from the Intelligent Situation Automation service
+- Export any required data before end-of-service date
+- Contact component CA-SIT-ATM for questions or concerns
+
+## Overview (For Reference)
+
+SAP Intelligent Situation Automation was a BTP service that enabled automatic handling of business situations from SAP S/4HANA and SAP S/4HANA Cloud systems. It leveraged SAP Event Mesh for real-time event communication and allowed organizations to define automated actions for resolving situations.
+
+**Documentation Source**: https://github.com/SAP-docs/btp-intelligent-situation-automation
+
+**Last Verified**: 2025-11-27
 
 ## When to Use This Skill
 
-Use this skill when:
+## When to Use This Skill
 
-- **Subscribing to Intelligent Situation Automation** on SAP BTP
-- **Configuring Event Mesh** for situation event communication
-- **Setting up destinations** to connect S/4HANA systems
-- **Onboarding SAP S/4HANA or SAP S/4HANA Cloud** systems
-- **Exposing Situation Handling APIs** (SAP_COM_0345, SAP_COM_0376)
-- **Assigning user roles** (SituationAutomationKeyUser, SituationAutomationAdminUser)
-- **Creating automation rules** for automatic situation resolution
-- **Troubleshooting** situation automation issues
-- **Analyzing situations** via the Situation Dashboard
+**⚠️ SERVICE DEPRECATED - Use only for:**
+
+- **Unsubscribing from Intelligent Situation Automation** service
+- **Exporting data** before end-of-service deadline
+- **Understanding legacy configurations** for documentation purposes
+- **Migration planning** to alternative solutions
+
+**Do NOT use this skill for:**
+- New subscriptions to the service (not available)
+- Setting up new automation rules (service deprecated)
+- Production deployments (service will be discontinued)
+
+## Migration Information
+
+SAP is working towards a GenAI-based capability in the **Situation Handling Extended framework**. Updates will be provided when available for consumption. For more information, see the SAP community announcement about the deprecation.
 
 ## Quick Decision Tree
 
 ### What Task?
 
 ```
-Subscription & Setup
-├─ Prerequisites → references/setup-guide.md
-├─ Subscribe to service → references/setup-guide.md#subscription-process
-├─ Enable Event Mesh → references/setup-guide.md#event-mesh-configuration
-└─ Configure region (cf-eu10) → references/setup-guide.md#network-requirements
-
-Onboarding S/4HANA Systems
-├─ Expose APIs
-│  ├─ SAP S/4HANA Cloud → references/onboarding.md#sap-s4hana-cloud
-│  └─ SAP S/4HANA (on-premise) → references/onboarding.md#sap-s4hana-on-premise
-├─ Configure destinations → references/onboarding.md#2-configure-destinations-on-sap-btp
-├─ Set up Event Mesh communication → references/onboarding.md#3-set-up-communication-with-sap-btp
-└─ Onboard system → references/onboarding.md#4-onboard-s4hana-system
-
-User Management
-├─ Define roles → references/security-roles.md#role-templates
-├─ Create role collections → references/security-roles.md#role-collections
-└─ Assign to users → references/security-roles.md#assigning-role-collections-to-users
-
-Operations
-├─ Configure automatic resolution → references/operations.md#automatic-situation-resolution
+Data Export & Unsubscription (DEPRECATED SERVICE)
 ├─ Export data → references/operations.md#data-export
-└─ View audit logs → references/operations.md#audit-logging
+└─ Unsubscribe → DEPRECATION NOTICE section
 
-Troubleshooting
-├─ Server errors → references/troubleshooting.md#error-1-server-error-on-application-access
-├─ No automation execution → references/troubleshooting.md#error-2-no-action-applied
-├─ Missing configuration → references/troubleshooting.md#error-3-no-automation-configuration-found
-└─ Support: CA-SIT-ATM
+Legacy Documentation (For Reference Only)
+├─ Understanding existing setup → references/setup-guide.md
+├─ API configurations → references/onboarding.md
+├─ Role assignments → references/security-roles.md
+├─ Automation rules → references/operations.md
+└─ Error troubleshooting → references/troubleshooting.md
+
+Migration Planning
+├─ Review Situation Handling Extended framework
+├─ Contact SAP for migration options
+└─ Support component: CA-SIT-ATM
 ```
 
 ## Supported Systems
@@ -234,7 +240,27 @@ Intelligent Situation Automation uses the Audit Log service to track:
 
 View logs via the Audit Log Viewer in Cloud Foundry.
 
-## Common Issues
+## Unsubscription Instructions
+
+### Prerequisites
+- Administrator role for the subaccount
+- Data export completed (if needed)
+
+### Steps to Unsubscribe
+1. Open your global account in the SAP BTP cockpit
+2. Navigate to your subaccount
+3. In the navigation area, choose **Services > Instances and Subscriptions**
+4. Find Intelligent Situation Automation in the subscription list
+5. Select the three dots at the end of the subscription row
+6. From the menu, select **Delete**
+7. Confirm deletion - all application data will be removed
+
+### Support
+For any questions or concerns about the deprecation:
+- **Component**: CA-SIT-ATM
+- Create an incident via SAP for Me
+
+## Common Issues (Legacy)
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
@@ -291,21 +317,26 @@ View logs via the Audit Log Viewer in Cloud Foundry.
 
 ## Updates and Maintenance
 
-**Source**: SAP BTP Intelligent Situation Automation Documentation
+**⚠️ SERVICE DEPRECATED**: No further updates expected as the service is deprecated.
 
-**To Update This Skill**:
-1. Check GitHub repository for documentation updates
-2. Review for new communication scenarios
-3. Update affected reference files
-4. Update "Last Verified" date
+**Documentation Source**: 
+- Original: https://github.com/SAP-docs/btp-intelligent-situation-automation
+- Deprecation Announcement: https://community.sap.com/t5/technology-blog-posts-by-sap/deprecation-of-intelligent-situation-automation-service/ba-p/14214342
 
-**Quarterly Review Recommended**: Check for updates every 3 months
+**Final Verification**: 2025-11-27
 
-**Next Review**: 2026-02-22
+**Maintenance Status**: ARCHIVE ONLY - Skill maintained for historical reference and unsubscription guidance.
 
 ---
 
-**Skill Version**: 1.0.0
-**Last Updated**: 2025-11-22
+**Skill Version**: 1.1.0
+**Status**: DEPRECATED
+**Last Updated**: 2025-11-27
 **License**: GPL-3.0
 **Maintainer**: SAP Skills Team | https://github.com/secondsky/sap-skills
+
+---
+
+**Version History**:
+- v1.1.0 (2025-11-27): Added deprecation notice and unsubscription instructions
+- v1.0.0 (2025-11-22): Initial release for active service

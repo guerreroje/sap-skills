@@ -5,7 +5,7 @@ description: |
 license: GPL-3.0
 metadata:
   version: "1.0.0"
-  last_verified: "2025-11-25"
+  last_verified: "2025-11-27"
 ---
 
 # SAP HANA Cloud Data Intelligence Skill
@@ -259,5 +259,5 @@ Starter templates are available in `templates/`:
 ## Version Information
 
 - **Skill Version**: 1.0.0
-- **Last Updated**: 2025-11-22
+- **Last Updated**: 2025-11-27
 - **Documentation Source**: SAP-docs/sap-hana-cloud-data-intelligence (GitHub)

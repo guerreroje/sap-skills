@@ -174,10 +174,18 @@ curl -X GET "$AI_API_URL/v2/lm/scenarios/foundation-models/models" \
 
 GPL-3.0
 
+## Version
+
+**Current**: 1.1.0 (2025-11-27)
+- Added comprehensive metadata tracking
+- Optimized SKILL.md from 615 to 256 lines (58% reduction)
+- Added Table of Contents for better navigation
+- Improved progressive disclosure architecture
+
 ## Last Updated
 
-2025-11-22
+2025-11-27
 
 ## Next Review
 
-2026-02-22 (Quarterly)
+2026-02-27 (Quarterly)

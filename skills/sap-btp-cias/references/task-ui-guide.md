@@ -6,6 +6,37 @@ Complete reference for working with tasks in Cloud Integration Automation Servic
 
 ---
 
+## Table of Contents
+
+1. [Task Types](#task-types)
+   - Manual Tasks
+   - Automation Tasks
+   - Confirmation Tasks
+2. [My Inbox Application](#my-inbox-application)
+   - Task List
+   - Task Details
+   - Task Actions
+3. [Task Execution Workflow](#task-execution-workflow)
+   - Claim Tasks
+   - Execute Task Steps
+   - Complete Tasks
+4. [Automation Task Controls](#automation-task-controls)
+   - Parameter Configuration
+   - Execution Controls
+   - Log Viewing
+5. [Scenario Execution Monitoring](#scenario-execution-monitoring)
+   - Workflow Status
+   - Task Progress
+   - Termination Options
+6. [Task Tabs Overview](#task-tabs-overview)
+   - Task Instructions
+   - Parameters
+   - Logs
+   - Support Information
+7. [Common Task Patterns](#common-task-patterns)
+
+---
+
 ## Task Types
 
 When hovering over tasks in the Overview tab, you can identify task types:

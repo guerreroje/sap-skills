@@ -1,396 +1,135 @@
 ---
 name: sap-hana-ml
 description: |
-  SAP HANA Machine Learning Python Client (hana-ml) development skill. Provides guidance for building ML solutions using SAP HANA's in-database machine learning capabilities with Python.
-
-  Use when:
-  - Setting up hana-ml Python library for SAP HANA ML development
-  - Creating connections to SAP HANA using ConnectionContext
-  - Working with HANA DataFrames for data manipulation
-  - Implementing PAL (Predictive Analysis Library) algorithms
-  - Using APL (Automated Predictive Library) for AutoML
-  - Building classification, regression, clustering, or time series models
-  - Creating visualizations and model explanations with SHAP
-  - Saving, loading, and managing ML models in HANA
-  - Performing spatial or graph analytics in HANA
-  - Text mining with topic modeling (LDA)
-
-  Keywords: hana-ml, SAP HANA, machine learning, PAL, APL, predictive analytics, HANA DataFrame, ConnectionContext, classification, regression, clustering, time series, ARIMA, gradient boosting, AutoML, SHAP, model storage, spatial analytics, graph algorithms
+  SAP HANA Machine Learning Python Client (hana-ml) development skill.
+  
+  Use when: Building ML solutions with SAP HANA's in-database machine learning
+  using Python hana-ml library for PAL/APL algorithms, DataFrame operations,
+  AutoML, model persistence, and visualization.
+  
+  Keywords: hana-ml, SAP HANA, machine learning, PAL, APL, predictive analytics,
+  HANA DataFrame, ConnectionContext, classification, regression, clustering,
+  time series, ARIMA, gradient boosting, AutoML, SHAP, model storage
 license: GPL-3.0
+metadata:
+  version: 1.1.0
+  last_verified: 2025-11-27
+  package_version: 2.22.241011
 ---
 
 # SAP HANA ML Python Client (hana-ml)
 
-**Version**: 2.22.241011
-**Last Verified**: 2025-11-23
-**Documentation**: https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.html
+**Package Version**: 2.22.241011  
+**Last Verified**: 2025-11-27
+
+## Table of Contents
+
+- [Installation & Setup](#installation--setup)
+- [Quick Start](#quick-start)
+- [Core Libraries](#core-libraries)
+- [Common Patterns](#common-patterns)
+- [Best Practices](#best-practices)
+- [Bundled Resources](#bundled-resources)
 
 ---
 
-## Installation
+## Installation & Setup
 
 ```bash
 pip install hana-ml
 ```
 
-**Requirements**:
-- Python 3.8+
-- SAP HANA 2.0 SPS03+ or SAP HANA Cloud
-- hdbcli (SAP HANA Python driver, installed automatically)
+**Requirements**: Python 3.8+, SAP HANA 2.0 SPS03+ or SAP HANA Cloud
 
 ---
 
 ## Quick Start
 
-### Connection Setup
+### Connection & DataFrame
 
 ```python
 from hana_ml import ConnectionContext
 
-# Connect to SAP HANA
+# Connect
 conn = ConnectionContext(
     address='<hostname>',
     port=443,
     user='<username>',
     password='<password>',
-    encrypt=True  # Required for HANA Cloud
+    encrypt=True
 )
 
-# Verify connection
-print(f"HANA Version: {conn.hana_version()}")
-print(f"Cloud Version: {conn.is_cloud_version()}")
-```
-
-### DataFrame Operations
-
-```python
-# Create DataFrame from existing table
+# Create DataFrame
 df = conn.table('MY_TABLE', schema='MY_SCHEMA')
-
-# Basic operations
-print(df.columns)        # Column names
-print(df.shape)          # (rows, columns)
-df.head(10).collect()    # First 10 rows to pandas
-
-# Filtering and selection
-filtered = df.filter("AGE > 30").select('NAME', 'AGE', 'SALARY')
-
-# Aggregations
-stats = df.agg([
-    ('SALARY', 'mean', 'AVG_SALARY'),
-    ('SALARY', 'max', 'MAX_SALARY'),
-    ('AGE', 'count', 'COUNT')
-])
-
-# Create from pandas
-import pandas as pd
-from hana_ml.dataframe import create_dataframe_from_pandas
-
-pdf = pd.DataFrame({'A': [1, 2, 3], 'B': ['x', 'y', 'z']})
-hdf = create_dataframe_from_pandas(conn, pdf, table_name='MY_NEW_TABLE')
+print(f"Shape: {df.shape}")
+df.head(10).collect()
 ```
 
----
-
-## PAL (Predictive Analysis Library)
-
-PAL provides 100+ algorithms executed in-database for optimal performance.
-
-### Classification Example
+### PAL Classification
 
 ```python
 from hana_ml.algorithms.pal.unified_classification import UnifiedClassification
-
-# Prepare data
-train_df = conn.table('TRAINING_DATA')
 
 # Train model
 clf = UnifiedClassification(func='RandomDecisionTree')
 clf.fit(train_df, features=['F1', 'F2', 'F3'], label='TARGET')
 
-# Predict
-test_df = conn.table('TEST_DATA')
+# Predict & evaluate
 predictions = clf.predict(test_df, features=['F1', 'F2', 'F3'])
-
-# Evaluate
 score = clf.score(test_df, features=['F1', 'F2', 'F3'], label='TARGET')
-print(f"Accuracy: {score}")
 ```
 
-### Regression Example
-
-```python
-from hana_ml.algorithms.pal.unified_regression import UnifiedRegression
-
-# Train regression model
-reg = UnifiedRegression(func='HybridGradientBoostingTree')
-reg.fit(train_df, features=['F1', 'F2', 'F3'], label='PRICE')
-
-# Predict continuous values
-predictions = reg.predict(test_df, features=['F1', 'F2', 'F3'])
-```
-
-### Clustering Example
-
-```python
-from hana_ml.algorithms.pal.clustering import KMeans
-
-# Train KMeans
-kmeans = KMeans(n_clusters=5)
-kmeans.fit(data_df, features=['F1', 'F2', 'F3'])
-
-# Get cluster assignments
-labels = kmeans.labels_
-centers = kmeans.cluster_centers_
-```
-
-### Time Series Forecasting
-
-```python
-from hana_ml.algorithms.pal.tsa.arima import ARIMA
-from hana_ml.algorithms.pal.tsa.auto_arima import AutoARIMA
-
-# AutoARIMA for automatic parameter selection
-auto_arima = AutoARIMA()
-auto_arima.fit(ts_df, endog='VALUE')
-
-# Forecast future values
-forecast = auto_arima.predict(forecast_length=30)
-```
-
----
-
-## APL (Automated Predictive Library)
-
-APL provides AutoML capabilities with automatic feature engineering and model selection.
-
-### AutoML Classification
+### APL AutoML
 
 ```python
 from hana_ml.algorithms.apl.classification import AutoClassifier
 
-# Automatic classification
+# Automated classification
 auto_clf = AutoClassifier()
 auto_clf.fit(train_df, label='TARGET')
-
-# Get feature importance
-importance = auto_clf.get_feature_importances()
-
-# Generate predictions with explanations
 predictions = auto_clf.predict(test_df)
 ```
 
-### AutoML Regression
+### Model Persistence
 
 ```python
-from hana_ml.algorithms.apl.regression import AutoRegressor
-
-auto_reg = AutoRegressor()
-auto_reg.fit(train_df, label='PRICE')
-
-# Model performance
-metrics = auto_reg.get_performance_metrics()
-summary = auto_reg.get_summary()
-```
-
-### Gradient Boosting
-
-```python
-from hana_ml.algorithms.apl.gradient_boosting_classification import GradientBoostingClassifier
-
-gbc = GradientBoostingClassifier()
-gbc.fit(train_df, label='TARGET')
-
-# Export model for deployment
-gbc.export_apply_code()
-```
-
-### Time Series with APL
-
-```python
-from hana_ml.algorithms.apl.time_series import AutoTimeSeries
-
-ts_model = AutoTimeSeries()
-ts_model.fit(ts_df, endog='SALES', exog=['PROMOTION', 'HOLIDAY'])
-
-# Forecast
-forecast = ts_model.predict(horizon=12)
-```
-
----
-
-## Model Persistence
-
-```python
-# Save model to HANA
 from hana_ml.model_storage import ModelStorage
 
 ms = ModelStorage(conn)
 clf.name = 'MY_CLASSIFIER'
 ms.save_model(model=clf, if_exists='replace')
-
-# List saved models
-ms.list_models()
-
-# Load model
-loaded_clf = ms.load_model('MY_CLASSIFIER')
-
-# Delete model
-ms.delete_model('MY_CLASSIFIER')
 ```
 
 ---
 
-## Visualizations
+## Core Libraries
 
-### EDA Visualizations
+### PAL (Predictive Analysis Library)
+- **100+ algorithms** executed in-database
+- Categories: Classification, Regression, Clustering, Time Series, Preprocessing
+- **Key classes**: `UnifiedClassification`, `UnifiedRegression`, `KMeans`, `ARIMA`
+- See: `references/PAL_ALGORITHMS.md` for complete list
 
-```python
-from hana_ml.visualizers.eda import EDAVisualizer
+### APL (Automated Predictive Library)
+- **AutoML capabilities** with automatic feature engineering
+- **Key classes**: `AutoClassifier`, `AutoRegressor`, `GradientBoostingClassifier`
+- See: `references/APL_ALGORITHMS.md` for details
 
-viz = EDAVisualizer(ax=None)
+### DataFrames
+- **Lazy evaluation** - builds SQL until `collect()` called
+- **In-database processing** for optimal performance
+- See: `references/DATAFRAME_REFERENCE.md` for complete API
 
-# Distribution plot
-viz.distribution_plot(data=df, column='AGE', bins=20)
-
-# Correlation plot
-viz.correlation_plot(data=df, columns=['F1', 'F2', 'F3', 'TARGET'])
-
-# Box plot
-viz.box_plot(data=df, column='SALARY', groupby='DEPARTMENT')
-```
-
-### Model Explanation with SHAP
-
-```python
-from hana_ml.visualizers.shap import ShapleyExplainer
-
-explainer = ShapleyExplainer(clf)
-explainer.summary_plot(test_df)
-explainer.force_plot(test_df.head(1))
-```
-
-### Confusion Matrix
-
-```python
-from hana_ml.visualizers.metrics import MetricsVisualizer
-
-mv = MetricsVisualizer()
-mv.plot_confusion_matrix(y_true, y_pred, labels=['Class0', 'Class1'])
-```
-
-### Time Series Plots
-
-```python
-from hana_ml.visualizers.eda import plot_acf, plot_pacf, seasonal_plot
-
-plot_acf(ts_df, column='VALUE', lags=40)
-plot_pacf(ts_df, column='VALUE', lags=40)
-seasonal_plot(ts_df, column='VALUE', period=12)
-```
-
----
-
-## Algorithm Reference
-
-### PAL Algorithm Categories
-
-| Category | Key Algorithms |
-|----------|----------------|
-| **Classification** | LogisticRegression, DecisionTreeClassifier, RDTClassifier, HybridGradientBoostingClassifier, SVC, OneClassSVM, NaiveBayes, KNNClassifier, MLPClassifier |
-| **Regression** | LinearRegression, PolynomialRegression, GLM, SVR, DecisionTreeRegressor, RDTRegressor, HybridGradientBoostingRegressor, MLPRegressor, CoxProportionalHazardModel |
-| **Clustering** | KMeans, KMedoids, DBSCAN, GeometryDBSCAN, AgglomerateHierarchicalClustering, SpectralClustering, GaussianMixture, SOM |
-| **Time Series** | ARIMA, AutoARIMA, SingleExponentialSmoothing, DoubleExponentialSmoothing, TripleExponentialSmoothing, AutoExponentialSmoothing, LSTM, BSTS, CPD, BCPD |
-| **Preprocessing** | FeatureNormalizer, PCA, Imputer, FeatureSelection, SMOTE, train_test_val_split |
-| **Association** | Apriori, AprioriLite, FPGrowth, KORD |
-| **Recommender** | ALS, FRM, FFMClassifier, FFMRegressor, FFMRanker |
-| **Statistics** | ttest_1samp, ttest_ind, f_oneway, chi_squared, KDE, pearsonr_matrix, distribution functions |
-| **Model Selection** | GridSearchCV, RandomSearchCV, Pipeline |
-
-**Note**: Additional algorithms (LTSF, GRUAttention, ROCKET, SPM, MLPRecommender) are referenced in SAP documentation v2.22.241011 but may require specific HANA versions. See `references/PAL_ALGORITHMS.md` for complete details.
-
-### APL Algorithm Classes
-
-| Class | Purpose |
-|-------|---------|
-| AutoClassifier | Automated classification with feature engineering |
-| AutoRegressor | Automated regression with feature engineering |
-| GradientBoostingClassifier | Multi-class gradient boosting |
-| GradientBoostingBinaryClassifier | Binary classification |
-| GradientBoostingRegressor | Gradient boosting regression |
-| AutoTimeSeries | Automated time series forecasting |
-| AutoUnsupervisedClustering | Automatic clustering |
-| AutoSupervisedClustering | Guided clustering |
-
----
-
-## Advanced Features
-
-### Hyperparameter Tuning
-
-```python
-from hana_ml.algorithms.pal.model_selection import GridSearchCV
-
-param_grid = {
-    'n_estimators': [50, 100, 200],
-    'max_depth': [3, 5, 7],
-    'learning_rate': [0.01, 0.1, 0.2]
-}
-
-grid_search = GridSearchCV(
-    estimator=HybridGradientBoostingClassifier(),
-    param_grid=param_grid,
-    cv=5
-)
-grid_search.fit(train_df, features=features, label='TARGET')
-
-print(f"Best params: {grid_search.best_params_}")
-print(f"Best score: {grid_search.best_score_}")
-```
-
-### Pipeline
-
-```python
-from hana_ml.algorithms.pal.pipeline import Pipeline
-from hana_ml.algorithms.pal.preprocessing import Imputer, FeatureNormalizer
-
-pipeline = Pipeline([
-    ('imputer', Imputer(strategy='mean')),
-    ('normalizer', FeatureNormalizer()),
-    ('classifier', UnifiedClassification(func='RandomDecisionTree'))
-])
-
-pipeline.fit(train_df, features=features, label='TARGET')
-predictions = pipeline.predict(test_df, features=features)
-```
-
-### Spatial Analytics
-
-```python
-from hana_ml.algorithms.pal.clustering import GeometryDBSCAN
-
-# Spatial clustering
-geo_dbscan = GeometryDBSCAN(eps=0.5, minpts=5)
-geo_dbscan.fit(spatial_df, key='ID', features=['LOCATION'])
-```
-
-### Text Mining
-
-```python
-from hana_ml.algorithms.pal.decomposition import LatentDirichletAllocation
-
-# Topic modeling
-lda = LatentDirichletAllocation(n_components=10)
-lda.fit(text_df, features=['DOCUMENT'])
-topics = lda.transform(text_df)
-```
+### Visualizers
+- **EDA plots**, model explanations, metrics
+- **SHAP integration** for model interpretability
+- See: `references/VISUALIZERS.md` for 14 visualization modules
 
 ---
 
 ## Common Patterns
 
 ### Train-Test Split
-
 ```python
 from hana_ml.algorithms.pal.partition import train_test_val_split
 
@@ -402,33 +141,69 @@ train, test, val = train_test_val_split(
 )
 ```
 
-### Feature Importance Analysis
-
+### Feature Importance
 ```python
-# For PAL models
-from hana_ml.algorithms.pal.preprocessing import FeatureSelection
+# APL models
+importance = auto_clf.get_feature_importances()
 
+# PAL models
+from hana_ml.algorithms.pal.preprocessing import FeatureSelection
 fs = FeatureSelection()
 fs.fit(train_df, features=features, label='TARGET')
-importance = fs.importance_
-
-# For APL models
-importance = auto_clf.get_feature_importances()
 ```
 
-### Model Cards
-
+### Pipeline
 ```python
-from hana_ml.algorithms.pal.model_selection import create_model_card
+from hana_ml.algorithms.pal.pipeline import Pipeline
+from hana_ml.algorithms.pal.preprocessing import Imputer, FeatureNormalizer
 
-card = create_model_card(
-    model=clf,
-    model_name='Customer Churn Predictor',
-    description='Predicts customer churn probability',
-    intended_use='Marketing targeting',
-    training_data_description='12 months customer data'
-)
+pipeline = Pipeline([
+    ('imputer', Imputer(strategy='mean')),
+    ('normalizer', FeatureNormalizer()),
+    ('classifier', UnifiedClassification(func='RandomDecisionTree'))
+])
 ```
+
+---
+
+## Best Practices
+
+1. **Use lazy evaluation** - Operations build SQL without execution until `collect()`
+2. **Leverage in-database processing** - Keep data in HANA for performance
+3. **Use Unified interfaces** - Consistent APIs across algorithms
+4. **Save models** - Use `ModelStorage` for persistence
+5. **Explain predictions** - Use SHAP explainers for interpretability
+6. **Monitor AutoML** - Use `PipelineProgressStatusMonitor` for long-running jobs
+
+---
+
+## Bundled Resources
+
+### Reference Files (12K-19K lines each)
+- **`references/DATAFRAME_REFERENCE.md`** (10,356 lines)
+  - ConnectionContext API, DataFrame operations, SQL generation
+  
+- **`references/PAL_ALGORITHMS.md`** (18,647 lines)
+  - Complete PAL algorithm reference (100+ algorithms)
+  - Classification, Regression, Clustering, Time Series, Preprocessing
+  
+- **`references/APL_ALGORITHMS.md`** (12,271 lines)
+  - AutoML capabilities, automated feature engineering
+  - AutoClassifier, AutoRegressor, GradientBoosting classes
+  
+- **`references/VISUALIZERS.md`** (13,535 lines)
+  - 14 visualization modules (EDA, SHAP, metrics, time series)
+  - Plot types, configuration, export options
+  
+- **`references/SUPPORTING_MODULES.md`** (13,692 lines)
+  - Model storage, spatial analytics, graph algorithms
+  - Text mining, statistics, error handling
+
+### Quick Reference Guides
+- **Algorithm Categories** - PAL vs APL comparison
+- **Connection Patterns** - Different authentication methods
+- **Model Deployment** - Export, save, load patterns
+- **Performance Tuning** - Optimization techniques
 
 ---
 
@@ -445,36 +220,7 @@ except Error as e:
 
 ---
 
-## Best Practices
+## Documentation
 
-1. **Use lazy evaluation**: DataFrame operations build SQL without execution until `collect()` is called
-2. **Leverage in-database processing**: Keep data in HANA for optimal performance
-3. **Use Unified interfaces**: `UnifiedClassification`, `UnifiedRegression` provide consistent APIs
-4. **Monitor with visualizers**: Use `PipelineProgressStatusMonitor` for long-running AutoML
-5. **Save models**: Use `ModelStorage` to persist trained models for deployment
-6. **Explain predictions**: Use SHAP explainers for model interpretability
-
----
-
-## Reference Files
-
-For detailed information, see:
-- `references/DATAFRAME_REFERENCE.md` - Complete DataFrame API (ConnectionContext, DataFrame)
-- `references/PAL_ALGORITHMS.md` - All PAL algorithms and parameters (100+ algorithms)
-- `references/APL_ALGORITHMS.md` - All APL algorithms and parameters (AutoML)
-- `references/VISUALIZERS.md` - Complete visualization API (14 submodules)
-- `references/SUPPORTING_MODULES.md` - Model storage, artifacts, spatial, graph, text mining, statistics
-
----
-
-## Documentation Links
-
-| Resource | URL |
-|----------|-----|
-| Main Documentation | https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.html |
-| Installation Guide | https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/Installation.html |
-| DataFrame API | https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.dataframe.html |
-| PAL Algorithms | https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.algorithms.pal.html |
-| APL Algorithms | https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.algorithms.apl.html |
-| Visualizers | https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.visualizers.html |
-| PyPI Package | https://pypi.org/project/hana-ml/ |
+- **Official Docs**: https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.html
+- **PyPI Package**: https://pypi.org/project/hana-ml/

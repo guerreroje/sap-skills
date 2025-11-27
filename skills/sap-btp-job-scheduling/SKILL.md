@@ -12,19 +12,49 @@ description: |
   SAP Cloud ALM, Alert Notification Service, multitenancy, tenant-aware, BC-CP-CF-JBS
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
-  last_verified: "2025-11-25"
+  version: "1.0.1"
+  last_verified: "2025-11-27"
 ---
 
 # SAP BTP Job Scheduling Service
+
+## Table of Contents
+
+- [Overview](#overview)
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Quick Decision Tree](#quick-decision-tree)
+- [Core Concepts](#core-concepts)
+- [Service Constraints](#service-constraints)
+- [Quick Reference Tables](#quick-reference-tables)
+  - [Schedule Formats](#schedule-formats)
+  - [Cron Format (7 fields)](#cron-format-7-fields)
+  - [Schedule Lifecycle States](#schedule-lifecycle-states)
+  - [HTTP Methods for Jobs](#http-methods-for-jobs)
+- [Best Practices](#best-practices)
+  - [Scheduling Optimization](#scheduling-optimization)
+  - [Asynchronous Jobs](#asynchronous-jobs)
+  - [One-Time Schedules](#one-time-schedules)
+- [Authentication Quick Start](#authentication-quick-start)
+  - [Standard Plan (OAuth 2.0)](#standard-plan-oauth-20)
+  - [xs-security.json Configuration]((xs-securityjson-configuration)
+- [Create Job Example](#create-job-example)
+- [Node.js Client Library](#nodejs-client-library)
+- [Rate Limits](#rate-limits)
+- [Service Behavior](#service-behavior)
+  - [Outage Recovery](#outage-recovery)
+  - [Auto-Deactivation Triggers](#auto-deactivation-triggers)
+- [Bundled Resources](#bundled-resources)
+- [Common Pitfalls](#common-pitfalls)
+- [External Resources](#external-resources)
+- [Updates and Maintenance](#updates-and-maintenance)
 
 ## Overview
 
 SAP Job Scheduling Service is a runtime-agnostic platform service for defining and managing one-time and recurring jobs or Cloud Foundry tasks on SAP BTP. It operates across multiple hyperscalers (AWS, Azure, GCP) without requiring application modifications.
 
-**Documentation Source**: https://github.com/SAP-docs/sap-btp-job-scheduling-service
+**Documentation Source**: https://help.sap.com/docs/job-scheduling
 
-**Last Verified**: 2025-11-22
+**Last Verified**: 2025-11-27
 
 ## When to Use This Skill
 
@@ -237,8 +267,10 @@ POST /scheduler/jobs
 
 ## Node.js Client Library
 
+**Requirements**: Node.js 14.x or later
+
 ```bash
-npm install @sap/jobs-client
+npm install @sap/jobs-client@1.8.6
 ```
 
 ```javascript
@@ -324,10 +356,6 @@ Limits stack - both can apply simultaneously.
 ### SAP Documentation
 - **SAP Help Portal**: https://help.sap.com/docs/job-scheduling
 - **SAP Developer Center**: https://developers.sap.com/
-- **SAP Business Accelerator Hub**: https://api.sap.com/
-
-### Source Repository
-- **GitHub Docs**: https://github.com/SAP-docs/sap-btp-job-scheduling-service
 
 ### Support
 - **Component**: BC-CP-CF-JBS
@@ -347,11 +375,27 @@ Limits stack - both can apply simultaneously.
 
 **Quarterly Review Recommended**: Check for updates every 3 months
 
-**Next Review**: 2026-02-22
+**Next Review**: 2026-02-27
+
+## Bundled Resources
+
+### Reference Files
+1. **references/concepts.md** - Schedule types, formats, lifecycle, async mode, multitenancy (12K lines)
+2. **references/rest-api.md** - Complete REST API reference with all endpoints (20K lines)
+3. **references/setup-guide.md** - Prerequisites, service instance creation (9K lines)
+4. **references/security.md** - OAuth 2.0, XSUAA scopes, credential rotation (11K lines)
+5. **references/integrations.md** - Cloud ALM, Alert Notification Service (8K lines)
+6. **references/troubleshooting.md** - FAQ, error scenarios, monitoring (9K lines)
+7. **references/operations.md** - Dashboard, backup/restore, service behavior (8K lines)
+8. **references/changelog.md** - Version history, feature updates (2021-2025) (9K lines)
+
+### Templates
+1. **templates/job-creation.json** - Job creation request template with examples
+2. **templates/xs-security.json** - XSUAA configuration template for OAuth scopes
 
 ---
 
-**Skill Version**: 1.0.0
-**Last Updated**: 2025-11-22
+**Skill Version**: 1.0.1
+**Last Updated**: 2025-11-27
 **License**: GPL-3.0
 **Maintainer**: SAP Skills Team | https://github.com/secondsky/sap-skills

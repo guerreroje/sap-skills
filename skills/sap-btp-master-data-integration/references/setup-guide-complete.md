@@ -2,6 +2,15 @@
 
 Comprehensive setup and administration documentation for SAP Master Data Integration.
 
+**Table of Contents**
+- [Technical Prerequisites](#technical-prerequisites)
+- [Tenant Management](#tenant-management)
+- [Client Configuration](#client-configuration)
+- [Service Instance Parameters](#service-instance-parameters)
+- [Business Data Orchestration](#business-data-orchestration)
+- [Monitoring and Operations](#monitoring-and-operations)
+- [Version History](#version-history)
+
 **Source**: https://github.com/SAP-docs/sap-btp-master-data-integration/tree/main/docs/initial-setup-and-administration
 
 ---

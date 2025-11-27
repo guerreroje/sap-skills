@@ -6,6 +6,26 @@ Complete list of ALL supported integration scenarios in Cloud Integration Automa
 
 ---
 
+## Table of Contents
+
+1. [SAP BTP Services](#sap-btp-services)
+2. [SAP BTP ABAP Environment](#sap-btp-abap-environment)
+3. [SAP S/4HANA Cloud](#sap-s4hana-cloud)
+   - Core Scenarios
+   - Extended Warehouse Management
+   - Transportation Management
+   - Advanced ATP
+4. [SAP S/4HANA On-Premise](#sap-s4hana-on-premise)
+5. [SAP SuccessFactors](#sap-successfactors)
+6. [SAP Integrated Business Planning (IBP)](#sap-integrated-business-planning-ibp)
+7. [SAP Build Solutions](#sap-build-solutions)
+8. [SAP Ariba Solutions](#sap-ariba-solutions)
+9. [SAP Concur Solutions](#sap-concur-solutions)
+10. [SAP Cloud Connector](#sap-cloud-connector)
+11. [Intelligent Enterprise Scenarios](#intelligent-enterprise-scenarios)
+
+---
+
 ## SAP BTP Services
 
 | Scenario | Description |

@@ -1,8 +1,9 @@
 # SAP BTP Connectivity Skill
 
 ![Status: Production Ready](https://img.shields.io/badge/Status-Production%20Ready-green)
-![Last Updated: 2025-11-22](https://img.shields.io/badge/Last%20Updated-2025--11--22-blue)
+![Last Updated: 2025-11-27](https://img.shields.io/badge/Last%20Updated-2025--11--27-blue)
 ![Documentation: 383 files](https://img.shields.io/badge/Documentation-383%20files-orange)
+![SKILL.md: 317 lines](https://img.shields.io/badge/SKILL%2Emd-317%20lines-brightgreen)
 
 ---
 
@@ -135,11 +136,11 @@ This skill provides comprehensive knowledge for SAP BTP Connectivity, covering a
 
 | Scenario | Without Skill | With Skill | Savings |
 |----------|---------------|------------|---------|
-| Destination setup | ~8k tokens | ~2.5k tokens | ~69% |
-| Cloud Connector config | ~10k tokens | ~3k tokens | ~70% |
-| Kubernetes proxy setup | ~12k tokens | ~4k tokens | ~67% |
-| Troubleshooting | ~6k tokens | ~2k tokens | ~67% |
-| **Average** | **~9k tokens** | **~3k tokens** | **~67%** |
+| Destination setup | ~8k tokens | ~2k tokens | ~75% |
+| Cloud Connector config | ~10k tokens | ~2.5k tokens | ~75% |
+| Kubernetes proxy setup | ~12k tokens | ~3k tokens | ~75% |
+| Troubleshooting | ~6k tokens | ~1.5k tokens | ~75% |
+| **Average** | **~9k tokens** | **~2.25k tokens** | **~75%** |
 
 ---
 
@@ -175,7 +176,7 @@ This skill provides comprehensive knowledge for SAP BTP Connectivity, covering a
 
 ```
 sap-btp-connectivity/
-├── SKILL.md                              # Main skill file (~600 lines)
+├── SKILL.md                              # Main skill file (317 lines - optimized)
 ├── README.md                             # This file
 ├── PROGRESS_TRACKING.md                  # Documentation extraction status
 ├── references/
@@ -244,6 +245,6 @@ sap-btp-connectivity/
 
 ---
 
-**Last Updated**: 2025-11-22
-**Next Review**: 2026-02-22
+**Last Updated**: 2025-11-27
+**Next Review**: 2026-02-27
 **Maintainer**: SAP Skills Team

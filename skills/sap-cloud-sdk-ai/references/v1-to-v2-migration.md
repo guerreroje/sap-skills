@@ -2,6 +2,8 @@
 
 Complete migration guide for upgrading SAP Cloud SDK for AI from version 1.x to 2.x.
 
+**Note**: As of November 2025, only the JavaScript/TypeScript SDK has been updated to v2.2.0. The Java SDK remains at v1.12.0 for orchestration and v1.13.0 for core.
+
 ## Table of Contents
 1. [Overview](#overview)
 2. [Dependency Update](#dependency-update)

@@ -6,6 +6,38 @@ Comprehensive security documentation for Cloud Integration Automation Service.
 
 ---
 
+## Table of Contents
+
+1. [Security Architecture Overview](#security-architecture-overview)
+   - Core Components
+   - Security Layers
+2. [Role Collections and Permissions](#role-collections-and-permissions)
+   - CIASIntegrationAdministrator
+   - CIASIntegrationExpert
+   - CIASIntegrationMonitor
+3. [Identity Provider Configuration](#identity-provider-configuration)
+   - Default SAP ID Service
+   - Custom Identity Provider Setup
+   - SAML Assertion Requirements
+4. [Authentication and Authorization](#authentication-and-authorization)
+   - OAuth2 Flow
+   - XSRF Protection
+   - Credential Management
+5. [Data Protection and Privacy](#data-protection-and-privacy)
+   - Personal Data Handling
+   - Data Retention Policies
+   - GDPR Compliance
+6. [Security Restrictions](#security-restrictions)
+   - Browser Requirements
+   - Network Security
+   - Access Limitations
+7. [Audit Logging](#audit-logging)
+   - Log Types
+   - Retention Period
+   - Access Controls
+
+---
+
 ## Security Architecture Overview
 
 Security is vital for Cloud Integration Automation Service as it handles integration setup between SAP products. The service comprises components provisioned into customer subaccounts via the SAP BTP cross-subaccount subscription concept.

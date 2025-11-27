@@ -2,6 +2,29 @@
 
 **Source**: https://cap.cloud.sap/docs/cds/cdl
 
+## Table of Contents
+- [Keywords & Identifiers](#keywords--identifiers)
+- [Literals & Values](#literals--values)
+- [Comments](#comments)
+- [Model Organization](#model-organization)
+- [Entity Definitions](#entity-definitions)
+- [Data Types](#data-types)
+- [Associations](#associations)
+- [Compositions](#compositions)
+- [Aspects](#aspects)
+- [Extensions](#extensions)
+- [Annotations](#annotations)
+- [Service Definitions](#service-definitions)
+- [Actions & Functions](#actions--functions)
+- [Type Definitions](#type-definitions)
+- [Views & Projections](#views--projections)
+- [Enums & Code Lists](#enums--code-lists)
+- [Structured Types](#structured-types)
+- [Expressions](#expressions)
+- [Queries & Subqueries](#queries--subqueries)
+- [Localization](#localization)
+- [Temporal Data](#temporal-data)
+
 ## Keywords & Identifiers
 
 - Keywords are case-insensitive (typically lowercase)

@@ -2,6 +2,19 @@
 
 **Source**: https://cap.cloud.sap/docs/node.js/events
 
+## Table of Contents
+- [Handler Registration](#handler-registration)
+- [Handler Types](#handler-types)
+- [Request Context](#request-context)
+- [Event Handlers in TypeScript](#event-handlers-in-typescript)
+- [Database Access](#database-access)
+- [Error Handling](#error-handling)
+- [Transaction Management](#transaction-management)
+- [External Services](#external-services)
+- [Testing Event Handlers](#testing-event-handlers)
+- [Best Practices](#best-practices)
+- [Common Patterns](#common-patterns)
+
 ## Handler Registration
 
 ### Class-Based Style

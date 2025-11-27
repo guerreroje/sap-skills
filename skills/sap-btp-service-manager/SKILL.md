@@ -6,8 +6,8 @@ description: |
   Keywords: SAP Service Manager, BTP, service instances, service bindings, SMCTL, service broker, OSBAPI, Cloud Foundry, Kyma, Kubernetes, service-manager, service-operator-access, subaccount-admin, OAuth2, X.509, service marketplace, service plans, rate limiting, cf create-service, btp create services/instance, ServiceInstance CRD, ServiceBinding CRD
 license: GPL-3.0
 metadata:
-  version: 1.0.0
-  last_updated: 2025-11-22
+  version: 1.1.0
+  last_verified: 2025-11-27
   documentation_source: https://github.com/SAP-docs/sap-btp-service-manager
   documentation_files_analyzed: 80+
   reference_files: 6
@@ -72,171 +72,83 @@ Use this skill when working on tasks involving:
 ## Quick Start
 
 ### 1. Install SMCTL CLI
-
-Download from GitHub releases:
 ```bash
-# Download latest release
-# https://github.com/Peripli/service-manager-cli/releases/latest
-
-# Extract and add to PATH (Linux/Mac)
-tar -xzf smctl-*.tar.gz
-chmod +x smctl
-sudo mv smctl /usr/local/bin/
-
-# Verify installation
-smctl --version
+# Download from: https://github.com/Peripli/service-manager-cli/releases/latest
+tar -xzf smctl-*.tar.gz && chmod +x smctl
+sudo mv smctl /usr/local/bin/ && smctl --version
 ```
 
-### 2. Login to Service Manager
-
+### 2. Login
 ```bash
-# Password-based login (interactive)
+# Interactive login
 smctl login -a https://service-manager.cfapps.<region>.hana.ondemand.com \
-  --param subdomain=<your-subdomain>
+  --param subdomain=<subdomain>
 
-# With 2FA: Append passcode to password (e.g., Password1234 + 5678 = Password12345678)
-
-# Client credentials login
+# Client credentials
 smctl login -a https://service-manager.cfapps.<region>.hana.ondemand.com \
-  --param subdomain=<your-subdomain> \
-  --auth-flow client-credentials \
-  --client-id <clientid> \
-  --client-secret <clientsecret>
-
-# X.509 certificate login
-smctl login -a https://service-manager.cfapps.<region>.hana.ondemand.com \
-  --param subdomain=<your-subdomain> \
-  --auth-flow client-credentials \
-  --client-id <clientid> \
-  --cert /path/to/cert.pem \
-  --key /path/to/key.pem
+  --param subdomain=<subdomain> --auth-flow client-credentials \
+  --client-id <id> --client-secret <secret>
 ```
 
-### 3. Browse Marketplace
-
+### 3. Basic Operations
 ```bash
-# List all available services
+# Browse services
 smctl marketplace
 
-# Get details for specific service
-smctl marketplace -s <service-name>
-```
+# Create instance (async)
+smctl provision my-instance <service> <plan>
 
-### 4. Create Service Instance
-
-```bash
-# Async mode (default)
-smctl provision my-instance <service-offering> <plan-name>
-
-# Sync mode (waits for completion)
-smctl provision my-instance <service-offering> <plan-name> --mode sync
-
-# With parameters
-smctl provision my-instance <service-offering> <plan-name> \
-  -c '{"key1":"value1","key2":"value2"}'
-```
-
-### 5. Create Service Binding
-
-```bash
 # Create binding
 smctl bind my-instance my-binding
-
-# With X.509 credentials
-smctl bind my-instance my-binding -c '{"credential-type":"x509"}'
-
-# Check binding credentials
-smctl get-binding my-binding
 ```
 
 ---
 
 ## Core Concepts
 
-### SAP Service Manager Architecture
+### Service Manager Architecture
 
-SAP Service Manager is the **central registry for service brokers and platforms** in SAP BTP. It manages six primary resources:
+SAP Service Manager is the **central registry for service brokers and platforms** in SAP BTP.
 
-| Resource | Description |
-|----------|-------------|
-| **Platforms** | OSBAPI-enabled systems where applications run |
-| **Service Brokers** | Intermediaries advertising service catalogs |
-| **Service Instances** | Individual instantiations of services |
-| **Service Bindings** | Access credentials for service instances |
-| **Service Plans** | Capability sets offered by services |
-| **Service Offerings** | Service advertisements from brokers |
+**Primary Resources**:
+- **Platforms** - OSBAPI-enabled systems where applications run
+- **Service Brokers** - Intermediaries advertising service catalogs
+- **Service Instances** - Individual service instantiations
+- **Service Bindings** - Access credentials for instances
+- **Service Plans** - Capability sets offered by services
+- **Service Offerings** - Service advertisements from brokers
 
 ### Service Manager Plans
 
-Three broker plans with different access levels:
-
-| Plan | Purpose | Key Scopes |
-|------|---------|------------|
-| **subaccount-admin** | Full resource management | 10 scopes (manage + read) |
-| **subaccount-audit** | Read-only monitoring | 6 scopes (read-only) |
-| **container** | Isolated container management | 7 scopes (limited scope) |
+| Plan | Purpose | Scopes |
+|------|---------|--------|
+| **subaccount-admin** | Full management | 10 scopes (manage + read) |
+| **subaccount-audit** | Read-only monitoring | 6 scopes |
+| **container** | Isolated management | 7 scopes |
 
 ### Roles
 
-| Role | Description |
-|------|-------------|
-| **Subaccount Service Administrator** | Full CRUD on subaccount resources |
-| **Subaccount Service Viewer** | Read-only access (Feature Set B) |
+- **Subaccount Service Administrator** - Full CRUD on resources
+- **Subaccount Service Viewer** - Read-only access (Feature Set B)
 
 ---
 
 ## Cloud Foundry Operations
 
-### Create Service Instance
+### Service Instance & Binding
 
-**Via Cockpit**:
-1. Navigate to Services > Instances and Subscriptions
-2. Click Create
-3. Select service and plan
-4. Choose Cloud Foundry as runtime
-5. Select organization and space
-6. Enter CLI-friendly name (max 32 chars, alphanumeric + . _ -)
-7. Configure JSON parameters (optional)
-8. Review and create
+**Via Cockpit**: Services > Instances > Create > Select service/plan > Cloud Foundry runtime
 
 **Via CF CLI**:
 ```bash
 # Create instance
 cf create-service <service> <plan> <instance-name>
 
-# With parameters
-cf create-service <service> <plan> <instance-name> -c '{"param":"value"}'
-
-# Check status
-cf service <instance-name>
-```
-
-### Bind to Application
-
-```bash
-# Bind instance to app
+# Bind to app
 cf bind-service <app-name> <instance-name>
 
-# View credentials
-cf env <app-name>
-# Look in VCAP_SERVICES > service-manager
-```
-
-### Create Service Key (External Access)
-
-```bash
-# Create key
+# Create service key (external access)
 cf create-service-key <instance-name> <key-name>
-
-# View key credentials
-cf service-key <instance-name> <key-name>
-```
-
-### User-Provided Services
-
-For services not in marketplace:
-```bash
-# Via cockpit: Cloud Foundry > Spaces > [space] > Services > Service Instances > Create User-Provided Service Instance
 ```
 
 ---
@@ -244,48 +156,36 @@ For services not in marketplace:
 ## Kubernetes Operations
 
 ### Prerequisites
-
-- Kubernetes cluster with kubeconfig
-- kubectl v1.7+
+- Kubernetes cluster with kubectl v1.7+
 - Helm v3.1.2+
 - SMCTL v1.10.1+
-- SAP Service Manager subscription
 
-### Setup SAP BTP Service Operator
+### Setup Service Operator
 
 **1. Install cert-manager**:
 ```bash
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
 ```
 
-**2. Create Service Manager Instance**:
+**2. Create Service Manager resources**:
 ```bash
-# Create instance with service-operator-access plan
 smctl provision sm-operator service-manager service-operator-access --mode sync
-
-# Create binding
 smctl bind sm-operator sm-operator-binding --mode sync
-
-# Get credentials
 smctl get-binding sm-operator-binding -o json
 ```
 
-**3. Deploy Operator via Helm**:
+**3. Deploy operator**:
 ```bash
-# Add Helm repo
 helm repo add sap-btp-operator https://sap.github.io/sap-btp-service-operator/
-
-# Install with credentials
 helm install sap-btp-operator sap-btp-operator/sap-btp-operator \
   --namespace sap-btp-operator --create-namespace \
-  --set manager.secret.clientid=<clientid> \
-  --set manager.secret.clientsecret=<clientsecret> \
-  --set manager.secret.sm_url=<sm_url> \
-  --set manager.secret.tokenurl=<url>/oauth/token
+  --set manager.secret.clientid=<id> \
+  --set manager.secret.clientsecret=<secret>
 ```
 
-### Create ServiceInstance CRD
+### Create Resources
 
+**ServiceInstance**:
 ```yaml
 apiVersion: services.cloud.sap.com/v1alpha1
 kind: ServiceInstance
@@ -294,19 +194,9 @@ metadata:
 spec:
   serviceOfferingName: <service-offering>
   servicePlanName: <plan-name>
-  externalName: my-service-instance-external
-  parameters:
-    key1: val1
-    key2: val2
 ```
 
-```bash
-kubectl apply -f service-instance.yaml
-kubectl get serviceinstances
-```
-
-### Create ServiceBinding CRD
-
+**ServiceBinding**:
 ```yaml
 apiVersion: services.cloud.sap.com/v1alpha1
 kind: ServiceBinding
@@ -316,13 +206,7 @@ spec:
   serviceInstanceName: my-service-instance
 ```
 
-```bash
-kubectl apply -f service-binding.yaml
-kubectl get servicebindings
-kubectl get secrets  # Credentials stored in secret with binding name
-```
-
-**Reference**: See `references/kubernetes-operator.md` for complete setup and migration guide.
+**Reference**: See `references/kubernetes-operator.md` for complete guide.
 
 ---
 
@@ -384,93 +268,43 @@ Response:
 
 ### Rate Limiting
 
-Three concurrent tiers:
+Three concurrent tiers enforced:
+- **Level 1**: All APIs - 10,000/hour, 1,000/minute
+- **Level 2**: Resource-specific - 1,000-6,000/hour
+- **Level 3**: Instance operations - 50-6,000/hour
 
-| Level | Scope | Limits |
-|-------|-------|--------|
-| 1 | All APIs | 10,000/hour, 1,000/minute |
-| 2 | `/v1/service_bindings` | 6,000/hour, 600/minute |
-| 2 | `/v1/service_offerings` | 1,000/hour, 100/minute |
-| 2 | `/v1/service_plans` | 1,000/hour, 100/minute |
-| 3 | CREATE `/v1/service_instances` | 50/minute |
-| 3 | UPDATE `/v1/service_instances` | 6,000/hour, 600/minute |
-| 3 | DELETE `/v1/service_instances` | 6,000/hour, 600/minute |
-
-**HTTP 429** returned when exceeded with `Retry-After` header.
+HTTP 429 returned with `Retry-After` header when limits exceeded.
 
 ### Filtering
 
-Use `fieldQuery` and `labelQuery` parameters:
+Query parameters:
+- `fieldQuery` - Filter by resource attributes
+- `labelQuery` - Filter by resource labels
+- Operators: `eq`, `ne`, `in`, `contains`, etc.
 
-```bash
-# Field filtering
-?fieldQuery=broker_id eq 'abc-123' and plan_name in ('small','medium')
-
-# Label filtering
-?labelQuery=environment eq 'dev'
-```
-
-**Operators**: `eq`, `ne`, `gt`, `ge`, `lt`, `le`, `in`, `notin`, `contains`, `en` (equal or null)
-
-**Reference**: See `references/rate-limiting-filtering.md` for complete details.
+**Reference**: See `references/rate-limiting-filtering.md` for complete rate limits and filtering details.
 
 ---
 
 ## SMCTL Command Reference
 
-### Authentication
-| Command | Description |
-|---------|-------------|
-| `smctl login` | Authenticate to Service Manager |
-| `smctl logout` | End session |
-
-### Instances
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `smctl provision` | - | Create service instance |
-| `smctl deprovision` | - | Delete service instance |
-| `smctl list-instances` | `li` | List all instances |
-| `smctl get-instance` | - | Get instance details |
-
-### Bindings
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `smctl bind` | - | Create service binding |
-| `smctl unbind` | - | Delete service binding |
-| `smctl list-bindings` | `lsb` | List all bindings |
-| `smctl get-binding` | - | Get binding details |
-
-### Brokers
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `smctl register-broker` | `rb` | Register service broker |
-| `smctl update-broker` | - | Update broker |
-| `smctl list-brokers` | - | List brokers |
-| `smctl delete-broker` | - | Remove broker |
-
-### Platforms
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `smctl register-platform` | `rp` | Register platform |
-| `smctl update-platform` | - | Update platform |
-| `smctl list-platforms` | - | List platforms |
-| `smctl delete-platform` | - | Remove platform |
-
-### Marketplace
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `smctl marketplace` | `m` | List offerings and plans |
+### Key Commands
+| Category | Commands | Description |
+|----------|----------|-------------|
+| **Authentication** | `login`, `logout` | Manage sessions |
+| **Instances** | `provision`, `deprovision`, `list-instances` | Service instance lifecycle |
+| **Bindings** | `bind`, `unbind`, `list-bindings` | Service binding management |
+| **Brokers** | `register-broker`, `update-broker` | Service broker operations |
+| **Platforms** | `register-platform`, `list-platforms` | Platform registration |
+| **Marketplace** | `marketplace` | Browse service offerings |
 
 ### Common Flags
-| Flag | Description |
-|------|-------------|
-| `--mode sync/async` | Execution mode (default: async) |
-| `-c, --parameters` | JSON configuration |
-| `-o, --output` | Format: json, yaml, text |
-| `-v, --verbose` | Detailed output |
-| `--config` | Custom config path |
+- `--mode sync/async` - Execution mode (default: async)
+- `-c, --parameters` - JSON configuration
+- `-o, --output` - Output format (json, yaml, text)
+- `-v, --verbose` - Detailed output
 
-**Reference**: See `references/smctl-commands.md` for complete command reference.
+**Reference**: See `references/smctl-commands.md` for complete command reference with all flags and examples.
 
 ---
 
@@ -604,29 +438,29 @@ For async operations, poll status with exponential backoff.
 
 ---
 
-## Templates
+## Bundled Resources
 
+### Templates (5 files)
 Ready-to-use templates in `templates/` directory:
+- **service-instance-cf.json** - Cloud Foundry instance parameters
+- **service-binding-cf.json** - Cloud Foundry binding parameters
+- **service-instance-k8s.yaml** - Kubernetes ServiceInstance CRD
+- **service-binding-k8s.yaml** - Kubernetes ServiceBinding CRD
+- **oauth-token-request.sh** - OAuth2 token retrieval script
 
-1. **service-instance-cf.json** - Cloud Foundry instance parameters
-2. **service-binding-cf.json** - Cloud Foundry binding parameters
-3. **service-instance-k8s.yaml** - Kubernetes ServiceInstance CRD
-4. **service-binding-k8s.yaml** - Kubernetes ServiceBinding CRD
-5. **oauth-token-request.sh** - OAuth2 token retrieval script
-
----
-
-## Reference Files
-
+### Reference Documentation (7 files)
 Detailed documentation in `references/` directory:
-
-1. **api-reference.md** - Complete API endpoints and operations
-2. **smctl-commands.md** - Full SMCTL CLI reference with all flags
-3. **btp-cli-commands.md** - Full BTP CLI reference
-4. **kubernetes-operator.md** - Service Operator setup, CRDs, migration
-5. **rate-limiting-filtering.md** - Rate limits and query operators
-6. **roles-permissions.md** - Plans, roles, and scopes
+1. **api-reference.md** - Complete API endpoints, operations, and examples
+2. **smctl-commands.md** - Full SMCTL CLI reference with all flags and usage
+3. **btp-cli-commands.md** - Comprehensive BTP CLI command reference
+4. **kubernetes-operator.md** - Service Operator setup, CRDs, migration guide
+5. **rate-limiting-filtering.md** - Rate limits, filtering, and best practices
+6. **roles-permissions.md** - Plans, roles, scopes, and authorization details
 7. **service-catalog-legacy.md** - Legacy svcat and broker proxy setup (deprecated)
+
+### Quick Reference Templates
+
+
 
 ---
 

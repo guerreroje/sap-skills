@@ -3,6 +3,29 @@
 **Module**: `hana_ml.dataframe`
 **Documentation**: https://help.sap.com/doc/1d0ebfe5e8dd44d09606814d83308d4b/2.0.07/en-US/hana_ml.dataframe.html
 
+## Table of Contents
+
+- [ConnectionContext](#connectioncontext)
+  - [Constructor](#constructor)
+  - [Connection Management](#connection-management)
+  - [ABAP SQL Operations](#abap-sql-operations)
+  - [Schema Operations](#schema-operations)
+  - [Table Operations](#table-operations)
+  - [SQL Execution](#sql-execution)
+- [DataFrame](#dataframe)
+  - [Creating DataFrames](#creating-dataframes)
+  - [DataFrame Properties](#dataframe-properties)
+  - [Data Selection & Filtering](#data-selection--filtering)
+  - [Data Manipulation](#data-manipulation)
+  - [Aggregations](#aggregations)
+  - [Joins](#joins)
+  - [Set Operations](#set-operations)
+  - [Sorting & Ordering](#sorting--ordering)
+  - [Data Export](#data-export)
+  - [SQL Generation](#sql-generation)
+- [Temporary Tables](#temporary-tables)
+- [Performance Optimization](#performance-optimization)
+
 ---
 
 ## ConnectionContext

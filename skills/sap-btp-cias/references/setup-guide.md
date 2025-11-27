@@ -6,6 +6,36 @@ Complete guide for subscribing to and configuring Cloud Integration Automation S
 
 ---
 
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Subscribe to CIAS - Standard Plan](#subscribe-to-cias---standard-plan)
+   - Access BTP Cockpit
+   - Navigate to Service Marketplace
+   - Create Service Instance
+   - Access CIAS Application
+3. [Subscribe to CIAS - OAuth2 Plan](#subscribe-to-cias---oauth2-plan)
+   - OAuth2 Plan Purpose
+   - Create OAuth2 Instance
+   - Create Service Key
+   - Service Key Configuration Options
+4. [Assign Roles to Users](#assign-roles-to-users)
+   - Role Collections Overview
+   - Assign Users to Role Collection
+   - Multiple User Assignment
+5. [Configure Identity Provider](#configure-identity-provider)
+   - Default Identity Provider
+   - Custom Identity Provider Setup
+   - SAML Configuration
+6. [Create Destinations](#create-destinations)
+   - Destination Types
+   - Create Destination via My Inbox
+   - Manual Destination Creation
+   - Destination Configuration Fields
+7. [Next Steps](#next-steps)
+
+---
+
 ## Prerequisites
 
 ### SAP BTP Subaccount Requirements

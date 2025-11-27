@@ -4,6 +4,43 @@ This reference covers advanced modeling topics including graph snippets, SAP clo
 
 **Documentation Source**: https://github.com/SAP-docs/sap-hana-cloud-data-intelligence/tree/main/docs/modelingguide
 
+## Table of Contents
+
+1. [Graph Snippets](#graph-snippets)
+   - [What Are Graph Snippets?](#what-are-graph-snippets)
+   - [Creating Graph Snippets](#creating-graph-snippets)
+   - [Importing Graph Snippets](#importing-graph-snippets)
+   - [Editing Graph Snippets](#editing-graph-snippets)
+2. [SAP Cloud Applications Integration](#sap-cloud-applications-integration)
+   - [Supported SAP Cloud Applications](#supported-sap-cloud-applications)
+   - [Cloud Data Integration API](#cloud-data-integration-api)
+   - [Connection Setup](#connection-setup)
+   - [Metadata Explorer Features](#metadata-explorer-features)
+   - [Cloud Data Integration Operator](#cloud-data-integration-operator)
+3. [Configuration Types](#configuration-types)
+   - [Purpose](#purpose)
+   - [Creating Configuration Types](#creating-configuration-types)
+   - [Supported Data Types](#supported-data-types)
+   - [Value Helpers](#value-helpers)
+   - [Property Options](#property-options)
+   - [Naming Convention](#naming-convention)
+4. [Local Data Types](#local-data-types)
+   - [Characteristics](#characteristics)
+   - [Type Categories](#type-categories)
+   - [Creating Local Data Types](#creating-local-data-types)
+   - [Scalar Type Templates](#scalar-type-templates)
+5. [Operator Metrics](#operator-metrics)
+   - [Consumer Operator Metrics](#consumer-operator-metrics)
+   - [Producer Operator Metrics](#producer-operator-metrics)
+   - [Debug Mode Metrics](#debug-mode-metrics)
+6. [Example Graph Templates (141 Available)](#example-graph-templates-141-available)
+   - [Data Integration & ETL](#data-integration--etl)
+   - [Machine Learning Templates](#machine-learning-templates)
+   - [Streaming & Real-Time](#streaming--real-time)
+   - [Cloud & API Integration](#cloud--api-integration)
+   - [Data Quality & Transformation](#data-quality--transformation)
+   - [Script & Development](#script--development)
+
 ---
 
 ## Graph Snippets

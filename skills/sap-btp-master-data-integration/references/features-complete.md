@@ -2,6 +2,19 @@
 
 Comprehensive feature documentation for SAP Master Data Integration.
 
+**Table of Contents**
+- [Core Features](#core-features)
+- [Distribution Models](#distribution-models)
+- [Filtering](#filtering)
+- [Delta Tokens](#delta-tokens)
+- [Extensibility](#extensibility)
+- [Key Mapping](#key-mapping)
+- [Events API](#events-api)
+- [Requests API](#requests-api)
+- [Business Data Orchestration](#business-data-orchestration)
+- [Data Privacy](#data-privacy)
+- [Monitoring](#monitoring)
+
 **Source**: https://github.com/SAP-docs/sap-btp-master-data-integration/tree/main/docs/features
 
 ---

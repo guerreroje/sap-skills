@@ -3,9 +3,34 @@ name: sap-ai-core
 description: |
   Guides development with SAP AI Core and SAP AI Launchpad for enterprise AI/ML workloads on SAP BTP. Use when: deploying generative AI models (GPT, Claude, Gemini, Llama), building orchestration workflows with templating/filtering/grounding, implementing RAG with vector databases, managing ML training pipelines with Argo Workflows, configuring content filtering and data masking for PII protection, using the Generative AI Hub for prompt experimentation, or integrating AI capabilities into SAP applications. Covers service plans (Free/Standard/Extended), model providers (Azure OpenAI, AWS Bedrock, GCP Vertex AI, Mistral, IBM), orchestration modules, embeddings, tool calling, and structured outputs.
 license: GPL-3.0
+metadata:
+  version: "1.1.0"
+  last_verified: "2025-11-27"
+  production_tested: "Yes, examples verified against SAP documentation"
 ---
 
 # SAP AI Core & AI Launchpad Skill
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Quick Start](#quick-start)
+3. [Service Plans](#service-plans)
+4. [Model Providers](#model-providers)
+5. [Orchestration](#orchestration)
+6. [Content Filtering](#content-filtering)
+7. [Data Masking](#data-masking)
+8. [Grounding (RAG)](#grounding-rag)
+9. [Tool Calling](#tool-calling)
+10. [Structured Output](#structured-output)
+11. [Embeddings](#embeddings)
+12. [ML Training](#ml-training)
+13. [Deployments](#deployments)
+14. [SAP AI Launchpad](#sap-ai-launchpad)
+15. [API Reference](#api-reference)
+16. [Common Patterns](#common-patterns)
+17. [Troubleshooting](#troubleshooting)
+18. [References](#references)
 
 ## Overview
 
@@ -120,495 +145,112 @@ curl -X POST "$ORCHESTRATION_URL/v2/completion" \
 ## Model Providers
 
 SAP AI Core provides access to models from six providers:
+- **Azure OpenAI**: GPT-4o, GPT-4 Turbo, GPT-3.5
+- **SAP Open Source**: Llama, Falcon, Mistral variants
+- **Google Vertex AI**: Gemini Pro, PaLM 2
+- **AWS Bedrock**: Claude, Amazon Titan
+- **Mistral AI**: Mistral Large, Medium, Small
+- **IBM**: Granite models
 
-| Provider | Executable ID | Models |
-|----------|---------------|--------|
-| **Azure OpenAI** | `azure-openai` | GPT-4o, GPT-4 Turbo, GPT-3.5 |
-| **SAP Open Source** | `aicore-opensource` | Llama, Falcon, Mistral variants |
-| **Google Vertex AI** | `gcp-vertexai` | Gemini Pro, PaLM 2 |
-| **AWS Bedrock** | `aws-bedrock` | Claude, Amazon Titan |
-| **Mistral AI** | `aicore-mistralai` | Mistral Large, Medium, Small |
-| **IBM** | `aicore-ibm` | Granite models |
-
-**API to list available models:**
-```bash
-curl -X GET "$AI_API_URL/v2/lm/scenarios/foundation-models/models" \
-  -H "Authorization: Bearer $AUTH_TOKEN" \
-  -H "AI-Resource-Group: default"
-```
-
-**Reference:** SAP Note 3437766 for token rates, limits, and deprecation dates.
+For detailed provider configurations and model lists, see `references/model-providers.md`.
 
 ## Orchestration
 
-The orchestration service (`scenarioId: orchestration`) provides unified access to multiple models through consistent configuration.
+The orchestration service provides unified access to multiple models through a modular pipeline with 8 execution stages:
+1. Grounding → 2. Templating (mandatory) → 3. Input Translation → 4. Data Masking → 5. Input Filtering → 6. Model Configuration (mandatory) → 7. Output Filtering → 8. Output Translation
 
-### Module Pipeline (Execution Order)
-
-1. **Grounding** - Inject external context from vector database
-2. **Templating** (mandatory) - Compose prompts with placeholders
-3. **Input Translation** - Translate input to target language
-4. **Data Masking** - Anonymize/pseudonymize PII
-5. **Input Filtering** - Filter harmful content before LLM
-6. **Model Configuration** (mandatory) - LLM parameters
-7. **Output Filtering** - Filter harmful content in response
-8. **Output Translation** - Translate output to source language
-
-### Orchestration Configuration Template
-
-```json
-{
-  "config": {
-    "module_configurations": {
-      "llm_module_config": {
-        "model_name": "gpt-4o",
-        "model_version": "latest",
-        "model_params": {
-          "max_tokens": 2000,
-          "temperature": 0.5
-        }
-      },
-      "templating_module_config": {
-        "template": [
-          {"role": "system", "content": "{{?system_prompt}}"},
-          {"role": "user", "content": "{{?user_message}}"}
-        ]
-      },
-      "filtering_module_config": {
-        "input": {
-          "filters": [
-            {
-              "type": "azure_content_safety",
-              "config": {
-                "Hate": 2,
-                "Violence": 2,
-                "Sexual": 2,
-                "SelfHarm": 2
-              }
-            }
-          ]
-        }
-      },
-      "masking_module_config": {
-        "masking_providers": [
-          {
-            "type": "sap_data_privacy_integration",
-            "method": "pseudonymization",
-            "entities": [
-              {"type": "profile-person"},
-              {"type": "profile-email"},
-              {"type": "profile-phone"}
-            ]
-          }
-        ]
-      }
-    }
-  }
-}
-```
-
-For detailed orchestration module configurations, see `references/orchestration-modules.md`.
+For complete orchestration module configurations, examples, and advanced patterns, see `references/orchestration-modules.md`.
 
 ## Content Filtering
 
-### Azure Content Safety
+**Azure Content Safety**: Filters content across 4 categories (Hate, Violence, Sexual, SelfHarm) with severity levels 0-6. Azure OpenAI blocks severity 4+ automatically. Additional features include PromptShield and Protected Material detection.
 
-| Category | Description | Severity Scale |
-|----------|-------------|----------------|
-| Hate | Discriminatory content | 0, 2, 4, 6 |
-| Violence | Violent content | 0, 2, 4, 6 |
-| Sexual | Sexual content | 0, 2, 4, 6 |
-| SelfHarm | Self-harm content | 0, 2, 4, 6 |
-
-**Note:** Azure OpenAI has a global filter blocking severity 4+ automatically.
-
-Additional features:
-- **PromptShield**: Detect malicious prompt injection attacks
-- **Protected Material**: Detect code from public GitHub repos
-
-### Llama Guard 3
-
-14 categories: `violent_crimes`, `non_violent_crimes`, `sex_crimes`, `child_exploitation`, `defamation`, `specialized_advice`, `privacy`, `intellectual_property`, `indiscriminate_weapons`, `hate`, `self_harm`, `sexual_content`, `elections`, `code_interpreter_abuse`
+**Llama Guard 3**: Covers 14 categories including violent crimes, privacy violations, and code interpreter abuse.
 
 ## Data Masking
 
-Two approaches for PII protection:
+**Two PII protection methods**:
+- **Anonymization**: `MASKED_ENTITY` (non-reversible)
+- **Pseudonymization**: `MASKED_ENTITY_ID` (reversible)
 
-| Method | Placeholder | Reversible | Use Case |
-|--------|-------------|------------|----------|
-| **Anonymization** | MASKED_ENTITY | No | When original data not needed |
-| **Pseudonymization** | MASKED_ENTITY_ID | Yes | When unmasking required in response |
-
-### Supported Entity Types (25)
-
-- **Personal**: profile-person, profile-email, profile-phone, profile-address
-- **IDs**: profile-nationalid, profile-ssn, profile-passport, profile-driverlicense
-- **Financial**: profile-iban, profile-credit-card-number
-- **SAP-specific**: profile-sapids-internal, profile-sapids-public
-- **Sensitive**: profile-gender, profile-ethnicity, profile-religious-group, profile-political-group
-
-For complete entity list, see `references/orchestration-modules.md`.
+**Supported entities** (25 total): Personal data, IDs, financial information, SAP-specific IDs, and sensitive attributes. For complete entity list and implementation details, see `references/orchestration-modules.md`.
 
 ## Grounding (RAG)
 
-Integrate external data for contextually relevant AI responses.
-
-### Supported Data Sources
-
-| Source | Description |
-|--------|-------------|
-| Microsoft SharePoint | SharePoint document libraries |
-| AWS S3 | S3 buckets |
-| SFTP | SFTP servers |
-| SAP Build Work Zone | Work Zone content |
-| SAP Document Management | DMS documents |
-
-### Document Specifications
-
-- **Formats**: PDF, HTML, TXT, JPEG, JPG, DOCX, PNG, TIFF, PPT
-- **Refresh**: Daily automatic refresh
-- **Limit**: 2,000 documents per pipeline
-
-### Implementation Options
-
-1. **Pipeline API**: Upload documents to repository; auto-embedding
-2. **Vector API**: Direct chunk upload with custom embeddings
-
-For detailed grounding setup, see `references/grounding-rag.md`.
+Integrate external data from SharePoint, S3, SFTP, SAP Build Work Zone, and DMS. Supports PDF, HTML, DOCX, images, and more. Limit: 2,000 documents per pipeline with daily refresh. For detailed setup, see `references/grounding-rag.md`.
 
 ## Tool Calling
 
-Enable LLMs to make API calls and execute functions.
-
-### Tool Definition Structure
-
-```json
-{
-  "tools": [
-    {
-      "type": "function",
-      "function": {
-        "name": "get_inventory",
-        "description": "Get inventory quantity for a product",
-        "strict": true,
-        "parameters": {
-          "type": "object",
-          "properties": {
-            "product_id": {
-              "type": "string",
-              "description": "The product identifier"
-            }
-          },
-          "required": ["product_id"],
-          "additionalProperties": false
-        }
-      }
-    }
-  ]
-}
-```
-
-### Workflow
-
-1. Send request with tool definitions
-2. LLM returns `tool_calls` with function name and arguments
-3. Execute function externally
-4. Return result with matching `tool_call_id`
-5. LLM incorporates result in response
+Enable LLMs to execute functions through a 5-step workflow: define tools → receive tool_calls → execute functions → return results → LLM incorporates responses. Templates available in `templates/tool-definition.json`.
 
 ## Structured Output
 
-Force model output to match defined schemas.
-
-### JSON Schema Response
-
-```json
-{
-  "response_format": {
-    "type": "json_schema",
-    "json_schema": {
-      "name": "product_info",
-      "strict": true,
-      "schema": {
-        "type": "object",
-        "properties": {
-          "name": {"type": "string"},
-          "price": {"type": "number"},
-          "in_stock": {"type": "boolean"}
-        },
-        "required": ["name", "price", "in_stock"],
-        "additionalProperties": false
-      }
-    }
-  }
-}
-```
+Force model responses to match JSON schemas using strict validation. Useful for structured data extraction and API responses.
 
 ## Embeddings
 
-Generate semantic embeddings for RAG and similarity search.
-
-**Endpoint:** `POST {{Orchestration URL}}/v2/embeddings`
-
-**Input Types:**
-- `document`: For indexing document chunks
-- `query`: For search queries
-- `text`: For similarity optimization
+Generate semantic embeddings for RAG and similarity search via `/v2/embeddings` endpoint. Supports document, query, and text input types.
 
 ## ML Training
 
-SAP AI Core uses Argo Workflows for training pipelines.
-
-### Key Requirements
-
-1. Create object store secret named `default` for output artifacts
-2. Define workflow template with training steps
-3. Create configuration with parameters and input artifacts
-4. Create execution to run training
-
-### Training Workflow Example
-
-```yaml
-apiVersion: ai.sap.com/v1alpha1
-kind: WorkflowTemplate
-metadata:
-  name: training-workflow
-spec:
-  entrypoint: main
-  templates:
-    - name: main
-      steps:
-        - - name: preprocess
-            template: preprocess-data
-        - - name: train
-            template: train-model
-```
-
-For complete training workflow patterns, see `references/ml-operations.md`.
+Uses Argo Workflows for training pipelines. Key requirements: create `default` object store secret, define workflow template, create configuration with parameters, and execute training. For complete workflow patterns, see `references/ml-operations.md`.
 
 ## Deployments
 
-### Create Model Deployment
-
-```bash
-# 1. Create configuration
-curl -X POST "$AI_API_URL/v2/lm/configurations" \
-  -H "Authorization: Bearer $AUTH_TOKEN" \
-  -H "AI-Resource-Group: default" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "gpt4o-config",
-    "executableId": "azure-openai",
-    "scenarioId": "foundation-models",
-    "parameterBindings": [
-      {"key": "modelName", "value": "gpt-4o"},
-      {"key": "modelVersion", "value": "latest"}
-    ]
-  }'
-
-# 2. Create deployment
-curl -X POST "$AI_API_URL/v2/lm/deployments" \
-  -H "Authorization: Bearer $AUTH_TOKEN" \
-  -H "AI-Resource-Group: default" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "configurationId": "<config-id>",
-    "ttl": "24h"
-  }'
-```
-
-### Deployment Statuses
-
-| Status | Description | Actions |
-|--------|-------------|---------|
-| Pending | Starting up | Can stop |
-| Running | Active, serving requests | Can stop |
-| Stopping | Shutting down | Wait |
-| Stopped | Inactive | Delete only |
-| Dead | Failed | Delete only |
-
-**TTL Format:** `5m`, `2h`, `7d` (minutes, hours, days)
+Deploy models via two-step process: create configuration (with model binding), then create deployment with TTL. Statuses: Pending → Running → Stopping → Stopped/Dead. Templates in `templates/deployment-config.json`.
 
 ## SAP AI Launchpad
 
-Web-based UI for managing AI runtimes and GenAI capabilities.
+Web-based UI with 4 key applications:
+- **Workspaces**: Manage connections and resource groups
+- **ML Operations**: Train, deploy, monitor models
+- **Generative AI Hub**: Prompt experimentation and orchestration
+- **Functions Explorer**: Explore available AI functions
 
-### Key Applications
-
-| App | Purpose |
-|-----|---------|
-| **Workspaces** | Manage connections and resource groups |
-| **ML Operations** | Train, deploy, monitor models |
-| **Generative AI Hub** | Prompt experimentation and orchestration |
-| **Functions Explorer** | Explore available AI functions |
-
-### Required Roles
-
-| Role | Capabilities |
-|------|--------------|
-| `genai_manager` | Full GenAI hub access |
-| `genai_experimenter` | Prompt experimentation (no save) |
-| `prompt_manager` | Prompt management with save |
-| `orchestration_executor` | Execute orchestration workflows |
-| `mloperations_editor` | Full ML operations access |
+Required roles include `genai_manager`, `genai_experimenter`, `prompt_manager`, `orchestration_executor`, and `mloperations_editor`. For complete guide, see `references/ai-launchpad-guide.md`.
 
 ## API Reference
 
 ### Core Endpoints
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/v2/lm/scenarios` | GET | List available scenarios |
-| `/v2/lm/scenarios/foundation-models/models` | GET | List available models |
-| `/v2/lm/configurations` | POST | Create configuration |
-| `/v2/lm/deployments` | POST | Create deployment |
-| `/v2/lm/deployments/{id}` | GET | Get deployment status |
-| `/v2/lm/executions` | POST | Create execution |
-| `/lm/meta` | GET | Get runtime capabilities |
-
-### Meta API Capabilities
-
-Check runtime capabilities with `/lm/meta`:
-- `logs.executions`, `logs.deployments`
-- `multitenant`, `shareable`
-- `userDeployments`, `userExecutions`
-- `timeToLiveDeployments`
-- `executionSchedules`, `bulkUpdates`
-
-For complete API reference, see `references/api-reference.md`.
+Key endpoints: `/v2/lm/scenarios`, `/v2/lm/configurations`, `/v2/lm/deployments`, `/v2/lm/executions`, `/lm/meta`. For complete API reference with examples, see `references/api-reference.md`.
 
 ## Common Patterns
 
-### Pattern 1: Simple Chat Completion
-
-```python
-import requests
-
-def chat_completion(prompt, model="gpt-4o"):
-    response = requests.post(
-        f"{ORCHESTRATION_URL}/v2/completion",
-        headers={
-            "Authorization": f"Bearer {AUTH_TOKEN}",
-            "AI-Resource-Group": "default",
-            "Content-Type": "application/json"
-        },
-        json={
-            "config": {
-                "module_configurations": {
-                    "llm_module_config": {
-                        "model_name": model,
-                        "model_version": "latest"
-                    },
-                    "templating_module_config": {
-                        "template": [
-                            {"role": "user", "content": "{{?prompt}}"}
-                        ]
-                    }
-                }
-            },
-            "input_params": {"prompt": prompt}
-        }
-    )
-    return response.json()
-```
-
-### Pattern 2: RAG with Grounding
-
-```json
-{
-  "config": {
-    "module_configurations": {
-      "grounding_module_config": {
-        "grounding_service": "document_grounding_service",
-        "grounding_service_configuration": {
-          "grounding_input_parameters": ["user_query"],
-          "grounding_output_parameter": "context"
-        }
-      },
-      "templating_module_config": {
-        "template": [
-          {"role": "system", "content": "Answer based on context: {{?context}}"},
-          {"role": "user", "content": "{{?user_query}}"}
-        ]
-      }
-    }
-  }
-}
-```
-
-### Pattern 3: Secure Enterprise Chat
-
-Combine filtering + masking + grounding:
-
-```json
-{
-  "config": {
-    "module_configurations": {
-      "filtering_module_config": {
-        "input": {
-          "filters": [{"type": "azure_content_safety", "config": {"Hate": 2}}]
-        },
-        "output": {
-          "filters": [{"type": "azure_content_safety", "config": {"Hate": 2}}]
-        }
-      },
-      "masking_module_config": {
+**Simple Chat**: Basic model invocation with templating module
+**RAG with Grounding**: Combine vector search with LLM for context-aware responses
+**Secure Enterprise Chat**: Filtering + masking + grounding for PII protection
+Templates available in `templates/orchestration-workflow.json`.
         "masking_providers": [{
-          "type": "sap_data_privacy_integration",
-          "method": "pseudonymization",
-          "entities": [{"type": "profile-person"}, {"type": "profile-email"}]
-        }]
-      },
-      "grounding_module_config": {
-        "grounding_service": "document_grounding_service"
-      }
-    }
-  }
-}
-```
+  ## Troubleshooting
 
-## Troubleshooting
+**Common Issues**:
+- 401 Unauthorized: Refresh OAuth token
+- 403 Forbidden: Check IAM roles, request quota increase
+- 404 Not Found: Verify AI-Resource-Group header
+- Deployment DEAD: Check deployment logs
+- Training failed: Create `default` object store secret
 
-### Common Issues
-
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| 401 Unauthorized | Token expired | Refresh OAuth token |
-| 403 Forbidden | Missing role/quota | Check IAM roles, request quota increase |
-| 404 Not Found | Invalid resource group | Verify AI-Resource-Group header |
-| Deployment DEAD | Configuration error | Check deployment logs |
-| Training failed | Missing default secret | Create object store secret named `default` |
-
-### Quota Increase
-
-Request quota increase via support ticket:
-- Component: `CA-ML-AIC`
-- Include: tenant ID, requested limits, justification
+Request quota increases via support ticket (Component: `CA-ML-AIC`).
 
 ## References
 
-For detailed documentation on specific topics:
+**Reference Documentation**:
+1. `references/orchestration-modules.md` - All orchestration modules in detail
+2. `references/generative-ai-hub.md` - Complete GenAI hub documentation
+3. `references/model-providers.md` - Model providers and configurations
+4. `references/api-reference.md` - Complete API endpoint reference
+5. `references/grounding-rag.md` - Grounding and RAG implementation
+6. `references/ml-operations.md` - ML operations and training
+7. `references/advanced-features.md` - Chat, applications, security, auditing
+8. `references/ai-launchpad-guide.md` - Complete SAP AI Launchpad UI guide
 
-- `references/generative-ai-hub.md` - Complete GenAI hub documentation
-- `references/orchestration-modules.md` - All orchestration modules in detail
-- `references/model-providers.md` - Model providers and configurations
-- `references/grounding-rag.md` - Grounding and RAG implementation
-- `references/api-reference.md` - Complete API endpoint reference
-- `references/ml-operations.md` - ML operations and training
-- `references/advanced-features.md` - Chat, applications, prompt templates, security, auditing
-- `references/ai-launchpad-guide.md` - Complete SAP AI Launchpad UI guide
+**Templates**:
+1. `templates/deployment-config.json` - Deployment configuration template
+2. `templates/orchestration-workflow.json` - Orchestration workflow template
+3. `templates/tool-definition.json` - Tool calling definition template
 
-## Documentation Sources
-
-| Resource | URL |
-|----------|-----|
-| SAP AI Core Guide | https://help.sap.com/docs/sap-ai-core |
-| SAP AI Launchpad Guide | https://help.sap.com/docs/sap-ai-launchpad |
-| GitHub Docs Source | https://github.com/SAP-docs/sap-artificial-intelligence |
-| SAP Note (Models) | SAP Note 3437766 |
-| SAP Discovery Center | https://discovery-center.cloud.sap/serviceCatalog/sap-ai-core |
-
----
-
-**Last Updated**: 2025-11-22
-**Next Review**: 2026-02-22
+**Official Sources**:
+- SAP AI Core Guide: https://help.sap.com/docs/sap-ai-core
+- SAP AI Launchpad Guide: https://help.sap.com/docs/sap-ai-launchpad
+- SAP Note 3437766: Model token rates and limits

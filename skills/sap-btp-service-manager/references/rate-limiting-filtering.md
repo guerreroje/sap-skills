@@ -6,6 +6,28 @@ Complete reference for SAP Service Manager API rate limits and query filtering.
 
 ---
 
+## Table of Contents
+
+1. [Rate Limiting](#rate-limiting)
+   - [Identification](#identification)
+   - [Level 1: All APIs Combined](#level-1-all-apis-combined)
+   - [Level 2: Resource-Specific Limits](#level-2-resource-specific-limits)
+   - [Level 3: Instance Operations](#level-3-instance-operations)
+   - [HTTP 429 Responses](#http-429-responses)
+2. [Query Filtering](#query-filtering)
+   - [Field Filtering](#field-filtering)
+   - [Label Filtering](#label-filtering)
+   - [Operators](#operators)
+   - [Combining Filters](#combining-filters)
+3. [Best Practices](#best-practices)
+   - [Rate Limit Handling](#rate-limit-handling)
+   - [Filter Optimization](#filter-optimization)
+4. [Examples](#examples)
+   - [Common Query Patterns](#common-query-patterns)
+   - [Rate Limit Scenarios](#rate-limit-scenarios)
+
+---
+
 ## Rate Limiting
 
 SAP Service Manager implements **three concurrent rate limiting levels**. Exceeding any tier triggers throttling, even if other allowances remain.

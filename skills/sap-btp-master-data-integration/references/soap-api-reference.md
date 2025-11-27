@@ -2,6 +2,18 @@
 
 Complete reference for SOAP-based integrations with SAP Master Data Integration.
 
+**Table of Contents**
+- [Endpoint Base URL](#endpoint-base-url)
+- [Authentication Methods](#authentication-methods)
+- [Available Endpoints](#available-endpoints)
+- [Business Partner Replication](#business-partner-replication)
+- [Business Partner Confirmations](#business-partner-confirmations)
+- [Business Partner Relationships](#business-partner-relationships)
+- [Key Mapping](#key-mapping)
+- [WSDL Operations](#wsdl-operations)
+- [Error Handling](#error-handling)
+- [Batch Processing](#batch-processing)
+
 **Source**: https://github.com/SAP-docs/sap-btp-master-data-integration/tree/main/docs/development
 
 ## Endpoint Base URL

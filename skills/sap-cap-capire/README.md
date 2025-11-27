@@ -155,23 +155,39 @@ Use this skill when:
 
 ```
 sap-cap-capire/
-├── SKILL.md                        # Main skill file
+├── SKILL.md                        # Main skill file (306 lines)
 ├── README.md                       # This file
 ├── EXTRACTION_PROGRESS.md          # Documentation extraction tracking
-├── references/
-│   ├── cdl-syntax.md               # Complete CDL syntax reference
-│   ├── cql-queries.md              # CQL query language reference
-│   ├── annotations-reference.md    # All annotations reference
-│   ├── event-handlers-nodejs.md    # Node.js handler patterns
-│   ├── deployment-cf.md            # Cloud Foundry deployment
-│   └── fiori-integration.md        # Fiori Elements integration
-└── templates/
-    ├── bookshop-schema.cds         # Data model template
+├── references/                     # 20 comprehensive reference files
+│   ├── annotations-reference.md    # UI annotations reference (10K lines)
+│   ├── cdl-syntax.md               # Complete CDL syntax reference (503 lines)
+│   ├── cql-queries.md              # CQL query language guide
+│   ├── csn-cqn-cxn.md              # Core Schema Notation and query APIs
+│   ├── data-privacy-security.md    # GDPR and security implementation
+│   ├── databases.md                # Database configuration and deployment
+│   ├── deployment-cf.md            # Cloud Foundry deployment details
+│   ├── event-handlers-nodejs.md    # Node.js event handler patterns
+│   ├── extensibility-multitenancy.md # SaaS multitenancy implementation
+│   ├── fiori-integration.md        # Fiori Elements and UI integration
+│   ├── java-runtime.md             # Java runtime support
+│   ├── localization-temporal.md    # i18n and temporal data
+│   ├── nodejs-runtime.md           # Node.js runtime reference
+│   ├── plugins-reference.md        # CAP plugins and extensions
+│   ├── tools-complete.md           # Complete CLI tools reference
+│   ├── consuming-services-deployment.md # Service consumption patterns
+│   ├── service-definitions.md      # Service definition patterns (new)
+│   ├── event-handlers-patterns.md  # Event handling patterns (new)
+│   ├── cql-patterns.md             # CQL usage patterns (new)
+│   └── cli-complete.md             # Complete CLI reference (new)
+└── templates/                      # 8 practical template files
+    ├── bookshop-schema.cds         # Complete data model example
     ├── catalog-service.cds         # Service definition template
+    ├── fiori-annotations.cds       # UI annotations example
+    ├── mta.yaml                    # Multi-target application descriptor
+    ├── package.json                # Project configuration template
     ├── service-handler.js          # Node.js handler template
     ├── service-handler.ts          # TypeScript handler template
-    ├── fiori-annotations.cds       # Fiori annotations template
-    └── package.json                # Project configuration template
+    └── xs-security.json            # XSUAA security configuration
 ```
 
 ## Documentation Links
@@ -186,9 +202,9 @@ sap-cap-capire/
 
 ## Version Information
 
-- **Skill Version**: 1.0.0
-- **CAP Version**: @sap/cds 8.x
-- **Last Verified**: 2025-11-22
+- **Skill Version**: 2.0.0
+- **CAP Version**: @sap/cds 9.4.x
+- **Last Verified**: 2025-11-27
 
 ## License
 

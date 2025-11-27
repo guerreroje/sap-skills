@@ -8,6 +8,26 @@ Legacy Kubernetes integration using Service Catalog and Service Manager Broker P
 
 ---
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites](#prerequisites)
+3. [Installation](#installation)
+   - [Install Service Catalog](#install-service-catalog)
+   - [Configure Broker Proxy](#configure-broker-proxy)
+4. [Usage](#usage)
+   - [List Services](#list-services)
+   - [Create Instance](#create-instance)
+   - [Create Binding](#create-binding)
+5. [Migration to Service Operator](#migration-to-service-operator)
+   - [Migration Steps](#migration-steps)
+   - [Key Differences](#key-differences)
+6. [Troubleshooting](#troubleshooting)
+   - [Common Issues](#common-issues)
+7. [Deprecation Notice](#deprecation-notice)
+
+---
+
 ## Overview
 
 Before the SAP BTP Service Operator, Kubernetes clusters used:

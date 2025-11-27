@@ -8,8 +8,9 @@ This skill provides comprehensive guidance for building machine learning solutio
 
 ## Version
 
+- **Skill Version**: 1.1.0
 - **hana-ml Version**: 2.22.241011
-- **Last Verified**: 2025-11-23
+- **Last Verified**: 2025-11-27
 
 ## Auto-Trigger Keywords
 

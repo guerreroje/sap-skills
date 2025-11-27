@@ -2,6 +2,23 @@
 
 **Source**: https://cap.cloud.sap/docs/cds/annotations
 
+## Table of Contents
+- [Core Annotations](#core-annotations)
+- [Access Control Annotations](#access-control-annotations)
+- [Draft Annotations](#draft-annotations)
+- [Object Model (OM) Annotations](#object-model-om-annotations)
+- [OData Annotations](#odata-annotations)
+- [UI Annotations](#ui-annotations)
+- [Analysis Annotations](#analysis-annotations)
+- [Personalized Recommendations](#personalized-recommendations)
+- [Communication Scenario](#communication-scenario)
+- [Field Control](#field-control)
+- [Value Help](#value-help)
+- [Media Annotations](#media-annotations)
+- [Hierarchy Annotations](#hierarchy-annotations)
+- [Temporal Annotations](#temporal-annotations)
+- [Custom Annotations](#custom-annotations)
+
 ## Core Annotations
 
 ### General Purpose

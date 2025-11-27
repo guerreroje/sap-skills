@@ -214,10 +214,10 @@ sap-btp-cias/
 
 | Field | Value |
 |-------|-------|
-| Skill Version | 1.0.0 |
-| Last Verified | 2025-11-22 |
+| Skill Version | 1.0.1 |
+| Last Verified | 2025-11-27 |
 | Source Docs Date | Current (GitHub main) |
-| Next Review | 2026-02-22 |
+| Next Review | 2026-02-27 |
 
 ---
 

@@ -8,6 +8,43 @@ Service Manager Control (SMCTL) is the CLI for SAP Service Manager.
 
 ---
 
+## Table of Contents
+
+1. [Global Flags](#global-flags)
+2. [Authentication Commands](#authentication-commands)
+   - [smctl login](#smctl-login)
+   - [smctl logout](#smctl-logout)
+3. [Service Instance Commands](#service-instance-commands)
+   - [smctl provision](#smctl-provision)
+   - [smctl deprovision](#smctl-deprovision)
+   - [smctl list-instances](#smctl-list-instances)
+   - [smctl get-instance](#smctl-get-instance)
+   - [smctl update-instance](#smctl-update-instance)
+4. [Service Binding Commands](#service-binding-commands)
+   - [smctl bind](#smctl-bind)
+   - [smctl unbind](#smctl-unbind)
+   - [smctl list-bindings](#smctl-list-bindings)
+   - [smctl get-binding](#smctl-get-binding)
+5. [Service Broker Commands](#service-broker-commands)
+   - [smctl register-broker](#smctl-register-broker)
+   - [smctl update-broker](#smctl-update-broker)
+   - [smctl list-brokers](#smctl-list-brokers)
+   - [smctl delete-broker](#smctl-delete-broker)
+6. [Platform Commands](#platform-commands)
+   - [smctl register-platform](#smctl-register-platform)
+   - [smctl update-platform](#smctl-update-platform)
+   - [smctl list-platforms](#smctl-list-platforms)
+   - [smctl delete-platform](#smctl-delete-platform)
+7. [Marketplace Commands](#marketplace-commands)
+   - [smctl marketplace](#smctl-marketplace)
+8. [Operations Commands](#operations-commands)
+   - [smctl status](#smctl-status)
+   - [smctl list-operations](#smctl-list-operations)
+9. [Common Examples](#common-examples)
+10. [Tips and Best Practices](#tips-and-best-practices)
+
+---
+
 ## Global Flags
 
 Available on all commands:

@@ -6,6 +6,31 @@ Detailed troubleshooting procedures for Cloud Integration Automation Service.
 
 ---
 
+## Table of Contents
+
+1. [Common Issues and Solutions](#common-issues-and-solutions)
+   - Empty Destination Dropdown
+   - Workflow Conflict Lock
+   - Application Access Denied
+   - Task Marked as Reserved
+   - Automation Execution Failures
+   - OAuth2 Certificate Issues
+2. [Error Codes and Messages](#error-codes-and-messages)
+3. [Support Procedures](#support-procedures)
+   - Creating Support Tickets
+   - Required Information
+   - Support Components
+4. [Monitoring and Logs](#monitoring-and-logs)
+   - Scenario Execution Monitoring
+   - Automation Logs
+   - Export Execution Summary
+5. [Self-Service Troubleshooting](#self-service-troubleshooting)
+   - Browser Issues
+   - Network Connectivity
+   - Cache and Cookies
+
+---
+
 ## Common Issues and Solutions
 
 ### Service Availability Issues

@@ -6,6 +6,33 @@ The SAP BTP CLI (`btp`) provides service management commands as an alternative t
 
 ---
 
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Service Instance Commands](#service-instance-commands)
+   - [btp create services/instance](#btp-create-servicesinstance)
+   - [btp get services/instance](#btp-get-servicesinstance)
+   - [btp list services/instances](#btp-list-servicesinstances)
+   - [btp delete services/instance](#btp-delete-servicesinstance)
+   - [btp update services/instance](#btp-update-servicesinstance)
+3. [Service Binding Commands](#service-binding-commands)
+   - [btp create services/binding](#btp-create-servicesbinding)
+   - [btp get services/binding](#btp-get-servicesbinding)
+   - [btp list services/bindings](#btp-list-servicesbindings)
+   - [btp delete services/binding](#btp-delete-servicesbinding)
+4. [Platform Commands](#platform-commands)
+   - [btp list services/platform](#btp-list-servicesplatform)
+   - [btp register services/platform](#btp-register-servicesplatform)
+   - [btp unregister services/platform](#btp-unregister-servicesplatform)
+   - [btp get services/platform](#btp-get-servicesplatform)
+5. [Marketplace Commands](#marketplace-commands)
+   - [btp list services/offering](#btp-list-servicesoffering)
+   - [btp list services/plan](#btp-list-servicesplan)
+6. [Common Examples](#common-examples)
+7. [Migration from SMCTL](#migration-from-smctl)
+
+---
+
 ## Prerequisites
 
 1. Install BTP CLI: https://tools.hana.ondemand.com/#cloud

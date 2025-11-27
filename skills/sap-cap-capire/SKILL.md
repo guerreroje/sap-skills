@@ -8,16 +8,22 @@ description: |
   Node.js and Java runtimes, event handlers, OData services, and CAP plugins.
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
-  last_verified: "2025-11-22"
-  cap_version: "@sap/cds 8.x"
-  source: "https://cap.cloud.sap/docs/"
-  github: "https://github.com/cap-js/docs"
+  version: "2.0.0"
+  last_verified: "2025-11-27"
+  cap_version: "@sap/cds 9.4.x"
 ---
 
 # SAP CAP-Capire Development Skill
 
-## Quick Reference
+## Table of Contents
+- [Quick Start](#quick-start)
+- [Project Structure](#project-structure)
+- [Core Concepts](#core-concepts)
+- [Database Setup](#database-setup)
+- [Deployment](#deployment)
+- [Bundled Resources](#bundled-resources)
+
+## Quick Start
 
 ### Project Initialization
 ```sh
@@ -40,7 +46,39 @@ cds add multitenancy  # SaaS multitenancy
 cds add typescript    # TypeScript support
 ```
 
-### Project Structure
+### Basic Entity Example
+```cds
+using { cuid, managed } from '@sap/cds/common';
+
+namespace my.bookshop;
+
+entity Books : cuid, managed {
+  title       : String(111) not null;
+  author      : Association to Authors;
+  stock       : Integer;
+  price       : Decimal(9,2);
+}
+
+entity Authors : cuid, managed {
+  name        : String(111);
+  books       : Association to many Books on books.author = $self;
+}
+```
+
+### Basic Service
+```cds
+using { my.bookshop as my } from '../db/schema';
+
+service CatalogService @(path: '/browse') {
+  @readonly entity Books as projection on my.Books;
+  @readonly entity Authors as projection on my.Authors;
+  
+  @requires: 'authenticated-user'
+  action submitOrder(book: Books:ID, quantity: Integer) returns String;
+}
+```
+
+## Project Structure
 ```
 project/
 ├── app/              # UI content (Fiori, UI5)
@@ -52,336 +90,70 @@ project/
 └── .cdsrc.json       # CDS configuration (optional)
 ```
 
----
+## Core Concepts
 
-## CDS Definition Language (CDL)
+### CDS Built-in Types
+| CDS Type | SQL Mapping | Common Use |
+|----------|-------------|------------|
+| `UUID` | NVARCHAR(36) | Primary keys |
+| `String(n)` | NVARCHAR(n) | Text fields |
+| `Integer` | INTEGER | Whole numbers |
+| `Decimal(p,s)` | DECIMAL(p,s) | Monetary values |
+| `Boolean` | BOOLEAN | True/false |
+| `Date` | DATE | Calendar dates |
+| `Timestamp` | TIMESTAMP | Date/time |
 
-### Entity Definitions
+### Common Aspects
 ```cds
-using { cuid, managed } from '@sap/cds/common';
-
-namespace my.bookshop;
-
-entity Books : cuid, managed {
-  title       : String(111) not null;
-  descr       : localized String(1111);
-  author      : Association to Authors;
-  genre       : Association to Genres;
-  stock       : Integer;
-  price       : Decimal(9,2);
-  currency    : Currency;
-}
-
-entity Authors : cuid, managed {
-  name        : String(111);
-  books       : Association to many Books on books.author = $self;
-}
-
-entity Genres : sap.common.CodeList {
-  key code    : String(10);
-  parent      : Association to Genres;
-  children    : Composition of many Genres on children.parent = $self;
-}
+using { cuid, managed, temporal } from '@sap/cds/common';
+// cuid = UUID key
+// managed = createdAt, createdBy, modifiedAt, modifiedBy
+// temporal = validFrom, validTo
 ```
 
-### Built-in Types
-| CDS Type | SQL Mapping | Notes |
-|----------|-------------|-------|
-| `UUID` | NVARCHAR(36) | Auto-generated RFC 4122 |
-| `String(n)` | NVARCHAR(n) | Default: 255 |
-| `Integer` | INTEGER | Equivalent to Int32 |
-| `Int64` | BIGINT | Large integers |
-| `Decimal(p,s)` | DECIMAL(p,s) | Precision/scale |
-| `Double` | DOUBLE | Floating point |
-| `Boolean` | BOOLEAN | true/false/null |
-| `Date` | DATE | YYYY-MM-DD |
-| `Time` | TIME | HH:MM:SS |
-| `DateTime` | TIMESTAMP | Second precision |
-| `Timestamp` | TIMESTAMP | Microsecond precision |
-| `LargeString` | NCLOB | Large text, streamed |
-| `LargeBinary` | BLOB | Large binary, streamed |
-
-### Common Reuse Library (@sap/cds/common)
-```cds
-using {
-  cuid,       // key ID : UUID
-  managed,    // createdAt, createdBy, modifiedAt, modifiedBy
-  temporal,   // validFrom, validTo
-  Country,    // Association to sap.common.Countries
-  Currency,   // Association to sap.common.Currencies
-  Language    // Association to sap.common.Languages
-} from '@sap/cds/common';
-```
-
-### Associations and Compositions
-```cds
-// Managed to-one (FK auto-generated)
-entity Books {
-  author : Association to Authors;
-}
-
-// Unmanaged with explicit ON condition
-entity Books {
-  author : Association to Authors on author.ID = author_ID;
-  author_ID : UUID;
-}
-
-// To-many
-entity Authors {
-  books : Association to many Books on books.author = $self;
-}
-
-// Composition (contained-in relationship)
-entity Orders {
-  key ID : UUID;
-  Items : Composition of many OrderItems on Items.parent = $self;
-}
-
-// Inline composition
-entity Orders {
-  Items : Composition of many {
-    key pos     : Integer;
-    product     : Association to Products;
-    quantity    : Integer;
-  };
-}
-```
-
-### Aspects and Inheritance
-```cds
-// Define reusable aspect
-aspect audited {
-  createdAt  : Timestamp @cds.on.insert: $now;
-  createdBy  : String    @cds.on.insert: $user;
-  modifiedAt : Timestamp @cds.on.update: $now;
-  modifiedBy : String    @cds.on.update: $user;
-}
-
-// Apply with inheritance
-entity Books : audited {
-  key ID : UUID;
-  title  : String;
-}
-
-// Extend existing entities
-extend Books with {
-  rating : Integer;
-}
-
-// Annotate existing entities
-annotate Books with @(
-  UI.HeaderInfo: {
-    TypeName: 'Book',
-    TypeNamePlural: 'Books'
-  }
-);
-```
-
----
-
-## Service Definitions
-
-### Basic Service
-```cds
-using { my.bookshop as my } from '../db/schema';
-
-service CatalogService @(path: '/browse') {
-  @readonly entity Books as projection on my.Books {
-    *, author.name as author
-  } excluding { createdBy, modifiedBy };
-
-  @readonly entity Authors as projection on my.Authors;
-
-  @requires: 'authenticated-user'
-  action submitOrder(book: Books:ID, quantity: Integer) returns String;
-}
-
-@requires: 'admin'
-service AdminService {
-  entity Books as projection on my.Books;
-  entity Authors as projection on my.Authors;
-}
-```
-
-### Actions and Functions
-```cds
-service OrderService {
-  entity Orders { ... };
-
-  // Unbound action (service-level)
-  action cancelOrder(orderID: UUID, reason: String) returns {
-    success: Boolean;
-    message: String;
-  };
-
-  // Unbound function (read-only)
-  function getOrderCount() returns Integer;
-
-  // Bound actions (entity-level)
-  entity Products { ... } actions {
-    action discount(percent: Decimal);
-    function getStock() returns Integer;
-  };
-}
-```
-
----
-
-## Event Handlers (Node.js)
-
-### Handler Registration
+### Event Handlers (Node.js)
 ```js
 // srv/cat-service.js
 module.exports = class CatalogService extends cds.ApplicationService {
   init() {
     const { Books } = this.entities;
-
-    // Before handlers - validation, enrichment
-    this.before('CREATE', Books, this.validateBook);
-    this.before(['CREATE', 'UPDATE'], Books, this.enrichBook);
-
-    // On handlers - replace default implementation
-    this.on('submitOrder', this.onSubmitOrder);
-    this.on('READ', Books, this.onReadBooks);
-
-    // After handlers - post-processing
-    this.after('READ', Books, this.addDiscount);
-
+    
+    // Before handlers - validation
+    this.before('CREATE', Books, req => {
+      if (!req.data.title) req.error(400, 'Title required');
+    });
+    
+    // On handlers - custom logic
+    this.on('submitOrder', async req => {
+      const { book, quantity } = req.data;
+      // Custom business logic
+      return { success: true };
+    });
+    
     return super.init();
   }
-
-  validateBook(req) {
-    const { title, stock } = req.data;
-    if (!title) req.error(400, 'Title is required');
-    if (stock < 0) req.error(400, 'Stock cannot be negative');
-  }
-
-  enrichBook(req) {
-    req.data.modifiedAt = new Date();
-  }
-
-  async onSubmitOrder(req) {
-    const { book, quantity } = req.data;
-    const { Books } = this.entities;
-
-    const result = await UPDATE(Books, book)
-      .set({ stock: { '-=': quantity } })
-      .where({ stock: { '>=': quantity } });
-
-    if (result === 0) {
-      return req.reject(409, `Insufficient stock for book ${book}`);
-    }
-
-    return { success: true, message: 'Order submitted' };
-  }
-
-  addDiscount(books, req) {
-    for (const book of books) {
-      if (book.stock > 100) book.discount = '10%';
-    }
-  }
 }
 ```
 
-### Alternative Functional Style
+### Basic CQL Queries
 ```js
-// srv/cat-service.js
-module.exports = function() {
-  this.before('CREATE', 'Books', validateBook);
-  this.on('submitOrder', onSubmitOrder);
-  this.after('READ', 'Books', addDiscount);
+const { Books } = cds.entities;
 
-  function validateBook(req) {
-    if (!req.data.title) req.error(400, 'Title required');
-  }
-
-  async function onSubmitOrder(req) {
-    const { book, quantity } = req.data;
-    // ... implementation
-  }
-
-  function addDiscount(books) {
-    books.forEach(b => b.stock > 100 && (b.discount = '10%'));
-  }
-}
-```
-
----
-
-## CDS Query Language (CQL)
-
-### Programmatic Queries
-```js
-const { Books, Authors } = cds.entities;
-
-// SELECT
+// SELECT with conditions
 const books = await SELECT.from(Books)
-  .columns('ID', 'title', 'author.name as authorName')
   .where({ stock: { '>': 0 } })
-  .orderBy('title')
-  .limit(10, 20);
-
-// Deep read with expand
-const booksWithAuthors = await SELECT.from(Books, b => {
-  b.ID, b.title, b.author(a => { a.name })
-}).where({ stock: { '>=': 10 } });
+  .orderBy('title');
 
 // INSERT
-await INSERT.into(Books).entries([
-  { title: 'Book 1', author_ID: authorId },
-  { title: 'Book 2', author_ID: authorId }
-]);
+await INSERT.into(Books)
+  .entries({ title: 'New Book', stock: 10 });
 
 // UPDATE
-await UPDATE(Books, bookId).set({ stock: 50 });
-await UPDATE(Books).set({ stock: { '+=': 10 } }).where({ genre_code: 'fiction' });
-
-// DELETE
-await DELETE.from(Books).where({ stock: 0 });
-
-// UPSERT
-await UPSERT.into(Books).entries({ ID: bookId, title: 'Updated Title' });
+await UPDATE(Books, bookId)
+  .set({ stock: { '-=': 1 } });
 ```
 
----
-
-## Authorization
-
-### Annotations
-```cds
-// Service-level
-@requires: 'authenticated-user'
-service CatalogService { ... }
-
-// Entity-level
-@restrict: [
-  { grant: 'READ' },
-  { grant: 'WRITE', to: 'admin' }
-]
-entity Books { ... }
-
-// Fine-grained with where conditions
-@restrict: [
-  { grant: 'READ' },
-  { grant: 'UPDATE', to: 'author', where: 'createdBy = $user' },
-  { grant: '*', to: 'admin' }
-]
-entity Books { ... }
-
-// Read-only / insert-only
-@readonly entity Products as projection on my.Products;
-@insertonly entity Orders as projection on my.Orders;
-```
-
-### Pseudo Roles
-- `authenticated-user` - Any authenticated user
-- `system-user` - Technical clients (client_credentials)
-- `internal-user` - Same XSUAA/IAS instance
-- `any` - All users including anonymous
-
----
-
-## Database Configuration
+## Database Setup
 
 ### Development (SQLite)
 ```json
@@ -390,7 +162,10 @@ entity Books { ... }
   "cds": {
     "requires": {
       "db": {
-        "[development]": { "kind": "sqlite", "credentials": { "url": ":memory:" } },
+        "[development]": { 
+          "kind": "sqlite", 
+          "credentials": { "url": ":memory:" } 
+        },
         "[production]": { "kind": "hana" }
       }
     }
@@ -405,309 +180,96 @@ cds deploy --to hana
 ```
 
 ### Initial Data (CSV)
-```
-db/data/my.bookshop-Books.csv
-db/data/my.bookshop-Authors.csv
-```
+- File location: `db/data/my.bookshop-Books.csv`
+- Format: `<namespace>-<EntityName>.csv`
+- Auto-loaded on deployment
 
-Format: `<namespace>-<EntityName>.csv` or `<namespace>.<EntityName>.csv`
+## Deployment
 
----
-
-## Fiori Integration
-
-### Enable Drafts
-```cds
-annotate AdminService.Books with @odata.draft.enabled;
-```
-
-### UI Annotations
-```cds
-annotate CatalogService.Books with @(
-  UI: {
-    HeaderInfo: {
-      TypeName: 'Book',
-      TypeNamePlural: 'Books',
-      Title: { Value: title },
-      Description: { Value: author.name }
-    },
-    SelectionFields: [ title, author_ID, genre_code ],
-    LineItem: [
-      { Value: title },
-      { Value: author.name, Label: 'Author' },
-      { Value: stock },
-      { Value: price }
-    ],
-    Facets: [
-      { $Type: 'UI.ReferenceFacet', Target: '@UI.FieldGroup#Main', Label: 'Details' }
-    ],
-    FieldGroup#Main: {
-      Data: [
-        { Value: title },
-        { Value: descr },
-        { Value: author_ID },
-        { Value: genre_code }
-      ]
-    }
-  }
-);
-```
-
-### Value Help
-```cds
-// Auto value help for code lists
-@cds.odata.valuelist
-entity Genres : sap.common.CodeList { ... }
-
-// Types from @sap/cds/common have value help by default
-entity Books {
-  currency : Currency;  // Automatic value help
-}
-```
-
----
-
-## Cloud Foundry Deployment
-
-### Setup
+### Cloud Foundry
 ```sh
+# Add CF deployment support
 cds add hana,xsuaa,mta,approuter
-```
 
-### Deploy
-```sh
+# Build and deploy
 npm install --package-lock-only
 mbt build
 cf deploy mta_archives/<project>_<version>.mtar
 ```
 
-### mta.yaml Structure
-```yaml
-_schema-version: '3.1'
-ID: bookshop
-version: 1.0.0
-
-modules:
-  - name: bookshop-srv
-    type: nodejs
-    path: gen/srv
-    requires:
-      - name: bookshop-db
-      - name: bookshop-auth
-    provides:
-      - name: srv-api
-        properties:
-          srv-url: ${default-url}
-
-  - name: bookshop-db-deployer
-    type: hdb
-    path: gen/db
-    requires:
-      - name: bookshop-db
-
-resources:
-  - name: bookshop-db
-    type: com.sap.xs.hdi-container
-  - name: bookshop-auth
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-```
-
----
-
-## Multitenancy (SaaS)
-
-### Enable
+### Multitenancy (SaaS)
 ```sh
 cds add multitenancy
 ```
 
-### Configuration
+Configuration:
 ```json
 {
   "cds": {
     "requires": {
-      "multitenancy": true,
-      "[production]": {
-        "db": { "kind": "hana" },
-        "auth": { "kind": "xsuaa" }
-      }
+      "multitenancy": true
     }
   }
 }
 ```
 
-### Local Testing
-```sh
-# Terminal 1: MTX Sidecar
-cds watch mtx/sidecar
+### Authorization Examples
+```cds
+// Service-level
+@requires: 'authenticated-user'
+service CatalogService { ... }
 
-# Terminal 2: Main app
-cds watch --with-mtx
+// Entity-level
+@restrict: [
+  { grant: 'READ' },
+  { grant: 'WRITE', to: 'admin' }
+]
+entity Books { ... }
 ```
 
----
+## Bundled Resources
 
-## Messaging & Events
+### Reference Documentation (18 files)
+1. **references/annotations-reference.md** - Complete UI annotations reference (10K lines)
+2. **references/cdl-syntax.md** - Complete CDL syntax reference (503 lines)
+3. **references/cql-queries.md** - CQL query language guide
+4. **references/csn-cqn-cxn.md** - Core Schema Notation and query APIs
+5. **references/data-privacy-security.md** - GDPR and security implementation
+6. **references/databases.md** - Database configuration and deployment
+7. **references/deployment-cf.md** - Cloud Foundry deployment details
+8. **references/event-handlers-nodejs.md** - Node.js event handler patterns
+9. **references/extensibility-multitenancy.md** - SaaS multitenancy implementation
+10. **references/fiori-integration.md** - Fiori Elements and UI integration
+11. **references/java-runtime.md** - Java runtime support
+12. **references/localization-temporal.md** - i18n and temporal data
+13. **references/nodejs-runtime.md** - Node.js runtime reference
+14. **references/plugins-reference.md** - CAP plugins and extensions
+15. **references/tools-complete.md** - Complete CLI tools reference
+16. **references/consuming-services-deployment.md** - Service consumption patterns
+17. **references/service-definitions.md** - Service definition patterns *(new)*
+18. **references/event-handlers-patterns.md** - Event handling patterns *(new)*
+19. **references/cql-patterns.md** - CQL usage patterns *(new)*
+20. **references/cli-complete.md** - Complete CLI reference *(new)*
 
-### Emit Events
-```js
-// Emit to messaging service
-const messaging = await cds.connect.to('messaging');
-await messaging.emit('OrderCreated', { orderID: order.ID });
+### Templates (8 files)
+1. **templates/bookshop-schema.cds** - Complete data model example
+2. **templates/catalog-service.cds** - Service definition template
+3. **templates/fiori-annotations.cds** - UI annotations example
+4. **templates/mta.yaml** - Multi-target application descriptor
+5. **templates/package.json** - Project configuration template
+6. **templates/service-handler.js** - Node.js handler template
+7. **templates/service-handler.ts** - TypeScript handler template
+8. **templates/xs-security.json** - XSUAA security configuration
 
-// Emit from service
-this.emit('OrderCreated', { orderID: order.ID });
-```
+### Quick References
+- **CAP Documentation**: https://cap.cloud.sap/docs/
+- **CDS Language**: https://cap.cloud.sap/docs/cds/
+- **Node.js Runtime**: https://cap.cloud.sap/docs/node.js/
+- **Java Runtime**: https://cap.cloud.sap/docs/java/
+- **Best Practices**: https://cap.cloud.sap/docs/about/best-practices
+- **GitHub Repository**: https://github.com/cap-js/docs
 
-### Subscribe to Events
-```js
-// srv/order-service.js
-module.exports = async function() {
-  const messaging = await cds.connect.to('messaging');
-
-  messaging.on('OrderCreated', async (msg) => {
-    console.log('Order created:', msg.data.orderID);
-  });
-}
-```
-
-### Configuration
-```json
-{
-  "cds": {
-    "requires": {
-      "messaging": {
-        "[development]": { "kind": "file-based-messaging" },
-        "[production]": { "kind": "enterprise-messaging" }
-      }
-    }
-  }
-}
-```
-
----
-
-## TypeScript Support
-
-### Setup
-```sh
-cds add typescript
-npm i -D typescript ts-node @types/node
-```
-
-### Handler with Types
-```ts
-// srv/cat-service.ts
-import cds from '@sap/cds';
-
-export default class CatalogService extends cds.ApplicationService {
-  async init() {
-    const { Books } = this.entities;
-
-    this.on('READ', Books, async (req: cds.Request) => {
-      return await cds.db.run(req.query);
-    });
-
-    return super.init();
-  }
-}
-```
-
-### Type Generation
-```sh
-npx @cap-js/cds-typer "*"  # Generate types from CDS models
-```
-
----
-
-## Plugins
-
-### Available Plugins
-| Plugin | Package | Purpose |
-|--------|---------|---------|
-| OData V2 | `@cap-js-community/odata-v2-adapter` | Legacy V2 support |
-| GraphQL | `@cap-js/graphql` | GraphQL adapter |
-| Attachments | `@cap-js/attachments` | File management |
-| Audit Log | `@cap-js/audit-logging` | Data access logging |
-| Change Tracking | `@cap-js/change-tracking` | Track entity changes |
-| Telemetry | `@cap-js/telemetry` | OpenTelemetry |
-
-### Usage
-```sh
-npm add @cap-js/attachments
-
-# In CDS model
-using { Attachments } from '@cap-js/attachments';
-entity Books {
-  attachments : Composition of many Attachments;
-}
-```
-
----
-
-## Configuration Reference
-
-### package.json (cds section)
-```json
-{
-  "cds": {
-    "requires": {
-      "db": { "kind": "sqlite" },
-      "auth": { "kind": "mocked" }
-    },
-    "odata": { "version": "v4" },
-    "fiori": { "preview": true },
-    "build": {
-      "target": "gen",
-      "tasks": [{ "for": "hana", "src": "db" }]
-    }
-  }
-}
-```
-
-### Environment Profiles
-```json
-{
-  "cds": {
-    "requires": {
-      "db": {
-        "[development]": { "kind": "sqlite" },
-        "[production]": { "kind": "hana" }
-      }
-    }
-  }
-}
-```
-
----
-
-## Best Practices
-
-### DO
-- Use `cuid` and `managed` aspects from `@sap/cds/common`
-- Keep domain models in `db/`, services in `srv/`, UI in `app/`
-- Use managed associations (let CAP handle foreign keys)
-- Separate authorization annotations into dedicated files
-- Use declarative validation (`@mandatory`, `@assert.range`)
-- Design single-purpose services per use case
-- Start with SQLite, switch to HANA for production
-
-### DON'T
-- Don't use SELECT * - be explicit about projections
-- Don't bypass CAP's query API with raw SQL
-- Don't create microservices prematurely
-- Don't use DAOs, DTOs, or Active Record patterns
-- Don't hardcode credentials in config files
-- Don't write custom OData providers
-
----
-
-## CLI Reference
-
+## Common CLI Commands
 ```sh
 cds init [name]           # Create project
 cds add <feature>         # Add capability
@@ -721,15 +283,24 @@ cds repl                  # Interactive REPL
 cds version               # Show version info
 ```
 
----
+## Best Practices
 
-## Documentation Links
+### DO ✓
+- Use `cuid` and `managed` aspects from `@sap/cds/common`
+- Keep domain models in `db/`, services in `srv/`, UI in `app/`
+- Use managed associations (let CAP handle foreign keys)
+- Design single-purpose services per use case
+- Start with SQLite, switch to HANA for production
 
-- **Main Documentation**: https://cap.cloud.sap/docs/
-- **GitHub Repository**: https://github.com/cap-js/docs
-- **CDS Language Reference**: https://cap.cloud.sap/docs/cds/
-- **Node.js Runtime**: https://cap.cloud.sap/docs/node.js/
-- **Java Runtime**: https://cap.cloud.sap/docs/java/
-- **Best Practices**: https://cap.cloud.sap/docs/about/best-practices
-- **Plugins**: https://cap.cloud.sap/docs/plugins/
-- **SAP Samples**: https://github.com/SAP-samples/cloud-cap-samples
+### DON'T ✗
+- Don't use SELECT * - be explicit about projections
+- Don't bypass CAP's query API with raw SQL
+- Don't create microservices prematurely
+- Don't hardcode credentials in config files
+- Don't write custom OData providers
+
+## Version Information
+- **Skill Version**: 2.0.0
+- **CAP Version**: @sap/cds 9.4.x
+- **Last Verified**: 2025-11-27
+- **License**: GPL-3.0

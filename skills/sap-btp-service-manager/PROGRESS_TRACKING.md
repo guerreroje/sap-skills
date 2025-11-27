@@ -2,8 +2,8 @@
 
 **Skill Name**: sap-btp-service-manager
 **Source Documentation**: https://github.com/SAP-docs/sap-btp-service-manager/tree/main/docs
-**Last Updated**: 2025-11-22
-**Status**: Complete
+**Last Updated**: 2025-11-27
+**Status**: Complete (Optimized for token efficiency)
 
 ---
 

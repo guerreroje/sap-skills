@@ -6,6 +6,33 @@
 
 ---
 
+## Table of Contents
+
+1. [Authentication](#authentication)
+   - User Access Tokens
+   - Client Access Tokens
+   - Token Retrieval
+2. [API Groups](#api-groups)
+   - [Platforms API](#1-platforms-api)
+   - [Service Brokers API](#2-service-brokers-api)
+   - [Service Offerings API](#3-service-offerings-api)
+   - [Service Plans API](#4-service-plans-api)
+   - [Service Instances API](#5-service-instances-api)
+   - [Service Bindings API](#6-service-bindings-api)
+   - [Operations API](#7-operations-api)
+3. [Common Patterns](#common-patterns)
+   - Filtering
+   - Pagination
+   - Error Handling
+4. [Response Formats](#response-formats)
+   - Success Responses
+   - Error Responses
+5. [Rate Limiting](#rate-limiting)
+   - Limits Overview
+   - Headers
+
+---
+
 ## Authentication
 
 ### User Access Tokens

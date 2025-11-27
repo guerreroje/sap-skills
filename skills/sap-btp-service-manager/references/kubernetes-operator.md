@@ -8,6 +8,33 @@ The SAP BTP Service Operator enables Kubernetes clusters to consume SAP BTP serv
 
 ---
 
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+   - [Infrastructure & Tools](#infrastructure--tools)
+   - [Environment Setup](#environment-setup)
+2. [Installation](#installation)
+   - [Install cert-manager](#install-cert-manager)
+   - [Create Service Manager Resources](#create-service-manager-resources)
+   - [Deploy Service Operator](#deploy-service-operator)
+3. [ServiceInstance CRD](#serviceinstance-crd)
+   - [Resource Definition](#resource-definition)
+   - [Examples](#examples)
+4. [ServiceBinding CRD](#servicebinding-crd)
+   - [Resource Definition](#resource-definition-1)
+   - [Examples](#examples-1)
+5. [Migration from Service Catalog](#migration-from-service-catalog)
+   - [Migration Steps](#migration-steps)
+   - [Breaking Changes](#breaking-changes)
+6. [Configuration](#configuration)
+   - [Namespace Scoping](#namespace-scoping)
+   - [Custom Resources](#custom-resources)
+7. [Troubleshooting](#troubleshooting)
+   - [Common Issues](#common-issues)
+   - [Debug Commands](#debug-commands)
+
+---
+
 ## Prerequisites
 
 ### Infrastructure & Tools

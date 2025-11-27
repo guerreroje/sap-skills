@@ -6,6 +6,28 @@ Complete reference for SAP Service Manager plans, roles, and scopes.
 
 ---
 
+## Table of Contents
+
+1. [Service Manager Plans](#service-manager-plans)
+   - [subaccount-admin](#1-subaccount-admin)
+   - [subaccount-audit](#2-subaccount-audit)
+   - [container](#3-container)
+2. [Roles in SAP BTP](#roles-in-sap-btp)
+   - [Subaccount Service Administrator](#subaccount-service-administrator)
+   - [Subaccount Service Viewer](#subaccount-service-viewer)
+   - [Assigning Roles](#assigning-roles)
+3. [Scope Reference](#scope-reference)
+   - [Broker Scopes](#broker-scopes)
+   - [Platform Scopes](#platform-scopes)
+   - [Service Instance Scopes](#service-instance-scopes)
+   - [Service Binding Scopes](#service-binding-scopes)
+4. [Best Practices](#best-practices)
+   - [Choose the Right Plan](#choose-the-right-plan)
+   - [Principle of Least Privilege](#principle-of-least-privilege)
+   - [Client vs User Scopes](#client-vs-user-scopes)
+
+---
+
 ## Service Manager Plans
 
 Three broker plans with different access levels:

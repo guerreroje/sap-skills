@@ -1,10 +1,18 @@
 # SAP BTP Intelligent Situation Automation Skill
 
-A comprehensive Claude Code skill for SAP BTP Intelligent Situation Automation setup, configuration, and operations.
+## ⚠️ SERVICE DEPRECATED
 
-## Overview
+**Status**: DEPRECATED as of September 24, 2025
+**End of Service**: March 2026 (approximately)
 
-This skill provides guidance for implementing situation-based automation between SAP S/4HANA systems and SAP Business Technology Platform. It covers the complete lifecycle from subscription to operations.
+This skill is now archived and maintained only for:
+- Data export guidance
+- Unsubscription instructions
+- Historical reference
+
+## Overview (For Reference)
+
+This skill previously provided guidance for implementing situation-based automation between SAP S/4HANA systems and SAP Business Technology Platform.
 
 ## Auto-Trigger Keywords
 
@@ -71,17 +79,17 @@ This skill activates when discussing:
 
 ## Quick Start
 
-### Prerequisites
+### ⚠️ For Unsubscribing from Deprecated Service
 
-1. SAP BTP global account with administrator access
-2. Subaccount in Europe (Frankfurt) region (cf-eu10)
-3. SAP S/4HANA Cloud or SAP S/4HANA 2021 FPS0+
+1. Export any required data using the data export endpoint
+2. Follow unsubscription instructions in SKILL.md
+3. Contact CA-SIT-ATM for support
 
-### Basic Setup Flow
+### Legacy Setup Flow (For Reference Only)
 
 ```
 1. Enable Event Mesh in subaccount
-2. Subscribe to Intelligent Situation Automation (standard plan)
+2. Subscribe to Intelligent Situation Automation (standard plan) - NO LONGER AVAILABLE
 3. Configure destinations to S/4HANA system
 4. Expose Situation Handling APIs in S/4HANA
 5. Set up Event Mesh communication
@@ -142,15 +150,18 @@ sap-btp-intelligent-situation-automation/
 
 ## Documentation Sources
 
-- **GitHub**: https://github.com/SAP-docs/sap-btp-intelligent-situation-automation
-- **SAP Help**: https://help.sap.com/docs/intelligent-situation-automation
+- **GitHub**: https://github.com/SAP-docs/btp-intelligent-situation-automation
+- **Deprecation Announcement**: https://community.sap.com/t5/technology-blog-posts-by-sap/deprecation-of-intelligent-situation-automation-service/ba-p/14214342
+- **SAP Help**: https://help.sap.com/docs/intelligent-situation-automation (archived)
 - **Event Mesh**: https://help.sap.com/docs/SAP_EM
 
 ## Version
 
-- **Skill Version**: 1.0.0
-- **Last Updated**: 2025-11-22
-- **SAP Docs Verified**: 2025-11-22
+- **Skill Version**: 1.1.0
+- **Status**: DEPRECATED
+- **Last Updated**: 2025-11-27
+- **Deprecation Date**: 2025-09-24
+- **End of Service**: March 2026 (estimated)
 
 ## License
 
