@@ -178,8 +178,9 @@ The skill automatically activates when you discuss SAP BTP development topics. E
 
 ## Version
 
-- **Skill Version**: 1.0.0
-- **Last Updated**: 2025-11-21
+- **Skill Version**: 1.1.0
+- **Last Updated**: 2025-11-27
+- **Last Verified**: 2025-11-27
 - **SAP BTP Developer Guide Source**: https://github.com/SAP-docs/btp-developer-guide
 
 ## License

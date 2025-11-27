@@ -1,12 +1,40 @@
 ---
 name: sap-btp-developer-guide
-description: Develops business applications on SAP Business Technology Platform (BTP) using CAP (Node.js/Java) or ABAP Cloud. Use when building cloud applications on SAP BTP, deploying to Cloud Foundry or Kyma runtimes, integrating with SAP HANA Cloud, implementing SAP Fiori UIs, connecting to remote SAP systems, building multitenant SaaS applications, extending SAP S/4HANA or SuccessFactors, setting up CI/CD pipelines, implementing observability, or following SAP development best practices.
+description: |
+  Develops business applications on SAP Business Technology Platform (BTP) using CAP (Node.js/Java) or ABAP Cloud. 
+
+  Use when: building cloud applications on SAP BTP, deploying to Cloud Foundry or Kyma runtimes, integrating with SAP HANA Cloud, implementing SAP Fiori UIs, connecting to remote SAP systems, building multitenant SaaS applications, extending SAP S/4HANA or SuccessFactors, setting up CI/CD pipelines, implementing observability, or following SAP development best practices.
+
+  Keywords: SAP BTP, Business Technology Platform, CAP, Cloud Application Programming Model, ABAP Cloud, Cloud Foundry, Kyma, SAP HANA Cloud, SAP Fiori, SAPUI5, CI/CD, observability, multitenant, SaaS, SAP BTP ABAP environment, SAP Business Application Studio, SAP Cloud SDK, SAP Integration Suite, SAP Event Mesh, SAP Connectivity Service, SAP Destination Service, XSUAA, OAuth, OpenID Connect, OData, CDS, Core Data Services, ABAP CDS, ABAP RESTful Application Programming Model, RAP, ABAP development, SAP BTP development
 license: GPL-3.0
+metadata:
+  version: 1.1.0
+  last_verified: 2025-11-27
+  source_last_updated: 2025-11-21
+  review_status: "Complete - Phase 1-14 audit"
 ---
 
 # SAP BTP Developer Guide Skill
 
 Comprehensive guidance for developing, deploying, and operating business applications on SAP Business Technology Platform.
+
+## Table of Contents
+
+### Quick Navigation
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Runtime and Programming Model Selection](#runtime-and-programming-model-selection)
+- [Development Workflow](#development-workflow)
+- [Key Services and Tools](#key-services-and-tools)
+- [Security Implementation](#security-implementation)
+- [Connectivity Patterns](#connectivity-patterns)
+- [CI/CD Implementation](#cicd-implementation)
+- [Observability Implementation](#observability-implementation)
+- [Tutorials and Missions](#tutorials-and-missions)
+- [Partner/ISV Development](#partnerisv-development)
+- [Common Errors and Solutions](#common-errors-and-solutions)
+- [Bundled Resources](#bundled-resources)
+- [Source Documentation](#source-documentation)
+- [Version Information](#version-information)
 
 ## When to Use This Skill
 
@@ -274,6 +302,78 @@ Sample applications:
 
 For tutorial details: See `references/tutorials.md`
 
+## Bundled Resources
+
+### File Structure
+```
+sap-btp-developer-guide/
+├── SKILL.md                 # This file - Main guidance
+├── README.md               # Quick reference with auto-trigger keywords
+├── PROGRESS_TRACKING.md    # Documentation coverage tracking
+└── references/             # Detailed guides (23 files)
+    ├── Architecture & Setup
+    │   ├── architecture.md      # Platform services and architecture
+    │   ├── runtimes.md          # Runtime comparison (CF vs Kyma vs ABAP)
+    │   ├── setup.md             # BTP landscape setup and Terraform
+    │   └── tools.md             # Development tools catalog
+    ├── Development
+    │   ├── cap-development.md   # CAP development guide
+    │   ├── abap-cloud.md        # ABAP Cloud development guide
+    │   ├── design-patterns.md   # Design patterns and DDD
+    │   ├── extensions.md        # SAP solution extensions
+    │   ├── mta.md               # Multitarget applications
+    │   ├── testing.md           # Testing strategies
+    │   └── ux-design.md         # UX design and Fiori
+    ├── Integration & Security
+    │   ├── connectivity.md      # Connectivity patterns
+    │   ├── security.md          # Security implementation
+    │   ├── hana-cloud.md        # SAP HANA Cloud
+    │   └── resilience.md        # Resilience patterns
+    ├── Deployment & Operations
+    │   ├── deployment.md        # Deployment options
+    │   ├── cicd.md              # CI/CD pipelines
+    │   ├── observability.md     # Monitoring and logging
+    │   ├── operations.md        # Operations and scaling
+    │   └── partners.md          # ISV/Partner development
+    └── Additional Resources
+        ├── tutorials.md         # Learning paths and missions
+        └── whats-new.md         # Changelog and updates
+```
+
+### Reference Files by Category
+
+#### Architecture & Platform (4 files)
+- `architecture.md` - Platform services overview and architecture patterns
+- `runtimes.md` - Runtime comparison and selection guide
+- `setup.md` - BTP landscape setup with sizing recommendations
+- `tools.md` - Complete development tools catalog
+
+#### Development (8 files)
+- `cap-development.md` - CAP development with Node.js/Java
+- `abap-cloud.md` - ABAP Cloud development with RAP
+- `design-patterns.md` - Domain-driven design and patterns
+- `extensions.md` - Side-by-side extensions for SAP solutions
+- `mta.md` - Multitarget application packaging
+- `testing.md` - Testing strategies and frameworks
+- `ux-design.md` - SAP Fiori UX design guidelines
+
+#### Integration & Security (4 files)
+- `connectivity.md` - Cloud-to-on-premise connectivity
+- `security.md` - Authentication, authorization, and security
+- `hana-cloud.md` - SAP HANA Cloud database
+- `resilience.md` - Application resilience patterns
+
+#### Deployment & Operations (5 files)
+- `deployment.md` - Deployment to CF, Kyma, and ABAP
+- `cicd.md` - CI/CD pipelines with SAP tools
+- `observability.md` - Monitoring, logging, and tracing
+- `operations.md` - Operations, scaling, and cost optimization
+- `partners.md` - ISV/partner development guidelines
+
+#### Learning & Updates (2 files)
+- `tutorials.md` - Hands-on missions and tutorials
+- `whats-new.md` - Latest features and changelog
+
 ## Partner/ISV Development
 
 ### Deployment Options
@@ -318,7 +418,8 @@ For partner details: See `references/partners.md`
 
 ## Version Information
 
-- **Skill Version**: 1.0.0
+- **Skill Version**: 1.1.0
+- **Last Verified**: 2025-11-27
 - **Source Last Updated**: 2025-11-21
 - **Based On**: SAP BTP Developer Guide (https://github.com/SAP-docs/btp-developer-guide)
 - **Next Review**: 2026-02-21
