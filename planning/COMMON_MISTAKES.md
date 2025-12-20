@@ -447,12 +447,12 @@ This skill helps with...
 
 ❌ **WRONG**:
 ```markdown
-See \[documentation](./docs/guide.md)  # ← File doesn't exist
+See \[documentation](`./docs/guide.md`)  # ← File doesn't exist
 ```
 
 ✅ **CORRECT**:
 ```markdown
-See \[documentation](references/guide.md)  # ← Actual path
+See \[documentation](../skills/sap-cap-capire/references/cli-complete.md)  # ← Actual path
 ```
 
 **Verify**:

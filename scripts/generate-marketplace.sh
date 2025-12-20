@@ -17,7 +17,7 @@ MARKETPLACE_JSON="$MARKETPLACE_DIR/marketplace.json"
 
 # Default values
 DRY_RUN=false
-GLOBAL_VERSION="2.1.0"
+VERBOSE="${VERBOSE:-false}"
 
 # Color output
 RED='\033[0;31m'
@@ -106,12 +106,18 @@ collect_plugins() {
     fi
 
     # Read plugin data
-    local name=$(jq -r '.name' "$plugin_json")
-    local description=$(jq -r '.description' "$plugin_json")
-    local version=$(jq -r '.version' "$plugin_json")
-    local category=$(jq -r '.category' "$plugin_json")
-    local keywords=$(jq -c '.keywords' "$plugin_json")
-    local license=$(jq -r '.license' "$plugin_json")
+    local name
+    name=$(jq -r '.name' "$plugin_json")
+    local description
+    description=$(jq -r '.description' "$plugin_json")
+    local version
+    version=$(jq -r '.version' "$plugin_json")
+    local category
+    category=$(jq -r '.category' "$plugin_json")
+    local keywords
+    keywords=$(jq -c '.keywords // []' "$plugin_json")
+    local license
+    license=$(jq -r '.license' "$plugin_json")
 
     # Validate required fields
     if [ "$name" = "null" ] || [ "$description" = "null" ]; then
@@ -160,8 +166,10 @@ $category"
     echo -e "${GREEN}  ✓ Added: $name${NC}" >&2
   done
 
-  echo "Total collected: $count plugins" >&2
-  echo "Categories string: '$categories_str'" >&2
+  if [ "$VERBOSE" = "true" ]; then
+    echo "Total collected: $count plugins" >&2
+    echo "Categories string: '$categories_str'" >&2
+  fi
 
   # Sort plugins by name
   plugins=$(echo "$plugins" | jq 'sort_by(.name)' 2>&1) || {

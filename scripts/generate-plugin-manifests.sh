@@ -222,7 +222,8 @@ scan_agents() {
 
   local agents=()
   while IFS= read -r -d '' agent_file; do
-    local relative_path="./agents/$(basename "$agent_file")"
+    local relative_path
+    relative_path="./agents/$(basename "$agent_file")"
     agents+=("\"$relative_path\"")
   done < <(find "$agents_dir" -maxdepth 1 -name "*.md" -print0 2>/dev/null || true)
 
@@ -245,7 +246,8 @@ scan_commands() {
 
   local commands=()
   while IFS= read -r -d '' command_file; do
-    local relative_path="./commands/$(basename "$command_file")"
+    local relative_path
+    relative_path="./commands/$(basename "$command_file")"
     commands+=("\"$relative_path\"")
   done < <(find "$commands_dir" -maxdepth 1 -name "*.md" -print0 2>/dev/null || true)
 
@@ -299,7 +301,8 @@ extract_yaml_field() {
 # Generate plugin.json for a skill
 generate_plugin_json() {
   local skill_dir="$1"
-  local skill_name=$(basename "$skill_dir")
+  local skill_name
+  skill_name=$(basename "$skill_dir")
   local skill_md="$skill_dir/SKILL.md"
   local plugin_dir="$skill_dir/.claude-plugin"
   local plugin_json="$plugin_dir/plugin.json"
@@ -311,9 +314,12 @@ generate_plugin_json() {
   fi
 
   # Extract YAML fields
-  local name=$(extract_yaml_field "$skill_md" "name")
-  local description=$(extract_yaml_field "$skill_md" "description")
-  local license=$(extract_yaml_field "$skill_md" "license")
+  local name
+  name=$(extract_yaml_field "$skill_md" "name")
+  local description
+  description=$(extract_yaml_field "$skill_md" "description")
+  local license
+  license=$(extract_yaml_field "$skill_md" "license")
 
   # Validate required fields
   if [ -z "$name" ] || [ -z "$description" ]; then
@@ -322,20 +328,28 @@ generate_plugin_json() {
   fi
 
   # Auto-detect category
-  local category=$(categorize_skill "$skill_name")
+  local category
+  category=$(categorize_skill "$skill_name")
 
   # Generate keywords
-  local name_keywords=$(generate_name_keywords "$name")
-  local category_keywords=$(get_category_keywords "$category")
-  local description_keywords=$(extract_description_keywords "$description")
-  local all_keywords=$(clean_keywords "$name_keywords,$category_keywords,$description_keywords")
+  local name_keywords
+  name_keywords=$(generate_name_keywords "$name")
+  local category_keywords
+  category_keywords=$(get_category_keywords "$category")
+  local description_keywords
+  description_keywords=$(extract_description_keywords "$description")
+  local all_keywords
+  all_keywords=$(clean_keywords "$name_keywords,$category_keywords,$description_keywords")
 
   # Convert keywords to JSON array (using jq for proper escaping)
-  local keywords_json=$(echo -n "$all_keywords" | jq -R -s -c 'split(",") | map(select(. != ""))')
+  local keywords_json
+  keywords_json=$(echo -n "$all_keywords" | jq -R -s -c 'split(",") | map(select(. != ""))')
 
   # Scan for agents and commands
-  local agents_json=$(scan_agents "$skill_dir")
-  local commands_json=$(scan_commands "$skill_dir")
+  local agents_json
+  agents_json=$(scan_agents "$skill_dir")
+  local commands_json
+  commands_json=$(scan_commands "$skill_dir")
 
   # Set default license if empty
   if [ -z "$license" ]; then
@@ -420,7 +434,8 @@ main() {
       continue
     fi
 
-    local skill_name=$(basename "$skill_dir")
+    local skill_name
+    skill_name=$(basename "$skill_dir")
 
     # Filter by skill name if specified
     if [ -n "$SKILL_FILTER" ] && [ "$skill_name" != "$SKILL_FILTER" ]; then
