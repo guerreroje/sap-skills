@@ -1,0 +1,838 @@
+---
+name: sap-sac-scripting
+description: |
+  Comprehensive SAC scripting skill for Analytics Designer and Optimized Story Experience. Use when building analytic applications, planning models, or enhanced stories. Covers DataSource API, Chart/Table manipulation, Planning operations, Calendar integration, Bookmarks, Timer API, Container widgets, Layout API, R Visualizations, Custom Widgets, Navigation, variables, event handlers, debugging, performance optimization, and 2025.23 features: comments APIs, Search to Insight, smart grouping, time-series forecast, geo map quick menus, Explorer/Smart Insights, composites scripting. Includes 40 code templates.
+license: GPL-3.0
+metadata:
+  version: 1.7.0
+  last_verified: 2025-11-27
+  sac_version: "2025.23"
+  api_reference_version: "2025.14"
+  documentation_source: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  reference_files: 52
+  template_patterns: 40
+  status: production
+---
+
+# SAP Analytics Cloud Scripting Skill
+
+Comprehensive skill for scripting in SAP Analytics Cloud (SAC) Analytics Designer and Optimized Story Experience.
+
+---
+
+## What’s New (2025.23)
+- Time series forecast API for time-series/line charts (`references/time-series-forecast.md`).
+- Search to Insight technical object with dialog/apply-to-chart APIs (`references/search-to-insight.md`).
+- Widget/table comments APIs (`references/comments.md`).
+- Smart grouping for bubble/scatter charts (`references/smart-grouping.md`).
+- Explorer & Smart Insights launch/apply patterns (`references/explorer-smart-insights.md`).
+- Geo map quick menus and scripting hooks (`references/geomap.md`).
+- Composite scripting and composite feature restrictions (`references/composites-scripting.md`, `references/composites-restrictions.md`).
+- Blending limitations and Analytics Designer known restrictions (`references/blending-limitations.md`, `references/analytics-designer-restrictions.md`).
+- Authentication-required Help Portal page logged for awareness (`references/auth-required.md`).
+
+---
+
+## When to Use This Skill
+
+Use this skill when working on tasks involving:
+
+**Analytics Designer Development**:
+- Creating analytic applications with interactive dashboards
+- Building planning applications for data entry and forecasting
+- Writing event handler scripts (onInitialization, onSelect, onResultChanged)
+- Implementing widget interactions (charts, tables, input controls)
+- Managing data sources and applying filters programmatically
+
+**Optimized Story Experience**:
+- Enhancing stories with scripting capabilities
+- Adding interactivity to existing stories
+- Implementing custom business logic
+- Creating dynamic visualizations
+
+**Data Operations**:
+- Filtering and manipulating data sources
+- Reading dimension members and measure values
+- Working with hierarchies and selections
+- Implementing data actions and multi-actions
+
+**Planning Operations**:
+- Managing planning versions (public/private)
+- Publishing and copying versions
+- Handling data locking
+- Implementing data entry workflows
+
+**UI/UX Enhancements**:
+- Creating popups and dialogs
+- Managing widget visibility
+- Implementing dynamic navigation
+- Building responsive applications
+- Using container widgets (Panel, TabStrip, PageBook, Flow Layout)
+- Implementing Layout API for dynamic sizing/positioning
+- Adding/exposing comments on widgets and table cells (`references/comments.md`)
+- Applying dynamic text via script variables (`references/text-widget.md`)
+- Using geo maps with quick menu control and scripted layers (`references/geomap.md`)
+- Binding widget values to variables (`references/bind-widget-values.md`)
+- Using input fields/text areas and sliders/range sliders (`references/input-fields.md`, `references/sliders.md`)
+- Bookmark settings, APIs, and bookmark sets (`references/bookmark-settings.md`, `references/bookmark-set-tech-object.md`)
+
+**Calendar & Workflow Integration**:
+- Creating and managing calendar tasks and processes
+- Implementing approval workflows (submit, approve, reject)
+- Adding reminders and notifications
+- Integrating with planning calendar events
+
+**Bookmarks & State Management**:
+- Saving and restoring application state
+- Creating global and personal bookmarks
+- URL parameter integration
+- Linked Analysis for cross-widget filtering
+
+**Advanced Features**:
+- Timer-based operations and animations
+- R Visualizations for specialized charts
+- Custom Widget development
+- Cross-application navigation
+- Search to Insight technical object, dialog control, apply-to-chart (`references/search-to-insight.md`)
+- Time-series forecast enablement on charts (`references/time-series-forecast.md`)
+- Smart grouping for correlation charts (`references/smart-grouping.md`)
+- Explorer & Smart Insights launch and application patterns (`references/explorer-smart-insights.md`)
+- Scripting inside composites (`references/composites-scripting.md`)
+- Pattern-based functions for ML-driven text pattern detection (`references/pattern-functions.md`)
+
+**Technical Objects & Actions**:
+- Data actions, multi actions, and planning model technical objects (`references/data-actions-tech-object.md`, `references/multi-actions-tech-object.md`, `references/planning-model-tech-object.md`)
+- Calendar integration, data change insights, timer, text pool (`references/calendar-integration-tech-object.md`, `references/data-change-insights-tech-object.md`, `references/timer-tech-object.md`, `references/text-pool-tech-object.md`)
+- Export technical objects for PDF/PowerPoint (`references/export-pdf-tech-object.md`, `references/export-ppt-tech-object.md`)
+- OData service integration (`references/odata-service.md`)
+- Bookmark set technical object (`references/bookmark-set-tech-object.md`)
+- onAfterDataEntryProcess event handling for tables (`references/on-after-data-entry-process.md`)
+- MemberInfo performance guidance (`references/memberinfo-performance.md`)
+
+**Debugging & Optimization**:
+- Debugging scripts with console.log and debugger statement
+- Optimizing application performance
+- Troubleshooting runtime errors
+- Script editor basics (`references/script-editor.md`) and value help (`references/value-help.md`)
+- Optimize type libraries and automatic refactoring tools (`references/optimize-type-libraries.md`, `references/automatic-refactoring.md`)
+- Check errors/references and debug mode with breakpoints (`references/check-errors.md`, `references/check-references.md`, `references/debug-scripts.md`)
+- Script performance popup for runtime profiling (`references/script-performance-popup.md`)
+
+---
+
+## Quick Start
+
+### Script Editor Access
+
+1. **Analytics Designer**: Open application in edit mode → Select widget → Click Scripts tab
+2. **Optimized Story Experience**: Enable Advanced Mode → Select widget → Add script
+
+### Basic Script Structure
+
+```javascript
+// Event handler script (e.g., onSelect of a chart)
+var selections = Chart_1.getSelections();
+if (selections.length > 0) {
+    var selectedMember = selections[0]["Location"];
+    Table_1.getDataSource().setDimensionFilter("Location", selectedMember);
+}
+```
+
+### Script Types
+
+1. **Event Handlers**: Triggered by widget events (onSelect, onClick, onResultChanged)
+2. **Application Events**: onInitialization, onResize, onOrientationChange
+3. **Script Objects**: Reusable functions callable from any event handler
+
+---
+
+## Core Concepts
+
+### 1. Variables
+
+**Local Variables** (within event handler):
+```javascript
+var myString = "Hello";
+var myNumber = 42;
+var myBoolean = true;
+var myArray = ["a", "b", "c"];
+```
+
+**Global Variables** (across entire application):
+- Create via Outline panel → Global Variables → (+)
+- Types: String, Integer, Number, Boolean (can be arrays)
+- Access from any script: `GlobalVariable_1 = "value";`
+
+**URL Parameters**:
+- Prefix global variable name with `p_` to pass via URL
+- URL format: `?p_myVariable=value`
+
+### 2. DataSource API
+
+Central API for data access. Get reference via widgets:
+
+```javascript
+var ds = Chart_1.getDataSource();
+var ds = Table_1.getDataSource();
+```
+
+**Key Methods**:
+| Method | Description |
+|--------|-------------|
+| `getDimensions()` | Returns all dimensions |
+| `getMeasures()` | Returns all measures |
+| `getMembers(dimensionId, options)` | Returns dimension members |
+| `getData(selection)` | Returns data values |
+| `getResultSet()` | Returns current result set (no backend trip) |
+| `setDimensionFilter(dimension, value)` | Sets filter on dimension |
+| `removeDimensionFilter(dimension)` | Removes filter |
+| `getDimensionFilters(dimension)` | Gets current filters |
+| `refreshData()` | Refreshes data from backend |
+| `getVariables()` | Returns model variables |
+| `setVariableValue(variable, value)` | Sets variable value |
+
+**Reference**: See `references/api-datasource.md` for complete DataSource API.
+
+### 3. Widget APIs
+
+**Chart**:
+```javascript
+Chart_1.addDimension(Feed.CategoryAxis, "Location");
+Chart_1.addMeasure(Feed.ValueAxis, "[Account].[parentId].&[Revenue]");
+Chart_1.removeMember(Feed.ValueAxis, measureId);
+var selections = Chart_1.getSelections();
+Chart_1.setVisible(true);
+```
+
+**Table**:
+```javascript
+Table_1.addDimensionToRows("Product");
+Table_1.addDimensionToColumns("Date");
+Table_1.setZeroSuppressionEnabled(true);
+var selections = Table_1.getSelections();
+```
+
+**Reference**: See `references/api-widgets.md` for complete widget APIs.
+
+### 4. Planning API
+
+Access via table widget:
+```javascript
+var planning = Table_1.getPlanning();
+```
+
+**Version Management**:
+```javascript
+// Get public version
+var publicVersion = planning.getPublicVersion("Budget2024");
+
+// Get private version
+var privateVersion = planning.getPrivateVersion("myDraft");
+
+// Check for unsaved changes
+if (publicVersion.isDirty()) {
+    publicVersion.publish();
+}
+
+// Copy version
+sourceVersion.copy("NewVersion", PlanningCopyOption.AllData, PlanningCategory.Budget);
+```
+
+**Data Locking**:
+```javascript
+var selection = Table_1.getSelections()[0];
+var lockState = planning.getDataLocking().getState(selection);
+```
+
+**Reference**: See `references/api-planning.md` for complete Planning API.
+
+### 5. Application API
+
+Global Application object:
+```javascript
+// User feedback
+Application.showBusyIndicator();
+Application.hideBusyIndicator();
+
+// Messages
+Application.showMessage(ApplicationMessageType.Info, "Operation completed");
+
+// Application info
+var appInfo = Application.getInfo();
+var userInfo = Application.getUserInfo();
+
+// Theme
+var theme = Application.getTheme();
+```
+
+### 6. Events
+
+**Application Events**:
+- `onInitialization`: Runs once when application loads
+- `onPostMessageReceived`: Fires when host app sends PostMessage (iFrame scenarios)
+- `onResize`: Fires when application is resized
+- `onOrientationChange`: Mobile orientation change
+
+**Widget Events**:
+- `onSelect`: User selects data point (Chart, Table)
+- `onResultChanged`: Data in widget changes
+- `onClick`: Button click, etc.
+
+**Best Practice**: Keep `onInitialization` empty for performance. Use static filters instead.
+
+**iFrame Embedding**: See `references/iframe-embedding-lumira-migration.md` for PostMessage integration.
+
+---
+
+## Common Patterns
+
+### Filter Data Based on Selection
+
+```javascript
+// onSelect event of Chart_1
+var selections = Chart_1.getSelections();
+if (selections.length > 0) {
+    var selectedLocation = selections[0]["Location"];
+    Table_1.getDataSource().setDimensionFilter("Location", selectedLocation);
+}
+```
+
+### Find Active Version from Attribute
+
+```javascript
+var allVersions = PlanningModel_1.getMembers("Version");
+var activeVersion = "";
+
+for (var i = 0; i < allVersions.length; i++) {
+    if (allVersions[i].properties.Active === "X") {
+        activeVersion = allVersions[i].id;
+        break;
+    }
+}
+console.log("Active Version: " + activeVersion);
+```
+
+### Dynamic Measure Swap
+
+```javascript
+// Get current measure
+var currentMeasure = Chart_1.getMembers(Feed.ValueAxis);
+
+// Remove current measure
+Chart_1.removeMember(Feed.ValueAxis, currentMeasure[0]);
+
+// Add new measure
+Chart_1.addMember(Feed.ValueAxis, "[Account].[parentId].&[NewMeasure]");
+```
+
+### Switch Between Chart and Table
+
+```javascript
+// Show chart, hide table
+Chart_1.setVisible(true);
+Table_1.setVisible(false);
+Button_ShowTable.setVisible(true);
+Button_ShowChart.setVisible(false);
+```
+
+### Pause and Resume Refresh
+
+```javascript
+// Pause before multiple operations
+Chart_1.getDataSource().setRefreshPaused(true);
+Table_1.getDataSource().setRefreshPaused(true);
+
+// Apply multiple filters
+Chart_1.getDataSource().setDimensionFilter("Year", "2024");
+Chart_1.getDataSource().setDimensionFilter("Region", "EMEA");
+
+// Resume refresh (single backend call)
+Chart_1.getDataSource().setRefreshPaused(false);
+Table_1.getDataSource().setRefreshPaused(false);
+```
+
+### Get Booked Values Only
+
+```javascript
+var members = Table_1.getDataSource()
+    .getMembers("Dimension", {accessMode: MemberAccessMode.BookedValues});
+```
+
+**Reference**: See `templates/common-patterns.js` for more patterns.
+
+---
+
+## Debugging
+
+### Console Logging
+
+```javascript
+console.log("Variable value:", myVariable);
+console.log("Selections:", Chart_1.getSelections());
+```
+
+**Access Console**:
+1. Run application
+2. Press F12 or Ctrl+Shift+J
+3. Go to Console tab
+4. Filter by "Info" type
+5. Expand "sandbox.worker.main.*.js" for your logs
+
+### Debugger Statement
+
+```javascript
+debugger;  // Execution pauses here
+var value = getData();
+```
+
+**Enable Debug Mode**:
+1. Add `;debug=true` to application URL
+2. Open Developer Tools (F12)
+3. Go to Sources tab
+4. Find code in "sandbox worker main" file
+
+### Performance Logging
+
+Add URL parameter: `?APP_PERFORMANCE_LOGGING=true`
+
+```javascript
+// In console
+window.sap.raptr.getEntriesByMarker("(Application)")
+    .filter(e => e.entryType === 'measure')
+    .sort((a,b) => (a.startTime + a.duration) - (b.startTime + b.duration));
+```
+
+### Error Handling
+
+```javascript
+try {
+    var data = Table_1.getDataSource().getData(selection);
+    // Process data
+} catch (error) {
+    console.log("Error:", error);
+    Application.showMessage(ApplicationMessageType.Error, "Operation failed");
+}
+```
+
+---
+
+## Performance Best Practices
+
+### 1. Minimize Backend Trips
+
+```javascript
+// GOOD: getResultSet() - no backend trip
+var resultSet = Chart_1.getDataSource().getResultSet();
+
+// AVOID: getMembers() - always hits backend
+var members = Chart_1.getDataSource().getMembers("Dimension");
+```
+
+### 2. Batch Filter Operations
+
+```javascript
+// GOOD: Pause refresh, apply multiple filters, resume
+ds.setRefreshPaused(true);
+ds.setDimensionFilter("Dim1", value1);
+ds.setDimensionFilter("Dim2", value2);
+ds.setDimensionFilter("Dim3", value3);
+ds.setRefreshPaused(false);
+
+// AVOID: Each filter triggers refresh
+ds.setDimensionFilter("Dim1", value1);  // Refresh
+ds.setDimensionFilter("Dim2", value2);  // Refresh
+ds.setDimensionFilter("Dim3", value3);  // Refresh
+```
+
+### 3. Copy Filters Efficiently
+
+```javascript
+// GOOD: Copy all filters at once
+Table_1.getDataSource().copyDimensionFilterFrom(Chart_1.getDataSource());
+
+// AVOID: Set each filter individually
+var filters = Chart_1.getDataSource().getDimensionFilters("Dim1");
+Table_1.getDataSource().setDimensionFilter("Dim1", filters[0].value);
+```
+
+### 4. Empty onInitialization
+
+```javascript
+// AVOID: Heavy operations in onInitialization
+// This blocks application startup
+
+// GOOD: Use URL parameters for initial values
+// Use static widget filters instead of script filters
+// Load invisible widgets in background
+```
+
+### 5. Cache DataSource References
+
+```javascript
+// GOOD: Cache reference outside loop
+var ds = Table_1.getDataSource();
+for (var i = 0; i < items.length; i++) {
+    ds.setDimensionFilter("Dim", items[i]);
+}
+
+// AVOID: Get reference inside loop
+for (var i = 0; i < items.length; i++) {
+    Table_1.getDataSource().setDimensionFilter("Dim", items[i]);
+}
+```
+
+---
+
+## Developer Best Practices
+
+Maintainable SAC stories require consistent conventions. Key principles:
+
+### 1. Naming Conventions
+
+Use prefixes to identify widget types at a glance:
+
+| Widget Type | Prefix | Example |
+|-------------|--------|---------|
+| Bar Chart | `chartB_` | `chartB_revenue_by_state` |
+| Line Chart | `chartL_` | `chartL_margin_by_product` |
+| Table | `tbl_` | `tbl_invoices_by_month` |
+| Panel | `pnl_` | `pnl_header` |
+| Button | `btn_` | `btn_export_pdf` |
+| Dropdown | `ddl_` | `ddl_product` |
+| KPI/Numeric | `kpi_` | `kpi_actuals_vs_budget` |
+
+### 2. Layout Organization
+
+- Group related widgets in panels
+- Order widgets in Outline view: top→bottom, left→right
+- Use panel visibility for show/hide sections:
+
+```javascript
+// Hide entire section instead of individual widgets
+pnl_details.setVisible(false);
+```
+
+### 3. Script Annotation
+
+Add summary + line-level comments to all scripts:
+
+```javascript
+/*
+ * Script: onSelect - chartB_revenue_by_region
+ * Purpose: Filter detail table when user selects a region
+ * Dependencies: chartB_revenue_by_region, tbl_transactions
+ */
+
+// Get user's selection from the chart
+var selections = chartB_revenue_by_region.getSelections();
+```
+
+### 4. Design Tips
+
+- **Disable Panel Auto Scroll**: Prevents unwanted scroll bars
+- **Avoid Flow Panels**: Fixed layouts are easier to maintain
+- **Use % for Left/Right**: Change from px to % after layout is finalized for responsive sizing
+
+**Full Reference**: See `references/best-practices-developer.md` for complete naming table and patterns.
+
+**Source**: [SAP Community - Building Stories That Other Developers Actually Want to Inherit](https://community.sap.com/t5/technology-blog-posts-by-members/building-stories-that-other-developers-actually-want-to-inherit/ba-p/14168133)
+
+---
+
+## Planning Story Architecture
+
+For complex planning processes, use multi-story architecture with a central entry point.
+
+### Key Principles
+
+1. **Entry Point Design**: Create overview page with KPI tiles and organized navigation sections
+2. **Multi-Story Separation**: One story per planning phase, stored in folder structure
+3. **Script-Based Navigation**: Use `NavigationUtils.openStory()` instead of hyperlinks
+4. **User Assistance**: Consistent sidebar with filters, step-by-step instructions, external links
+5. **Guided Process**: "Guide Me!" popup for focused step-by-step workflow
+6. **Button Color Coding**: Green (positive), Red (negative), Blue (neutral)
+
+### Navigation Script Pattern
+
+```javascript
+// Navigate to target story with page and mode parameters
+var urlParameters = ArrayUtils.create(Type.UrlParameter);
+urlParameters.push(UrlParameter.create("mode", "view"));
+urlParameters.push(UrlParameter.create("page", "0"));
+NavigationUtils.openStory(storyId, "", urlParameters, false);
+```
+
+### Folder Organization
+
+```
+Planning_Application/
+├── 00_Entry_Point.story
+├── 01_Configuration.story
+├── 02_Plan_FTE.story
+├── 03_Plan_Costs.story
+└── 04_Reports.story
+```
+
+**Full Reference**: See `references/best-practices-planning-stories.md` for complete patterns including sidebar design, guided process popup implementation, and button guidelines.
+
+**Source**: [SAP PRESS - Best Practices for Planning Stories](https://blog.sap-press.com/best-practices-for-planning-stories-in-sap-analytics-cloud)
+
+---
+
+## Popups and Dialogs
+
+### Create Popup
+
+1. Outline panel → Popups → (+)
+2. Add widgets to popup (tables, charts, buttons)
+3. Optionally enable header/footer for dialog style
+
+### Show/Hide Popup
+
+```javascript
+// Show popup
+Popup_1.open();
+
+// Hide popup
+Popup_1.close();
+```
+
+### Busy Indicator
+
+```javascript
+Application.showBusyIndicator();
+
+// Perform operations
+Table_1.getDataSource().refreshData();
+
+Application.hideBusyIndicator();
+```
+
+---
+
+## Utility Functions
+
+### Type Conversion
+
+```javascript
+// String to Integer
+var num = ConvertUtils.stringToInteger("42");
+
+// Number to String
+var str = ConvertUtils.numberToString(42);
+```
+
+### Array Operations
+
+```javascript
+// ArrayUtils available for common operations
+var arr = [1, 2, 3];
+```
+
+### Date Formatting
+
+```javascript
+// DateFormat utility
+var formatted = DateFormat.format(dateValue, "yyyy-MM-dd");
+```
+
+---
+
+## Script Objects (Reusable Functions)
+
+Create reusable functions not tied to specific events:
+
+1. Outline panel → Script Objects → (+)
+2. Add functions to script object
+3. Call from any event: `ScriptObject_1.myFunction(param);`
+
+```javascript
+// In ScriptObject_1
+function applyStandardFilters(dataSource, year, region) {
+    dataSource.setDimensionFilter("Year", year);
+    dataSource.setDimensionFilter("Region", region);
+}
+
+// In event handler
+ScriptObject_1.applyStandardFilters(Table_1.getDataSource(), "2024", "EMEA");
+```
+
+---
+
+## Export Capabilities
+
+### PDF Export
+
+```javascript
+var exportSettings = {
+    scope: ExportScope.All,
+    header: "Report Title",
+    footer: "Page {page}",
+    orientation: "landscape"
+};
+Application.export(ExportType.PDF, exportSettings);
+```
+
+### Excel Export
+
+```javascript
+Application.export(ExportType.Excel, {
+    scope: ExportScope.All,
+    includeHierarchy: true
+});
+```
+
+### CSV Export
+
+```javascript
+Table_1.export(ExportType.CSV);
+```
+
+---
+
+## Restrictions & Unsupported (2025.23)
+- **Composites**: many editor/runtime gaps; export/bookmark only at composite level; limited linked analysis; no `onInitialization` event (`references/composites-restrictions.md`).
+- **Analytics Designer**: popup sizing/theme issues, planning/version API limits, DataSource filter/variable constraints, chart feed/event limits, export quirks, Safari R-vis cookie issue, embedding not supported, input-control constraints (`references/analytics-designer-restrictions.md`).
+- **Blending**: primary-model-only API support; several filter/table/planning/comment APIs unsupported; IDs include modelId; value help differences (`references/blending-limitations.md`).
+- **Authentication-required page**: one Help Portal article needs SAP login (`references/auth-required.md`).
+
+---
+
+## Official Documentation Links
+
+### API References (Always Current)
+- **Analytics Designer API Reference 2025.23**: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html
+- **Optimized Story Experience API Reference 2025.23**: https://help.sap.com/doc/1639cb9ccaa54b2592224df577abe822/release/en-US/index.html
+
+### SAP Help Portal
+- **Scripting Documentation**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/6a4db9a9c8634bcb86cecbf1f1dbbf8e.html
+- **Performance Best Practices**: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/fbe339efda1241b5a3f46cf17f54cdff.html
+
+### Learning Resources
+- **SAP Learning Journey**: https://learning.sap.com/learning-journeys/acquiring-basic-scripting-skills-to-extend-stories-in-sap-analytics-cloud
+- **SAP Developer Tutorials**: https://developers.sap.com/tutorials/sac-analytics-designer-create-1-create.html
+
+### Community Resources
+- **SAP Community - SAC**: https://community.sap.com/topics/cloud-analytics
+- **Code Snippets**: https://www.denisreis.com/sap-analytics-cloud-javascript-api-code-snippets/
+
+---
+
+## Bundled Reference Files
+
+This skill includes detailed reference documentation (52 files):
+
+**Core APIs**:
+1. **references/api-datasource.md**: Complete DataSource API (36+ methods)
+2. **references/api-widgets.md**: Chart, Table, Input Controls, GeoMap APIs
+3. **references/api-planning.md**: Planning API, version management, data locking
+4. **references/api-application.md**: Application object, utilities, events
+
+**Advanced APIs**:
+5. **references/api-calendar-bookmarks.md**: Calendar integration, Bookmarks, Linked Analysis, Timer API
+6. **references/api-advanced-widgets.md**: Container widgets, Layout API, R Visualization, Custom Widgets, Navigation
+7. **references/api-data-operations.md**: Range/exclude filters, dimension properties, hierarchies, members, DataSource info
+
+**Scripting Fundamentals**:
+8. **references/scripting-language-fundamentals.md**: Type system, variables, control flow, loops, operators, built-in objects, arrays, method chaining, security
+9. **references/debugging-browser-tools.md**: Console logging, browser debugging, debug mode, breakpoints, R visualization debugging, performance logging
+
+**Best Practices**:
+10. **references/best-practices-developer.md**: Naming conventions, layout organization, script annotation, responsive design
+11. **references/best-practices-planning-stories.md**: Multi-story architecture, entry point design, navigation scripting, user assistance patterns
+
+**Embedding & Migration**:
+12. **references/iframe-embedding-lumira-migration.md**: iFrame PostMessage communication, Lumira Designer migration guidance
+
+**2025.23 Addenda (Help Portal extracts)**:
+13. **references/comments.md** – Comments APIs for widgets/table cells  
+14. **references/search-to-insight.md** – Search to Insight technical object  
+15. **references/time-series-forecast.md** – Forecast enablement on charts  
+16. **references/composites-scripting.md** – Add scripts to composites  
+17. **references/composites-restrictions.md** – Composite restrictions  
+18. **references/blending-limitations.md** – Blending unsupported APIs and notes  
+19. **references/analytics-designer-restrictions.md** – Known restrictions  
+20. **references/geomap.md** – Geo map quick menus and scripting  
+21. **references/text-widget.md** – Dynamic text & text widget APIs  
+22. **references/smart-grouping.md** – Smart grouping APIs  
+23. **references/explorer-smart-insights.md** – Explorer and Smart Insights  
+24. **references/auth-required.md** – Auth-required Help Portal page  
+25. **references/script-editor.md** – Script editor basics  
+26. **references/value-help.md** – Value help/auto-complete in editor  
+27. **references/script-variables.md** – Global/script variables & URL params  
+28. **references/script-objects.md** – Reusable script objects  
+29. **references/pattern-functions.md** – Pattern-based functions (ML)  
+30. **references/optimize-type-libraries.md** – Optimize type libraries  
+31. **references/automatic-refactoring.md** – Automatic refactoring tools  
+32. **references/debug-scripts.md** – Debug mode & breakpoints  
+33. **references/check-errors.md** – Errors panel usage  
+34. **references/check-references.md** – Reference checking  
+35. **references/script-performance-popup.md** – Script performance analysis  
+36. **references/input-fields.md** – Input fields/text areas  
+37. **references/sliders.md** – Sliders and range sliders  
+38. **references/bind-widget-values.md** – Bind widget values to variables  
+39. **references/bookmark-settings.md** – Bookmark settings/APIs  
+40. **references/bookmark-set-tech-object.md** – Bookmark set technical object  
+41. **references/calendar-integration-tech-object.md** – Calendar integration tech object  
+42. **references/data-change-insights-tech-object.md** – Data change insights tech object  
+43. **references/export-pdf-tech-object.md** – Export to PDF tech object  
+44. **references/export-ppt-tech-object.md** – Export to PowerPoint tech object  
+45. **references/text-pool-tech-object.md** – Text pool tech object  
+46. **references/timer-tech-object.md** – Timer tech object  
+47. **references/planning-model-tech-object.md** – Planning model tech object  
+48. **references/data-actions-tech-object.md** – Data actions tech object  
+49. **references/multi-actions-tech-object.md** – Multi actions tech object  
+50. **references/odata-service.md** – OData service technical object  
+51. **references/on-after-data-entry-process.md** – Table onAfterDataEntryProcess event  
+52. **references/memberinfo-performance.md** – MemberInfo performance guidance
+
+**Templates** (40 ready-to-use patterns):
+1. **templates/common-patterns.js**: 40 patterns - filtering, data access, loops, arrays, R visualization, type conversion, etc.
+2. **templates/planning-operations.js**: Version management, workflows, data actions
+
+---
+
+## Version Compatibility
+
+- **Minimum SAC Version**: 2025.23
+- **API Reference Version**: 2025.23
+- **Analytics Designer**: Fully supported
+- **Optimized Story Experience**: Fully supported (Advanced Mode)
+
+**Note**: Analytics Designer is being strategically replaced by Advanced Mode in Optimized Story Experience. Both share similar scripting APIs.
+
+---
+
+## Instructions for Claude
+
+When assisting with SAC scripting:
+
+1. **Use correct API syntax**: Reference official API documentation
+2. **Prefer getResultSet()**: Over getMembers() for performance
+3. **Batch operations**: Use pause/resume refresh pattern
+4. **Include error handling**: Use try-catch for robust code
+5. **Follow naming conventions**: CamelCase for variables, descriptive names
+6. **Test incrementally**: Suggest testing every 5-10 lines
+7. **Link to documentation**: Provide relevant SAP Help links
+8. **Consider performance**: Avoid heavy operations in onInitialization
+
+When writing scripts:
+- Start with variable declarations
+- Use console.log() for debugging
+- Cache DataSource references
+- Handle empty selections gracefully
+- Use Application.showBusyIndicator() for long operations
+
+For troubleshooting:
+- Check browser console (F12)
+- Verify widget names in Outline
+- Confirm DataSource is connected
+- Test with simple console.log first
+- Use `;debug=true` URL parameter
+
+---
+
+**License**: MIT
+**Version**: 1.6.0
+**Maintained by**: SAP Skills Maintainers
+**Repository**: https://github.com/secondsky/sap-skills

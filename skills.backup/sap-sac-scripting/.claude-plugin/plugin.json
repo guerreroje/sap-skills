@@ -1,0 +1,23 @@
+{
+  "name": "sap-sac-scripting",
+  "description": "Comprehensive SAC scripting skill for Analytics Designer and Optimized Story Experience. Use when building analytic applications, planning models, or enhanced stories. Covers DataSource API, Chart/Table manipulation, Planning operations, Calendar integration, Bookmarks, Timer API, Container widgets, Layout API, R Visualizations, Custom Widgets, Navigation, variables, event handlers, debugging, performance optimization, and 2025.23 features: comments APIs, Search to Insight, smart grouping, time-series forecast, geo map quick menus, Explorer/Smart Insights, composites scripting. Includes 40 code templates.",
+  "version": "2.1.0",
+  "author": {
+    "name": "SAP Skills Maintainers",
+    "email": "maintainers@example.com"
+  },
+  "license": "GPL-3.0",
+  "repository": "https://github.com/secondsky/sap-skills",
+  "keywords": [
+    "analytics",
+    "api",
+    "dashboard",
+    "data",
+    "sac",
+    "sap",
+    "sap-sac-scripting",
+    "scripting",
+    "visualization"
+  ],
+  "category": "data-analytics"
+}

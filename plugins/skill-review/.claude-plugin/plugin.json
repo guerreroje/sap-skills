@@ -1,0 +1,25 @@
+{
+  "name": "skill-review",
+  "description": "Comprehensive deep-dive documentation review process for sap-skills repository. Use this skill when investigating suspected issues in a skill, major package version updates detected, skill last verified >3 months ago, before marketplace submission, or when examples seem outdated. Performs systematic 14-phase audit: pre-review setup, standards compliance (exact YAML validation rules), official docs verification (Context7/WebFetch), code examples audit, cross-file consistency, dependency version checks, progressive disclosure architecture review, conciseness & degrees of freedom audit, anti-pattern detection, testing & evaluation review, security & MCP considerations, issue categorization by severity, fix implementation with minimal user questions, and post-fix verification. Enforces official Claude best practices including name validation (64 chars, lowercase/hyphens), description limits (1024 chars), SKILL.md line count (<500 lines), third-person writing style, progressive disclosure depth (one level), and multi-model testing verification. Prevents outdated documentation, incorrect API patterns, contradictory examples, version drift, broken links, YAML errors, schema inconsistencies, missing dependencies, Windows paths, inconsistent terminology, and over-explained content. Combines automated technical checks (YAML syntax, package versions, link validation, TODO markers) with AI-powered verification. Auto-fixes unambiguous issues, asks user only for architectural decisions or breaking change confirmations. Outputs severity-classified issue list (🔴 Critical / 🟡 High / 🟠 Medium / 🟢 Low) with evidence citations (GitHub URLs, official docs, changelogs) and detailed remediation plan. Keywords: skill review, skill audit, documentation review, version check, api verification, package updates, skill maintenance, quality assurance, standards compliance, breaking changes, github verification, official docs check, context7 verification, skill-review, audit-skill, review-documentation, check-skill-currency, verify-skill-accuracy, outdated skill, skill needs update, verify api methods, package version drift, stale documentation, contradictory examples, broken links check, yaml frontmatter validation, skill discovery test, production testing, sap skill review",
+  "version": "2.1.0",
+  "author": {
+    "name": "SAP Skills Maintainers",
+    "email": "maintainers@example.com"
+  },
+  "license": "GPL-3.0",
+  "repository": "https://github.com/secondsky/sap-skills",
+  "keywords": [
+    "api",
+    "automation",
+    "cli",
+    "development",
+    "production",
+    "productivity",
+    "review",
+    "skill",
+    "skill-review",
+    "tools",
+    "yaml"
+  ],
+  "category": "tooling"
+}
