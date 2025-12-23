@@ -248,7 +248,6 @@ Contributions welcome! Please:
 The `main` branch is protected to ensure code quality. All changes require:
 
 **Automated Requirements:**
-- ✅ Quality checks pass (`validate-skills` workflow)
 - ✅ Code owner review (@secondsky)
 - ✅ All review comments resolved
 
