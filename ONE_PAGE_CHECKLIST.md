@@ -1,260 +1,184 @@
-# Skill Compliance Checklist ✅
+# SAP Skill Quality Checklist
 
-**Print this page and check off items as you build your skill.**
+**For general plugin development**, use **plugin-dev skills** FIRST.
 
----
-
-## PRE-BUILD CHECKLIST
-
-Before starting a new skill, verify:
-
-- [ ] Read [START_HERE.md](START_HERE.md) for workflow overview
-- [ ] Skill doesn't already exist in this repo
-- [ ] Checked official Anthropic skills: [https://github.com/anthropics/skills](https://github.com/anthropics/skills)
-- [ ] Identified target use cases (3-5 concrete examples)
-- [ ] Verified this is atomic (one domain, not a bundle)
+This checklist covers **SAP-specific quality standards** only.
 
 ---
 
-## RESEARCH CHECKLIST
+## Pre-Build Checklist
 
-Research completed before building:
+**General Plugin Development** (use plugin-dev):
+- [ ] Used plugin-dev:skill-development for basic skill creation
+- [ ] Used plugin-dev:plugin-structure for directory setup
+- [ ] YAML frontmatter created with plugin-dev guidance
 
-- [ ] Reviewed official SAP documentation
-- [ ] Verified latest SDK/package versions
-- [ ] Searched SAP Community for common problems
-- [ ] Built working example project from scratch
-- [ ] Documented all errors encountered and fixes
+**SAP-Specific Validation**:
+- [ ] Skill is SAP-specific (not general development)
+- [ ] Identified skill family (Tooling/BTP/UI/Data/Core)
+- [ ] Checked for existing related SAP skills
 
 ---
 
-## YAML FRONTMATTER CHECKLIST
+## SAP SDK Version Tracking
 
-`SKILL.md` frontmatter is complete and correct:
+**Package Versions**:
+- [ ] SAP SDK versions documented in metadata section
+- [ ] Version format: `cap_version: "@sap/cds 9.4.x"`
+- [ ] Last verified date current (<90 days): `last_verified: "2025-12-28"`
+- [ ] All package.json dependencies use latest stable versions
 
-- [ ] **name**: Present, lowercase hyphen-case (e.g., `my-skill-name`)
-- [ ] **name**: Matches directory name exactly
-- [ ] **description**: Present and comprehensive (3+ sentences)
-- [ ] **description**: Uses third-person ("This skill should be used when..." not "Use this skill when...")
-- [ ] **description**: Includes "Use when" scenarios
-- [ ] **description**: Includes keywords (technologies, use cases, error messages)
-- [ ] **license**: Present (e.g., `GPL-3.0` or `Complete terms in LICENSE.txt`)
-- [ ] **allowed-tools** (optional): Included if pre-approving tools
-- [ ] **metadata** (optional): Used if custom fields needed
+**Version Sources**:
+- [ ] Verified against official SAP release notes
+- [ ] Checked npm registry for latest versions
+- [ ] Tested with documented versions
 
-**Example:**
-```yaml
 ---
-name: sap-cap-nodejs
-description: |
-  This skill provides comprehensive knowledge for SAP Cloud Application Programming Model
-  with Node.js runtime. It should be used when building CAP services, configuring CDS models,
-  or encountering deployment issues on SAP BTP.
 
-  Keywords: SAP CAP, CDS, Node.js, BTP, Cloud Foundry, HANA, OData
-license: GPL-3.0
----
+## Known Issues Documentation
+
+**SAP-Specific Issues**:
+- [ ] Common SAP errors documented with error codes
+- [ ] SAP Note numbers cited where applicable
+- [ ] GitHub issue links for known bugs
+- [ ] Workarounds provided with clear instructions
+
+**Example Format**:
+```markdown
+| Issue | Solution | Source |
+|-------|----------|--------|
+| D1_ERROR 1105 | Use batch API | SAP Note 3456789 |
 ```
 
 ---
 
-## SKILL.MD BODY CHECKLIST
+## Production Testing
 
-Skill instructions are clear and actionable:
-
-- [ ] Written in **imperative/infinitive form** (verb-first: "To do X, run Y")
-- [ ] NOT written in second person (avoid "you should")
-- [ ] Quick start section (< 5 minutes to first result)
-- [ ] Step-by-step instructions with code examples
-- [ ] Configuration examples with actual values
-- [ ] Critical rules section ("Always Do" / "Never Do")
-- [ ] Common issues section with sources (SAP Notes, GitHub issues, etc.)
-- [ ] Dependencies clearly listed
-- [ ] References to bundled resources (scripts/, references/, assets/)
-- [ ] Official documentation links included
-- [ ] Package versions documented with "Last Verified" date
+**Real SAP Environment Testing**:
+- [ ] Tested with actual SAP BTP account (not just localhost)
+- [ ] Verified with real SAP systems (HANA, S/4HANA, etc.)
+- [ ] Templates work in production environments
+- [ ] Error catalog validated against real errors
+- [ ] Deployment tested end-to-end
 
 ---
 
-## BUNDLED RESOURCES CHECKLIST
+## Marketplace Integration
 
-Resources are properly organized:
+**Cross-References**:
+- [ ] Related SAP skills identified and documented
+- [ ] Cross-references added to Related Skills section
+- [ ] Example:
+  ```markdown
+  ## Related Skills
+  - **sap-fiori-tools**: Use for UI layer development
+  - **sap-btp-cloud-platform**: Use for deployment
+  ```
 
-- [ ] **scripts/**: Executable code placed here (Python, Bash, etc.)
-- [ ] **references/**: Documentation files placed here (schemas, guides)
-- [ ] **assets/**: Output files placed here (templates, images, fonts)
-- [ ] All resources referenced in SKILL.md body
-- [ ] Scripts have proper permissions (chmod +x)
-- [ ] No hardcoded secrets or credentials
-- [ ] Templates are complete and tested
-- [ ] Documentation is current and accurate
-
----
-
-## README.MD CHECKLIST
-
-Quick reference is complete:
-
-- [ ] Status badge present (Production Ready / Beta / Experimental)
-- [ ] Last Updated date current
-- [ ] Production tested evidence included
-- [ ] Auto-trigger keywords comprehensive
-  - [ ] Primary keywords (3-5 exact tech names)
-  - [ ] Secondary keywords (5-10 related terms)
-  - [ ] Error-based keywords (2-5 common errors)
-- [ ] "What This Skill Does" section clear
-- [ ] "Known Issues Prevented" table with sources
-- [ ] "When to Use / Not Use" sections present
-- [ ] Token efficiency metrics documented
-- [ ] Quick usage example included
+**Category Assignment**:
+- [ ] Correct category: Tooling / BTP / UI / Data / Core
+- [ ] Keywords include SAP technology names
+- [ ] Description mentions SAP-specific use cases
 
 ---
 
-## TESTING CHECKLIST
+## Error Catalog Pattern
 
-Skill works in practice:
-
-- [ ] Tested auto-discovery: Claude suggests skill when relevant
-- [ ] Built example project using skill templates
-- [ ] All templates work without errors
-- [ ] All scripts execute successfully
-- [ ] Configuration files valid
-- [ ] Package versions correct
+**SAP Error Documentation**:
+- [ ] Common error messages documented
+- [ ] Error codes included (BTP errors, HANA errors, etc.)
+- [ ] Solutions provided with step-by-step instructions
+- [ ] Links to SAP documentation
 
 ---
 
-## COMPLIANCE CHECKLIST
+## Comprehensive Quality Review
 
-Skill meets official standards:
+**skill-review Plugin** (14-phase audit):
+- [ ] Run: `/review-skill <skill-name>`
+- [ ] All 🔴 Critical issues resolved
+- [ ] All 🟡 High issues resolved
+- [ ] 🟠 Medium and 🟢 Low issues reviewed
 
-- [ ] Compared against https://github.com/anthropics/skills/blob/main/agent_skills_spec.md
-- [ ] No deprecated patterns used
-- [ ] No non-standard frontmatter fields (except allowed-tools, metadata)
-- [ ] Writing style consistent (imperative, third-person)
-
----
-
-## DOCUMENTATION CHECKLIST
-
-All required documentation present:
-
-- [ ] SKILL.md complete
-- [ ] README.md complete
-- [ ] LICENSE field in frontmatter
-- [ ] Templates tested and documented
-- [ ] Scripts documented with usage examples
-- [ ] References accurate and current
-- [ ] Links to official docs work
-- [ ] Version numbers current
-- [ ] "Last Updated" date accurate
+**Covers**:
+- Standards compliance (YAML validation)
+- Official docs verification (Context7/WebFetch)
+- Code examples audit
+- Dependency version checks
+- Anti-pattern detection
 
 ---
 
-## QUALITY GATES CHECKLIST
+## Automation & Manifest Generation
 
-Before committing:
+**After Skill Creation**:
+- [ ] Run: `./scripts/sync-plugins.sh`
+- [ ] Verify plugin.json generated correctly
+- [ ] Check marketplace.json updated with new skill
+- [ ] Validate cross-references appear
 
-- [ ] Read entire SKILL.md out loud (catches awkward phrasing)
-- [ ] Built example project in fresh directory
-- [ ] No errors in console during development
-- [ ] No warnings about deprecated packages
-- [ ] Git status clean (no untracked files)
-- [ ] Skill name matches directory name
-- [ ] All relative paths correct
-- [ ] No placeholder text (TODO, FIXME, etc.)
-- [ ] No debug code or console.log statements
-
----
-
-## GIT CHECKLIST
-
-Ready to commit:
-
-- [ ] Added skill files: `git add skills/my-skill/`
-- [ ] Commit message descriptive with:
-  - [ ] What the skill does
-  - [ ] Token savings metric
-  - [ ] Errors prevented count
-  - [ ] Production testing evidence
-- [ ] Checked git diff before committing
-- [ ] No sensitive data in commit
-- [ ] All files have correct permissions
-
-**Commit Template**:
+**Verification**:
 ```bash
-git commit -m "Add sap-cap-nodejs skill for CAP development
+# Check plugin.json exists
+ls plugins/<skill-name>/.claude-plugin/plugin.json
 
-- Provides CAP Node.js setup, CDS modeling, deployment
-- Token savings: ~65%
-- Errors prevented: 8
-- Package versions: @sap/cds@X.Y.Z
-
-Production tested: [evidence/link]"
+# Check marketplace.json includes skill
+jq '.plugins | map(.name)' .claude-plugin/marketplace.json | grep <skill-name>
 ```
 
 ---
 
-## POST-COMMIT CHECKLIST
+## Git Commit Checklist
 
-After pushing:
+**Files to Include**:
+- [ ] plugins/<skill-name>/ (all skill files)
+- [ ] .claude-plugin/marketplace.json (updated registry)
+- [ ] Both plugin.json files (plugin-level + skill-level)
 
-- [ ] Pushed to GitHub: `git push`
-- [ ] Skill appears in repo
-- [ ] README renders correctly on GitHub
-- [ ] Links work in GitHub UI
+**Commit Message Template**:
+```
+Add <skill-name> for [SAP technology]
+
+- Provides [key features]
+- SAP SDK version: <version>
+- Tested with: [production evidence]
+- Related skills: [cross-references]
+
+Production tested: [evidence]
+```
 
 ---
 
-## MAINTENANCE CHECKLIST
+## Quarterly Maintenance
 
-Quarterly (every 3 months):
-
-- [ ] Check for SAP SDK updates
-- [ ] Review SAP Community for skill-related problems
-- [ ] Re-test skill in fresh environment
-- [ ] Update "Last Verified" date if still current
+**Every 3 Months**:
+- [ ] Check SAP SDK updates (npm outdated)
+- [ ] Review SAP release notes for breaking changes
+- [ ] Re-test skill in production environment
+- [ ] Update last_verified date if current
 - [ ] Update package versions if needed
-- [ ] Document breaking changes (if any)
-- [ ] Check official Anthropic skills for new patterns
+- [ ] Re-run skill-review plugin
 
 ---
 
-## PERIODIC REVIEW ⏰
+## Final Sign-Off
 
-For maintaining skill quality over time:
-
-- [ ] Use `skill-review` skill for comprehensive audit
-- [ ] After major SAP updates: Check release notes + run review
-- [ ] Address all 🔴 Critical and 🟡 High issues found
-- [ ] Update "Last Verified" date in metadata after review
-
----
-
-## FINAL SIGN-OFF
-
-I certify that:
-
-- [ ] ✅ All checklists above are complete
-- [ ] ✅ Skill tested and working in production
-- [ ] ✅ Compliant with official Anthropic standards
-- [ ] ✅ Documentation accurate and current
-- [ ] ✅ Zero errors from documented issues
-- [ ] ✅ Ready for production use
-
-**Skill Name**: ______________________
-**Date**: ______________________
-**Builder**: ______________________
-**Verified By**: ______________________
+✅ **I certify**:
+- [ ] All SAP-specific checklists complete
+- [ ] Used plugin-dev for general plugin development
+- [ ] Skill tested in production SAP environment
+- [ ] skill-review plugin passed (all critical issues resolved)
+- [ ] Marketplace integration complete
+- [ ] Automation scripts run successfully
 
 ---
+
+**Skill Name**: _______________
+**Date**: _______________
+**Verified By**: _______________
 
 **If all boxes checked: SHIP IT! 🚀**
 
-**If any boxes unchecked**: Go back and complete those items before committing.
-
 ---
 
-**Quick Links**:
-- [START_HERE.md](START_HERE.md) - Navigation
-- [QUICK_WORKFLOW.md](QUICK_WORKFLOW.md) - Step-by-step process
-- [CLAUDE.md](CLAUDE.md) - Project context
+**Last Updated**: 2025-12-28

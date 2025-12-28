@@ -515,6 +515,8 @@ This skill references:
 - **Full Process Guide**: `planning/SKILL_REVIEW_PROCESS.md`
 - **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
 - **Example Audit**: See process guide Appendix B (better-auth v2.0.0)
+- **Plugin Development**: Use official **plugin-dev skills** for general plugin development (YAML, structure, hooks, etc.)
+- **SAP-Specific Patterns**: See `SAP_DEVELOPMENT_GUIDE.md` for marketplace infrastructure, SDK versioning, and quality standards
 
 ---
 
