@@ -592,6 +592,7 @@ For transport procedures, see `references/content-transport.md`.
 
 **MCP Integration:**
 14. **`references/mcp-tools-reference.md`** - Complete MCP tool reference, 45 tools across 8 categories, API documentation, authentication patterns
+15. **`references/mcp-use-cases.md`** - 8 real-world use cases with personas, time savings, and ROI analysis ($159K+/year savings)
 
 ### Plugin Components
 

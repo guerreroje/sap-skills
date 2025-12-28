@@ -8,9 +8,10 @@ description: |
   Node.js and Java runtimes, event handlers, OData services, and CAP plugins.
 license: GPL-3.0
 metadata:
-  version: "2.0.0"
-  last_verified: "2025-11-27"
+  version: "2.1.0"
+  last_verified: "2025-12-28"
   cap_version: "@sap/cds 9.4.x"
+  mcp_version: "@cap-js/mcp-server 0.0.3+"
 ---
 
 # SAP CAP-Capire Development Skill
@@ -88,6 +89,26 @@ service CatalogService @(path: '/browse') {
   action submitOrder(book: Books:ID, quantity: Integer) returns String;
 }
 ```
+
+## MCP Integration
+
+This skill integrates with the official CAP MCP (Model Context Protocol) server, providing AI agents with live access to your project's compiled CDS model and CAP documentation.
+
+**Available MCP Tools**:
+- `search_model` - Fuzzy search for CDS entities, services, actions, and relationships in your compiled CSN model
+- `search_docs` - Semantic search through CAP documentation for syntax, patterns, and best practices
+
+**Key Benefits**:
+- **Instant Model Discovery**: Query your project's entities, associations, and services without reading files
+- **Context-Aware Documentation**: Find relevant CAP documentation based on semantic similarity, not keywords
+- **Zero Configuration**: No credentials or environment variables required
+- **Offline-Capable**: All searches are local (model) or cached (docs)
+
+**Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot.
+
+**Use Cases**: See [MCP Use Cases](references/mcp-use-cases.md) for real-world examples with quantified ROI (~$131K/developer/year time savings).
+
+**Agent Integration**: The specialized agents (cap-cds-modeler, cap-service-developer, cap-project-architect, cap-performance-debugger) automatically use these MCP tools as part of their workflows.
 
 ## Project Structure
 ```
@@ -240,7 +261,7 @@ entity Books { ... }
 
 ## Bundled Resources
 
-### Reference Documentation (20 files)
+### Reference Documentation (22 files)
 1. **references/annotations-reference.md** - Complete UI annotations reference (10K lines)
 2. **references/cdl-syntax.md** - Complete CDL syntax reference (503 lines)
 3. **references/cql-queries.md** - CQL query language guide
@@ -257,10 +278,12 @@ entity Books { ... }
 14. **references/plugins-reference.md** - CAP plugins and extensions
 15. **references/tools-complete.md** - Complete CLI tools reference
 16. **references/consuming-services-deployment.md** - Service consumption patterns
-17. **references/service-definitions.md** - Service definition patterns *(new)*
-18. **references/event-handlers-patterns.md** - Event handling patterns *(new)*
-19. **references/cql-patterns.md** - CQL usage patterns *(new)*
-20. **references/cli-complete.md** - Complete CLI reference *(new)*
+17. **references/service-definitions.md** - Service definition patterns
+18. **references/event-handlers-patterns.md** - Event handling patterns
+19. **references/cql-patterns.md** - CQL usage patterns
+20. **references/cli-complete.md** - Complete CLI reference
+21. **references/mcp-integration.md** - MCP server setup and usage guide *(new)*
+22. **references/mcp-use-cases.md** - Real-world MCP scenarios with quantified ROI *(new)*
 
 ### Templates (8 files)
 1. **templates/bookshop-schema.cds** - Complete data model example
@@ -311,7 +334,8 @@ cds version               # Show version info
 - Don't write custom OData providers
 
 ## Version Information
-- **Skill Version**: 2.0.0
+- **Skill Version**: 2.1.0
 - **CAP Version**: @sap/cds 9.4.x
-- **Last Verified**: 2025-11-27
+- **MCP Version**: @cap-js/mcp-server 0.0.3+
+- **Last Verified**: 2025-12-28
 - **License**: GPL-3.0

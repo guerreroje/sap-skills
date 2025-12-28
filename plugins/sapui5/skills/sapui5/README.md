@@ -184,10 +184,20 @@ sap gateway, sap netweaver, sap s/4hana, sap btp, sap cloud platform, sap fiori 
 
 ## Version
 
-- **Skill Version**: 1.4.0
+- **Skill Version**: 2.0.0
 - **Minimum UI5 Version**: 1.120.0
-- **Last Updated**: 2025-11-27
+- **Last Updated**: 2025-12-28
 - **Status**: Production
+
+### What's New in v2.0.0 (2025-12-28) - MCP Integration & Plugin-Dev Best Practices
+- ✅ **MCP Integration**: Official @ui5/mcp-server with 9 live tools
+- ✅ **4 Specialized Agents**: Scaffolding, API Explorer, Code Quality, Migration
+- ✅ **5 Slash Commands**: /ui5-api, /ui5-scaffold, /ui5-lint, /ui5-version, /ui5-mcp-tools
+- ✅ **Validation Hooks**: PreToolUse and PostToolUse quality gates (user approval)
+- ✅ **15 Reference Files**: +4 new guides (MCP integration, scaffolding, migration, quality)
+- ✅ **User Settings**: Configurable preferences via sapui5.local.md
+- ✅ **Graceful Degradation**: Full functionality without MCP (reference file fallback)
+- ✅ **Keywords**: +20 new auto-trigger keywords for agents and commands
 
 ### What's New in v1.4.0
 - ✅ Major SKILL.md optimization: 855 → 452 lines (47% reduction)

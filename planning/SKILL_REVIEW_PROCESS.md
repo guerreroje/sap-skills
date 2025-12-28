@@ -191,7 +191,6 @@ metadata:
   last_verified: 2025-11-08
   production_tested: [evidence]
   package_version: X.X.X
-  token_savings: ~XX%
   errors_prevented: XX
   official_docs: [url]
 ```

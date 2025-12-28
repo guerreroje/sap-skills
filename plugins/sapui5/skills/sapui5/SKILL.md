@@ -6,12 +6,16 @@ description: |
   Keywords: sapui5, ui5, openui5, sap ui5, ui5 framework, sapui5 framework, ui5 application, sapui5 app, ui5 development, sapui5 development, ui5 tooling, ui5 cli, Component.js, manifest.json, xml view, data binding, odata v2, odata v4, fiori elements, sap.m controls, mvc pattern, routing, navigation, qunit, opa5, testing, mock server, sap.ui.mdc, mdc table, typescript, accessibility, security, performance, ui5 inspector, ui5 troubleshooting
 license: GPL-3.0
 metadata:
-  version: 1.4.0
-  last_verified: 2025-11-27
+  version: 2.0.0
+  last_verified: 2025-12-28
   framework_version: "1.120.0+"
   documentation_source: [https://github.com/SAP-docs/sapui5](https://github.com/SAP-docs/sapui5)
   documentation_files_analyzed: 1416
-  reference_files: 11
+  reference_files: 15
+  mcp_integration: true
+  mcp_tools: 9
+  specialized_agents: 4
+  slash_commands: 5
   status: production
 ---
 
@@ -26,6 +30,21 @@ metadata:
 - **sap-api-style**: Use when documenting UI5 application APIs or following REST/OData standards
 
 Comprehensive skill for building enterprise applications with SAP UI5 framework.
+
+## Using MCP Tools (New in v2.0.0)
+
+This skill integrates with the official **@ui5/mcp-server** for live development tools:
+
+- **Scaffolding**: Create projects with `ui5-app-scaffolder` agent or `/ui5-scaffold` command
+- **API Reference**: Lookup controls with `ui5-api-explorer` agent or `/ui5-api` command
+- **Code Quality**: Run linter with `ui5-code-quality-advisor` agent or `/ui5-lint` command
+- **Migration**: Upgrade versions with `ui5-migration-specialist` agent
+- **Version Info**: Check releases with `/ui5-version` command
+- **Tool Catalog**: List all MCP tools with `/ui5-mcp-tools` command
+
+For setup and troubleshooting, see [references/mcp-integration.md](references/mcp-integration.md).
+
+**Graceful Fallback**: All features work without MCP by using reference files and built-in templates.
 
 ## Table of Contents
 

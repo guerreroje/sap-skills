@@ -10,7 +10,6 @@ metadata:
   version: 2.0.0
   last_verified: 2025-12-27
   sac_version: "2025.21"
-  token_savings: ~75%
   errors_prevented: 25+
   official_docs:
     - [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/0ac8c6754ff84605a4372468d002f2bf/75311f67527c41638ceb89af9cd8af3e.html](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/0ac8c6754ff84605a4372468d002f2bf/75311f67527c41638ceb89af9cd8af3e.html)

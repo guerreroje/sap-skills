@@ -158,13 +158,13 @@ var theme = Application.getTheme();
 | Scripting Scope | Application-wide | Story-scoped |
 
 **Reference Files to Consult:**
-- `references/api-datasource.md` - DataSource API (36+ methods)
-- `references/api-widgets.md` - Chart, Table, Input Controls
-- `references/api-planning.md` - Planning API
-- `references/api-application.md` - Application object
-- `references/api-calendar-bookmarks.md` - Calendar, Bookmarks, Timer
-- `references/api-advanced-widgets.md` - Containers, R Viz, Custom Widgets
-- `references/api-data-operations.md` - Filters, hierarchies, members
+- `../skills/sap-sac-scripting/references/api-datasource.md` - DataSource API (36+ methods)
+- `../skills/sap-sac-scripting/references/api-widgets.md` - Chart, Table, Input Controls
+- `../skills/sap-sac-scripting/references/api-planning.md` - Planning API
+- `../skills/sap-sac-scripting/references/api-application.md` - Application object
+- `../skills/sap-sac-scripting/references/api-calendar-bookmarks.md` - Calendar, Bookmarks, Timer
+- `../skills/sap-sac-scripting/references/api-advanced-widgets.md` - Containers, R Viz, Custom Widgets
+- `../skills/sap-sac-scripting/references/api-data-operations.md` - Filters, hierarchies, members
 
 **Official Documentation Links:**
 - Analytics Designer API: https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/

@@ -5,7 +5,7 @@
   "repository": "https://github.com/secondsky/sap-skills",
   "metadata": {
     "version": "2.1.0",
-    "last_updated": "2025-12-27",
+    "last_updated": "2025-12-28",
     "total_skills": 33,
     "categories": [
       "abap",
@@ -454,7 +454,20 @@
         "sap-cap-capire",
         "sql"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/cap-cds-modeler.md",
+        "./agents/cap-service-developer.md",
+        "./agents/cap-performance-debugger.md",
+        "./agents/cap-project-architect.md"
+      ],
+      "commands": [
+        "./commands/cap-setup-wizard.md",
+        "./commands/cap-troubleshooter.md",
+        "./commands/cap-mcp-tools.md",
+        "./commands/cap-cds-reference.md",
+        "./commands/cap-deployment-checklist.md"
+      ]
     },
     {
       "name": "sap-cloud-sdk-ai",
@@ -510,7 +523,8 @@
         "./commands/datasphere-cli.md",
         "./commands/datasphere-connection-guide.md",
         "./commands/datasphere-space-template.md",
-        "./commands/datasphere-view-template.md"
+        "./commands/datasphere-view-template.md",
+        "./commands/datasphere-mcp-tools.md"
       ]
     },
     {
@@ -743,7 +757,20 @@
         "typescript",
         "xml"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/ui5-migration-specialist.md",
+        "./agents/ui5-api-explorer.md",
+        "./agents/ui5-code-quality-advisor.md",
+        "./agents/ui5-app-scaffolder.md"
+      ],
+      "commands": [
+        "./commands/ui5-mcp-tools.md",
+        "./commands/ui5-scaffold.md",
+        "./commands/ui5-lint.md",
+        "./commands/ui5-api.md",
+        "./commands/ui5-version.md"
+      ]
     },
     {
       "name": "sapui5-cli",

@@ -114,11 +114,11 @@ console.log("Filter applied successfully");
 5. Check Network tab for failed backend calls
 
 **Reference Files to Consult:**
-- `references/debug-scripts.md` - Debug patterns
-- `references/debugging-browser-tools.md` - DevTools usage
-- `references/check-errors.md` - Error detection
-- `references/api-datasource.md` - DataSource methods
-- `references/api-widgets.md` - Widget methods
+- `../skills/sap-sac-scripting/references/debug-scripts.md` - Debug patterns
+- `../skills/sap-sac-scripting/references/debugging-browser-tools.md` - DevTools usage
+- `../skills/sap-sac-scripting/references/check-errors.md` - Error detection
+- `../skills/sap-sac-scripting/references/api-datasource.md` - DataSource methods
+- `../skills/sap-sac-scripting/references/api-widgets.md` - Widget methods
 
 **Output Format:**
 

@@ -90,6 +90,20 @@ All three agents have access to relevant MCP tools:
 
 - `/datasphere-mcp-tools` - List all MCP tools
 
+### Real-World Use Cases
+
+See [mcp-use-cases.md](references/mcp-use-cases.md) for 8 comprehensive use cases demonstrating:
+- **The Monday Morning Health Check**: 45 min/day saved for Data Operations Managers
+- **Data Lineage Inspection**: 3 hours saved per investigation for Data Engineers
+- **Pre-Analytics Data Quality Audit**: 2 hours saved per project for Data Analysts
+- **The Onboarding Speedrun**: 2 days saved for New Data Engineers
+- **The Marketplace Shopping Spree**: 1 hour saved per evaluation for Analytics Team Leads
+- **The Security Audit**: 4 hours saved per audit for Data Governance Managers
+- **The Performance Troubleshooter**: 1.5 hours saved per incident for Data Platform Engineers
+- **Cross-Functional Collaboration**: 3 hours saved per issue for Business Analysts + Data Engineers
+
+**Total ROI**: $159,100+/year for mid-sized teams
+
 ## Keywords
 
 **Product Terms**: sap datasphere, data warehouse cloud, dwc, sap btp data warehouse, datasphere tenant, datasphere space, sap business data cloud
@@ -161,7 +175,8 @@ plugins/sap-datasphere/
             ├── catalog-governance.md
             ├── best-practices-patterns.md
             ├── whats-new-2025.md
-            └── mcp-tools-reference.md    # MCP technical reference
+            ├── mcp-tools-reference.md    # MCP technical reference
+            └── mcp-use-cases.md          # MCP real-world use cases
 ```
 
 ## Documentation Sources
@@ -179,7 +194,7 @@ This plugin provides comprehensive coverage of SAP Datasphere with:
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| Reference Files | 13 | Core documentation covering all major topics |
+| Reference Files | 15 | Core documentation covering all major topics + MCP integration |
 | Agents | 3 | Specialized agents for modeling, integration, admin |
 | Commands | 4 | Template generators and CLI reference |
 | Hooks | 2 | Validation and optimization suggestions |

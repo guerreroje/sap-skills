@@ -220,7 +220,6 @@ This repository is open source under the **GPL-3.0 License**. Contributions are 
 - All skills must be production-tested
 - Package versions must be current (verified quarterly)
 - Known issues must be documented with sources
-- Token efficiency ≥50% savings vs. manual approach
 
 ---
 
@@ -232,7 +231,6 @@ This repository is open source under the **GPL-3.0 License**. Contributions are 
 - ✅ Package versions current (checked quarterly)
 
 **Efficiency**:
-- ✅ Average 60%+ token savings
 - ✅ 100% error prevention vs. manual setup
 - ✅ Sub-5-minute skill creation with templates
 - ✅ 95%+ first-try skill discovery rate

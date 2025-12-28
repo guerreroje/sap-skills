@@ -137,7 +137,6 @@ Claude: [Uses sap-fiori-tools and sapui5 skills]
 
 ### For Projects
 
-- ✅ **60-70% token savings** vs manual implementation
 - ✅ **Production-tested** patterns and templates
 - ✅ **Current packages** (verified quarterly)
 - ✅ **SAP-specific** patterns and best practices

@@ -9,7 +9,6 @@ license: GPL-3.0
 metadata:
   version: 1.3.0
   last_verified: 2025-11-21
-  token_savings: ~80%
   errors_prevented: 31+
   official_docs: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
   triggers:

@@ -214,11 +214,11 @@ dataAction.execute().then(function(result) {
 ```
 
 **Reference Files to Consult:**
-- `references/api-planning.md` - Planning API reference
-- `references/planning-model-tech-object.md` - Planning model object
-- `references/best-practices-planning-stories.md` - Multi-story patterns
-- `references/data-actions-tech-object.md` - Data action integration
-- `templates/planning-operations.js` - Ready-to-use templates
+- `../skills/sap-sac-scripting/references/api-planning.md` - Planning API reference
+- `../skills/sap-sac-scripting/references/planning-model-tech-object.md` - Planning model object
+- `../skills/sap-sac-scripting/references/best-practices-planning-stories.md` - Multi-story patterns
+- `../skills/sap-sac-scripting/references/data-actions-tech-object.md` - Data action integration
+- `../skills/sap-sac-scripting/templates/planning-operations.js` - Ready-to-use templates
 
 **Output Format:**
 

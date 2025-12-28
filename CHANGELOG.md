@@ -118,7 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Skill-review skill usage for quality audits
   - Current status documentation (33 production-ready skills)
   - Marketplace cross-references documentation
-  - Quality standards and token efficiency metrics
+  - Quality standards and verification checklist
 
 - **migra.md**: Complete migration guide for plugin structure
   - Problem diagnosis and solution

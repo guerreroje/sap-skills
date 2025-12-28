@@ -346,3 +346,27 @@ Check MCP server status:
 # From Claude Code, use:
 /mcp
 ```
+
+## See Also
+
+**Real-World Use Cases:**
+For comprehensive examples of how these MCP tools are used in practice, see:
+- **[mcp-use-cases.md](../skills/sap-datasphere/references/mcp-use-cases.md)** - 8 detailed use cases demonstrating:
+  1. **The Monday Morning Health Check** - Operations monitoring (45 min/day saved)
+  2. **Data Lineage Inspection** - Impact analysis (3 hours saved)
+  3. **Pre-Analytics Data Quality Audit** - Data validation (2 hours saved)
+  4. **The Onboarding Speedrun** - New hire onboarding (2 days saved)
+  5. **The Marketplace Shopping Spree** - Content discovery (1 hour saved)
+  6. **The Security Audit** - Compliance review (4 hours saved)
+  7. **The Performance Troubleshooter** - Performance debugging (1.5 hours saved)
+  8. **Cross-Functional Collaboration** - Team collaboration (3 hours saved)
+
+**Total ROI:** $159,100+/year for mid-sized teams
+
+Each use case includes:
+- Persona and role
+- Quantified time savings
+- Complete conversational workflow
+- MCP tools used
+- Expected results
+- ROI analysis

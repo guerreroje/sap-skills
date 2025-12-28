@@ -31,7 +31,6 @@ metadata:
   documentation_source: [https://github.com/SAP-docs/sap-btp-integration-suite](https://github.com/SAP-docs/sap-btp-integration-suite)
   sap_help_portal: [https://help.sap.com/docs/integration-suite](https://help.sap.com/docs/integration-suite)
   status: production
-  token_savings: ~65-80%
 
 allowed-tools:
   - Read

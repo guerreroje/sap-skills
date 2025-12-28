@@ -129,11 +129,11 @@ console.timeEnd("filterOperation");
 ```
 
 **Reference Files to Consult:**
-- `references/memberinfo-performance.md` - Performance patterns
-- `references/script-performance-popup.md` - Performance logging
-- `references/api-datasource.md` - Efficient data access
-- `references/best-practices-developer.md` - General best practices
-- `references/optimize-type-libraries.md` - Type optimization
+- `../skills/sap-sac-scripting/references/memberinfo-performance.md` - Performance patterns
+- `../skills/sap-sac-scripting/references/script-performance-popup.md` - Performance logging
+- `../skills/sap-sac-scripting/references/api-datasource.md` - Efficient data access
+- `../skills/sap-sac-scripting/references/best-practices-developer.md` - General best practices
+- `../skills/sap-sac-scripting/references/optimize-type-libraries.md` - Type optimization
 
 **Output Format:**
 

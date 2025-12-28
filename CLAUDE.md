@@ -255,7 +255,6 @@ Three automation scripts maintain plugin consistency:
 - All skills must be **tested in production**
 - Package versions must be **current** (verified regularly)
 - Known issues must be **documented with sources** (SAP notes, GitHub issues, etc.)
-- Token efficiency must be **measured** (≥50% savings)
 
 ### 3. Official Standards Compliance
 - YAML frontmatter: `name` and `description` (required)
@@ -287,20 +286,6 @@ Use [ONE_PAGE_CHECKLIST.md](ONE_PAGE_CHECKLIST.md) to verify:
 - [ ] Known issues documented with sources
 - [ ] LICENSE field present (GPL-3.0)
 - [ ] README.md has auto-trigger keywords
-- [ ] Token efficiency measured (≥50%)
-
----
-
-## Token Efficiency Metrics
-
-**Why This Matters**: Skills save massive amounts of tokens by preventing trial-and-error.
-
-| Scenario | Without Skill | With Skill | Savings |
-|----------|---------------|------------|---------|
-| SAP CAP setup | ~15k tokens, 2-3 errors | ~5k tokens, 0 errors | ~67% |
-| Fiori Elements app | ~12k tokens, 1-2 errors | ~4k tokens, 0 errors | ~67% |
-| BTP deployment | ~10k tokens, 2 errors | ~4k tokens, 0 errors | ~60% |
-| **Average** | **~12k tokens** | **~4.5k tokens** | **~62%** |
 
 ---
 
@@ -396,7 +381,6 @@ Use [ONE_PAGE_CHECKLIST.md](ONE_PAGE_CHECKLIST.md) to verify:
 - ✅ Zero reported errors from documented issues
 
 **Efficiency**:
-- ✅ Average 60%+ token savings
 - ✅ 100% error prevention (vs manual setup)
 - ✅ Sub-5-minute skill creation (with templates)
 - ✅ First-try skill discovery rate: 95%+

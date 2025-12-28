@@ -149,12 +149,12 @@ Deep integration with SAP Business Data Cloud for enterprise data fabric.
 datasphere objects export \
   --space DEV \
   --objects view1,view2,model1 \
-  --output package.zip
+  --output-file package.zip
 
 # Import to target
 datasphere objects import \
   --space PROD \
-  --input package.zip \
+  --input-file package.zip \
   --overwrite
 ```
 

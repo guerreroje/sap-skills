@@ -142,6 +142,18 @@ Use this skill when:
 - @cap-js/graphql
 - OData V2 adapter
 
+### MCP Integration
+- MCP
+- Model Context Protocol
+- @cap-js/mcp-server
+- search_model
+- search_docs
+- CSN model search
+- semantic documentation search
+- AI-assisted CAP development
+- model discovery
+- CAP documentation query
+
 ### Common Errors
 - CDS compilation error
 - OData error
@@ -155,9 +167,9 @@ Use this skill when:
 
 ```
 sap-cap-capire/
-├── SKILL.md                        # Main skill file (306 lines)
+├── SKILL.md                        # Main skill file (342 lines)
 ├── README.md                       # This file
-├── references/                     # 20 comprehensive reference files
+├── references/                     # 22 comprehensive reference files
 │   ├── annotations-reference.md    # UI annotations reference (10K lines)
 │   ├── cdl-syntax.md               # Complete CDL syntax reference (503 lines)
 │   ├── cql-queries.md              # CQL query language guide
@@ -174,10 +186,12 @@ sap-cap-capire/
 │   ├── plugins-reference.md        # CAP plugins and extensions
 │   ├── tools-complete.md           # Complete CLI tools reference
 │   ├── consuming-services-deployment.md # Service consumption patterns
-│   ├── service-definitions.md      # Service definition patterns (new)
-│   ├── event-handlers-patterns.md  # Event handling patterns (new)
-│   ├── cql-patterns.md             # CQL usage patterns (new)
-│   └── cli-complete.md             # Complete CLI reference (new)
+│   ├── service-definitions.md      # Service definition patterns
+│   ├── event-handlers-patterns.md  # Event handling patterns
+│   ├── cql-patterns.md             # CQL usage patterns
+│   ├── cli-complete.md             # Complete CLI reference
+│   ├── mcp-integration.md          # MCP server setup and usage guide (new)
+│   └── mcp-use-cases.md            # Real-world MCP scenarios with ROI (new)
 └── templates/                      # 8 practical template files
     ├── bookshop-schema.cds         # Complete data model example
     ├── catalog-service.cds         # Service definition template
@@ -201,9 +215,10 @@ sap-cap-capire/
 
 ## Version Information
 
-- **Skill Version**: 2.0.0
+- **Skill Version**: 2.1.0
 - **CAP Version**: @sap/cds 9.4.x
-- **Last Verified**: 2025-11-27
+- **MCP Version**: @cap-js/mcp-server 0.0.3+
+- **Last Verified**: 2025-12-28
 
 ## License
 

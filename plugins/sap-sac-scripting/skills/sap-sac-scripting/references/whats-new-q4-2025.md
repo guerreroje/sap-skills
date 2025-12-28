@@ -41,28 +41,7 @@ Chart_1.removeVariance(varianceId);
 - Toggle between absolute and percentage variance
 - Conditional variance visibility
 
-### 2. Compass for Seamless Planning
-
-Enhanced planning integration with Compass support for seamless planning workflows.
-
-**Key Capabilities**:
-- Integrated planning scenarios
-- Cross-story planning coordination
-- Enhanced version management
-- Streamlined approval workflows
-
-**API Integration**:
-```javascript
-// Access Compass planning features
-var planning = Table_1.getPlanning();
-
-// Enhanced version operations
-planning.getSeamlessVersion();
-planning.submitForApproval();
-planning.checkApprovalStatus();
-```
-
-### 3. Data Actions Enhancements
+### 2. Data Actions Enhancements
 
 **Automatic Dimension Mapping**:
 Data actions now support automatic dimension mapping for cross-model copy operations.
@@ -269,7 +248,6 @@ Table_1.setPageSize(50);
 ## Related Resources
 
 - **Chart Variance APIs**: `references/chart-variance-apis.md`
-- **Compass Planning**: `references/compass-seamless-planning.md`
 - **Data Actions**: `references/data-actions-enhancements.md`
 - **Previous Release**: `references/whats-new-2025.23.md`
 
