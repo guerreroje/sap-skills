@@ -28,8 +28,8 @@ license: GPL-3.0
 metadata:
   version: "1.1.0"
   last_verified: "2025-11-27"
-  documentation_source: "[https://github.com/SAP-docs/sap-btp-integration-suite](https://github.com/SAP-docs/sap-btp-integration-suite)"
-  sap_help_portal: "[https://help.sap.com/docs/integration-suite](https://help.sap.com/docs/integration-suite)"
+  documentation_source: "https://github.com/SAP-docs/sap-btp-integration-suite"
+  sap_help_portal: "https://help.sap.com/docs/integration-suite"
   status: "production"
 
 allowed-tools:
